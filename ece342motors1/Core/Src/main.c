@@ -122,7 +122,9 @@ void PCA9685_SetServoAngle(uint8_t Channel, float Angle)
   float Value;
   // 50 Hz servo then 4095 Value --> 20 milliseconds
   // 0 degree --> 0.5 ms(102.4 Value) and 180 degree --> 2.5 ms(511.9 Value)
-  Value = (Angle * (511.9 - 102.4) / 180.0) + 102.4;
+  //Value = (Angle * (511.9 - 102.4) / 180.0) + 102.4;
+
+  Value = (205.0 + (Angle / 180.0) * (410.0 - 205.0));
   PCA9685_SetPWM(Channel, 0, (uint16_t)Value);
 }
 
@@ -170,72 +172,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  PCA9685_SetServoAngle(9, 72);
-	  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
-	  HAL_Delay(1000);
-
-
-	  PCA9685_SetServoAngle(9, 108);
-	  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
-	  HAL_Delay(1000);
-
-	  // check whats written:
-	  HAL_I2C_Mem_Read(&hi2c2, PCA9685_ADDRESS, Register, 1, &readValue, 1, 10);
-
-
-
-
-
-	  	PCA9685_SetServoAngle(5, 0);
-		PCA9685_SetServoAngle(7, 36);
-		PCA9685_SetServoAngle(9, 72);
-		PCA9685_SetServoAngle(11, 108);
-		PCA9685_SetServoAngle(13, 144);
-		PCA9685_SetServoAngle(15, 180);
-		HAL_Delay(1000);
-
-		PCA9685_SetServoAngle(5, 36);
-		PCA9685_SetServoAngle(7, 72);
-		PCA9685_SetServoAngle(9, 108);
-		PCA9685_SetServoAngle(11, 144);
-		PCA9685_SetServoAngle(13, 180);
-		PCA9685_SetServoAngle(15, 0);
-		HAL_Delay(1000);
-
-		PCA9685_SetServoAngle(5, 72);
-		PCA9685_SetServoAngle(7, 108);
-		PCA9685_SetServoAngle(9, 144);
-		PCA9685_SetServoAngle(11, 180);
-		PCA9685_SetServoAngle(13, 0);
-		PCA9685_SetServoAngle(15, 36);
-		HAL_Delay(1000);
-
-		PCA9685_SetServoAngle(5, 108);
-		PCA9685_SetServoAngle(7, 144);
-		PCA9685_SetServoAngle(9, 180);
-		PCA9685_SetServoAngle(11, 0);
-		PCA9685_SetServoAngle(13, 36);
-		PCA9685_SetServoAngle(15, 72);
-		HAL_Delay(1000);
-
-		PCA9685_SetServoAngle(5, 144);
-		PCA9685_SetServoAngle(7, 180);
-		PCA9685_SetServoAngle(9, 0);
-		PCA9685_SetServoAngle(11, 36);
-		PCA9685_SetServoAngle(13, 72);
-		PCA9685_SetServoAngle(15, 108);
-		HAL_Delay(1000);
-
-		PCA9685_SetServoAngle(5, 180);
-		PCA9685_SetServoAngle(7, 0);
-		PCA9685_SetServoAngle(9, 36);
-		PCA9685_SetServoAngle(11, 72);
-		PCA9685_SetServoAngle(13, 108);
-		PCA9685_SetServoAngle(15, 144);
-		HAL_Delay(1000);
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
+  // PCA9685_SetServoAngle(9, 0);
+  // HAL_Delay(5000);
+  PCA9685_SetServoAngle(9, 90);
+  //HAL_Delay(5000);
+  // PCA9685_SetServoAngle(9, 180);
   }
   /* USER CODE END 3 */
 }
