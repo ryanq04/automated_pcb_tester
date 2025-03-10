@@ -172,11 +172,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-  // PCA9685_SetServoAngle(9, 0);
-  // HAL_Delay(5000);
+  PCA9685_SetServoAngle(9, 80);
+  HAL_Delay(2000);
   PCA9685_SetServoAngle(9, 90);
-  //HAL_Delay(5000);
-  // PCA9685_SetServoAngle(9, 180);
+  HAL_Delay(2000);
+  PCA9685_SetServoAngle(9, 100);
+  HAL_Delay(2000);
+  PCA9685_SetServoAngle(9, 90);
+  HAL_Delay(2000);
   }
   /* USER CODE END 3 */
 }

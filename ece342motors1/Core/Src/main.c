@@ -128,6 +128,11 @@ void PCA9685_SetServoAngle(uint8_t Channel, float Angle)
   PCA9685_SetPWM(Channel, 0, (uint16_t)Value);
 }
 
+//Sets motor direction (1: CW/ 0: CCW)
+void set_NEMA_dir(uint8_t dir) {
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, dir ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
 /* USER CODE END 0 */
 
 /**
