@@ -29,6 +29,7 @@ void PCA9685_SetPWMFrequency(uint16_t frequency);
 void PCA9685_Init(uint16_t frequency);
 void PCA9685_SetPWM(uint8_t Channel, uint16_t OnTime, uint16_t OffTime);
 void PCA9685_SetServoAngle(uint8_t Channel, float Angle);
+void FS90R_SetSpeed(uint8_t Channel, float Speed);
 
 #ifdef __cplusplus
 }

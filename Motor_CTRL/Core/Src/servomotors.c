@@ -1,4 +1,4 @@
-#include "motors.h"
+#include "servomotors.h"
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
@@ -62,7 +62,6 @@ void PCA9685_SetServoAngle(uint8_t Channel, float Angle)
 1.5 ms STOP
 2 ms CCW FULLSPEED
 */
-
 void FS90R_SetSpeed(uint8_t Channel, float Speed)
 {
     if (speed < -1.0) speed = -1.0;
@@ -72,3 +71,5 @@ void FS90R_SetSpeed(uint8_t Channel, float Speed)
     float Angle = Speed * 90 + 90; 
     PCA9685_SetServoAngle(Channel, Angle);
 }
+
+
