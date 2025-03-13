@@ -1,5 +1,5 @@
-#ifndef MOTORS_H
-#define MOTORS_H
+#ifndef SERVOMOTORS_H
+#define SERVOMOTORS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,4 +35,4 @@ void FS90R_SetSpeed(uint8_t Channel, float Speed);
 }
 #endif
 
-#endif /* MOTORS_H */
+#endif /* SERVOMOTORS_H */

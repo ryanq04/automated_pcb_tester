@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "steppermotors.h"
+#include "servomotors.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -82,14 +84,9 @@ int main(void)
 
   while (1)
   {
-  PCA9685_SetServoAngle(9, 80);
+  Stepper_Move(20, 1000);
   HAL_Delay(2000);
-  PCA9685_SetServoAngle(9, 90);
-  HAL_Delay(2000);
-  PCA9685_SetServoAngle(9, 100);
-  HAL_Delay(2000);
-  PCA9685_SetServoAngle(9, 90);
-  HAL_Delay(2000);
+
   }
 }
 
@@ -264,7 +261,17 @@ static void MX_DMA_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+  
   GPIO_InitTypeDef GPIO_InitStruct = {0};
+  __HAL_RCC_GPIOA_CLK_ENABLE(); // Enable GPIOA clock
+
+   /* Configure GPIO pin PA3567 as Output */
+    GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
 /* USER CODE BEGIN MX_GPIO_Init_1 */
 /* USER CODE END MX_GPIO_Init_1 */
 
@@ -312,6 +319,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
+
 
 /* USER CODE BEGIN 4 */
 

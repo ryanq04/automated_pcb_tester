@@ -31,7 +31,6 @@ void Stepper_Step(int step) {
 }
 
 
-
 void Stepper_Move(int steps, int delay) {
     int direction = (steps > 0) ? 1 : -1;  // Determine direction
     int stepCount = abs(steps);            // Get absolute step count
