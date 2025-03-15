@@ -1,6 +1,8 @@
 #ifndef STEPPERMOTORS_H
 #define STEPPERMOTORS_H
 
+#include "stm32f4xx_hal.h"
+
 #define MOTOR_PORT GPIOA  // Choose an unused port that has all of the gpio pins below.
 
 #define IN1 GPIO_PIN_3  // Connect to L298N IN1

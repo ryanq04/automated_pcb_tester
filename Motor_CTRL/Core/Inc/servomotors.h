@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include "stm32f4xx_hal.h"  // Adjust for your STM32 series
+
 // Datasheet link --> https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf
 
 
@@ -23,13 +24,14 @@ extern "C" {
 #define PCA9685_ADDRESS 0x80
 
 
+
 // Function Prototypes
 void PCA9685_SetBit(uint8_t Register, uint8_t Bit, uint8_t Value);
 void PCA9685_SetPWMFrequency(uint16_t frequency);
 void PCA9685_Init(uint16_t frequency);
 void PCA9685_SetPWM(uint8_t Channel, uint16_t OnTime, uint16_t OffTime);
 void PCA9685_SetServoAngle(uint8_t Channel, float Angle);
-void FS90R_SetSpeed(uint8_t Channel, float Speed);
+void FS90R_SetSpeed(uint8_t Channel, float speed);
 
 #ifdef __cplusplus
 }

@@ -1,0 +1,2 @@
+../Core/Src/steppermotors.c:4:6:Stepper_Step	16	static
+../Core/Src/steppermotors.c:34:6:Stepper_Move	32	static
