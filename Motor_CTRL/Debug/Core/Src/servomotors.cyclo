@@ -1,0 +1,6 @@
+../Core/Src/servomotors.c:7:6:PCA9685_SetBit	2
+../Core/Src/servomotors.c:18:6:PCA9685_SetPWMFrequency	3
+../Core/Src/servomotors.c:32:6:PCA9685_Init	1
+../Core/Src/servomotors.c:38:6:PCA9685_SetPWM	1
+../Core/Src/servomotors.c:51:6:PCA9685_SetServoAngle	1
+../Core/Src/servomotors.c:66:6:FS90R_SetSpeed	3

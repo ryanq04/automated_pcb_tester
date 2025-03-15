@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include "stm32f4xx_hal.h"  // Adjust for your STM32 series
+#include "config.h"
 
 // Datasheet link --> https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf
 
