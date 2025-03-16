@@ -1,0 +1,3 @@
+../Core/Src/ov2640.c:252:9:ov2640_init	2
+../Core/Src/ov2640.c:273:9:ov2640_read	2
+../Core/Src/ov2640.c:294:6:i2c_scan	3
