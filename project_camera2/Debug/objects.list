@@ -1,3 +1,4 @@
+"./Core/Src/config.o"
 "./Core/Src/main.o"
 "./Core/Src/ov2640.o"
 "./Core/Src/stm32f4xx_hal_msp.o"

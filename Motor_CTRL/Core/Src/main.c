@@ -88,10 +88,42 @@ int main(void)
 	  	}
 
 	  if(start){
-		  Stepper_Move(200, 10);
-		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		  // FS90R_SetSpeed(0, 0.5);
+      // HAL_Delay(2000);
+      // FS90R_SetSpeed(0, -0.5);
+      // HAL_Delay(2000);
+      // FS90R_SetSpeed(0, 0);
+      // HAL_Delay(2000);
+
+      setServoAngle(15, 0);
+
+      // for(double i = 0; i < 180; i += 1){
+      //   setServoAngle(15, i);
+      //   HAL_Delay(10);
+
+      // }
+      // for(double i = 180; i > 0; i -= 1){
+      //   setServoAngle(15, i);
+      //   HAL_Delay(10);
+
+      // }
+
 	  }
   }
 }
 
 
+
+/* Stepper motor test code
+
+if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin))
+	    {
+			  start ^= 1;
+			  HAL_Delay(200);
+	  	}
+
+	  if(start){
+		  Stepper_Move(200, 10);
+		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  }
+      */

@@ -1,14 +1,7 @@
-/*
- * ov2640.c
- *
- *  Created on: Mar 15, 2025
- *      Author: root
- */
 
 #include <stdio.h>
 #include <string.h>
 #include "ov2640.h"
-
 
 extern I2C_HandleTypeDef hi2c2;
 extern DCMI_HandleTypeDef hdcmi;
@@ -16,11 +9,13 @@ extern DMA_HandleTypeDef hdma_dcmi;
 
 #define ADDR_OV2640 ((uint16_t)0x60)
 #define Read_ADDR_OV2640 ((uint16_t)0x61)
-#define FRAMEX 120
-#define FRAMEY 160
-#define BUFFER_SIZE (FRAMEX * FRAMEY)
 #define OV2640_REG_NUM 219
 
+#define FRAMEX 160
+#define FRAMEY 120
+#define BUFFER_SIZE (FRAMEX * FRAMEY)
+
+extern uint16_t snapshot_buff[FRAMEX * FRAMEY];
 
 /* Initialization sequence for QQVGA resolution (160x120) */
 const char OV2640_QQVGA[][2]=
@@ -333,4 +328,23 @@ void read_all_ov2640_registers() {
     }
 
     print_msg("OV2640 Register Read Complete.\n");
+}
+
+void ov2640_snapshot(uint16_t *buff){
+	char msg[100];
+	HAL_StatusTypeDef status = HAL_DCMI_Start_DMA( &hdcmi, DCMI_MODE_SNAPSHOT, (uint32_t)snapshot_buff, BUFFER_SIZE/2); //SUS
+	if(status != HAL_OK) {
+			 sprintf(msg, "Error DMA failed\n");
+       print_msg(msg);
+    }
+}//goes back to main for waiting for interrupt
+
+
+void ov2640_capture(uint16_t *buff){
+	char msg[100];
+	HAL_StatusTypeDef status = HAL_DCMI_Start_DMA( &hdcmi, DCMI_MODE_CONTINUOUS, (uint32_t)snapshot_buff, BUFFER_SIZE/2); //SUS
+	if(status != HAL_OK) {
+			 sprintf(msg, "Error DMA failed\n");
+       print_msg(msg);
+    }
 }

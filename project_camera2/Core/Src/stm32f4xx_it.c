@@ -60,6 +60,7 @@ extern DCMI_HandleTypeDef hdcmi;
 extern TIM_HandleTypeDef htim6;
 extern DMA_HandleTypeDef hdma_usart3_tx;
 extern UART_HandleTypeDef huart3;
+extern uint8_t dma_flag;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -267,6 +268,7 @@ void DMA2_Stream1_IRQHandler(void)
 
   /* USER CODE END DMA2_Stream1_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_dcmi);
+  dma_flag = 1;
   /* USER CODE BEGIN DMA2_Stream1_IRQn 1 */
 
   /* USER CODE END DMA2_Stream1_IRQn 1 */

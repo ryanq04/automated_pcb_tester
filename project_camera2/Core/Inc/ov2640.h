@@ -17,4 +17,7 @@ void i2c_scan(void);
 void ov2640_config();
 void read_all_ov2640_registers();
 
+void ov2640_snapshot(uint16_t *buff);
+void ov2640_capture(uint16_t *buff);
+
 #endif /* INC_OV2640_H_ */

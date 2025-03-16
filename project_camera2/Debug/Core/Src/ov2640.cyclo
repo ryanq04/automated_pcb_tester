@@ -1,5 +1,7 @@
-../Core/Src/ov2640.c:251:9:ov2640_read	2
-../Core/Src/ov2640.c:268:9:ov2640_init	2
-../Core/Src/ov2640.c:290:6:i2c_scan	3
-../Core/Src/ov2640.c:302:6:ov2640_config	3
-../Core/Src/ov2640.c:322:6:read_all_ov2640_registers	2
+../Core/Src/ov2640.c:246:9:ov2640_read	2
+../Core/Src/ov2640.c:263:9:ov2640_init	2
+../Core/Src/ov2640.c:285:6:i2c_scan	3
+../Core/Src/ov2640.c:297:6:ov2640_config	3
+../Core/Src/ov2640.c:317:6:read_all_ov2640_registers	2
+../Core/Src/ov2640.c:333:6:ov2640_snapshot	2
+../Core/Src/ov2640.c:343:6:ov2640_capture	2

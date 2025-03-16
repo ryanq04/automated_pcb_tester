@@ -48,13 +48,21 @@ void PCA9685_SetPWM(uint8_t Channel, uint16_t OnTime, uint16_t OffTime)
   HAL_I2C_Mem_Write(&hi2c2, PCA9685_ADDRESS, registerAddress, 1, pwm, 4, 10);
 }
 
-void PCA9685_SetServoAngle(uint8_t Channel, float Angle)
+void setServoAngle_r(uint8_t Channel, float Angle)
 {
   float Value;
 
   // (pulse width / 20 ms) * 4096 = PCA pwm value
   // 
   Value = (205.0 + (Angle / 180.0) * (410.0 - 205.0));
+  PCA9685_SetPWM(Channel, 0, (uint16_t)Value);
+}
+
+void setServoAngle(uint8_t Channel, float Angle)
+{
+  float Value;
+
+  Value = (Angle * (511.9 - 102.4) / 180.0) + 102.4;
   PCA9685_SetPWM(Channel, 0, (uint16_t)Value);
 }
 
@@ -70,7 +78,7 @@ void FS90R_SetSpeed(uint8_t Channel, float speed)
 
     //Speed passed in from (-1,1), representing max and mininum range of speed 
     float Angle = speed * 90 + 90;
-    PCA9685_SetServoAngle(Channel, Angle);
+    setServoAngle_r(Channel, Angle);
 }
 
 
