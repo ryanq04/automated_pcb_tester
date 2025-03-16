@@ -10,7 +10,6 @@
 #include "ov2640.h"
 
 
-
 extern I2C_HandleTypeDef hi2c2;
 extern DCMI_HandleTypeDef hdcmi;
 extern DMA_HandleTypeDef hdma_dcmi;
@@ -20,8 +19,7 @@ extern DMA_HandleTypeDef hdma_dcmi;
 #define FRAMEX 120
 #define FRAMEY 160
 #define BUFFER_SIZE (FRAMEX * FRAMEY)
-
-
+#define OV2640_REG_NUM 219
 
 
 /* Initialization sequence for QQVGA resolution (160x120) */
@@ -247,32 +245,11 @@ const char OV2640_QQVGA[][2]=
   {0x98, 0x00},
   {0x99, 0x00},
   {0x00, 0x00},
-};
+}; //219 of them
 
-uint8_t ov2640_init(void){
-  uint8_t val;
-  char msg[100];
-
-  print_msg("init_test\r\n");
-  val = ov2640_read(0x0A);
-
-  if (val != 0x26) {
-    sprintf(msg, "Wrong product id (0x%x)\r\n", val);
-    print_msg(msg);
-    return 1;
-  }else{
-		sprintf(msg, "success\n");
-		print_msg(msg);
-  }
-
-  // Re-use the same code from Lab 5 here.
-
-  return 0;
-}
 
 uint8_t ov2640_read(uint8_t reg){
   // Re-use the same code from Lab 5 here.
-
 	uint8_t data;
 	char msg[100];
 	// Transmit register
@@ -284,12 +261,31 @@ uint8_t ov2640_read(uint8_t reg){
 	status = HAL_I2C_Master_Transmit(&hi2c2, ADDR_OV2640, &reg, 1, 10000);
 	}
 	// Read data
-	HAL_I2C_Master_Receive(&hi2c2, Read_ADDR_OV2640, &data, 1, HAL_MAX_DELAY);
+	HAL_I2C_Master_Receive(&hi2c2, Read_ADDR_OV2640, &data, 1, 10000);
 	return data;
-
-  //
 }
 
+uint8_t ov2640_init(void){
+  uint8_t val;
+  char msg[100];
+
+  print_msg("init_test\r\n");
+  val = ov2640_read(0x0A);
+
+
+
+  if (val != 0x26) {
+    sprintf(msg, "Wrong product id (0x%x)\r\n", val);
+    print_msg(msg);
+    return 1;
+  }else{
+		sprintf(msg, "success\n");
+		print_msg(msg);
+  }
+
+  // Re-use the same code from Lab 5 here.
+  return 0;
+}
 
 void i2c_scan() {
     char msg[50];
@@ -301,3 +297,40 @@ void i2c_scan() {
     }
 }
 
+
+
+void ov2640_config(){
+    char msg[20];
+    uint8_t data[2];
+    for(int i = 0; i < OV2640_REG_NUM; i++){ //for all rows of array, send an address and data frame corresponding to [i][0] and [i][1]
+        data[0] = OV2640_QQVGA[i][0]; 
+        data[1] = OV2640_QQVGA[i][1];
+        HAL_StatusTypeDef status = HAL_I2C_Master_Transmit(&hi2c2, ADDR_OV2640, data, 2, 10000); //send address frame
+        while(status != HAL_OK) {
+             sprintf(msg, "Error\n");
+       print_msg(msg);
+       HAL_Delay(1000);
+       status = HAL_I2C_Master_Transmit(&hi2c2, ADDR_OV2640, data, 2, 10000); 
+    }
+        HAL_Delay(10);
+    }
+}
+
+
+
+
+void read_all_ov2640_registers() {
+    char msg[50];
+
+    print_msg("Reading OV2640 Registers:\n");
+
+    for (int i = 0; i < OV2640_REG_NUM; i++) {
+        uint8_t reg_addr = OV2640_QQVGA[i][0];  // Register address
+        uint8_t reg_value = ov2640_read(reg_addr);  // Read register value
+
+        sprintf(msg, "Reg 0x%02X = 0x%02X\n", reg_addr, reg_value);
+        print_msg(msg);
+    }
+
+    print_msg("OV2640 Register Read Complete.\n");
+}

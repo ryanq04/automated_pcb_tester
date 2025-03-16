@@ -60,8 +60,8 @@ all: main-build
 main-build: project_camera2.elf secondary-outputs
 
 # Tool invocations
-project_camera2.elf project_camera2.map: $(OBJS) $(USER_OBJS) /Users/avaniyadav/Avani/University/Y3S2/ECE342/project_camera2/STM32F446ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "project_camera2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/avaniyadav/Avani/University/Y3S2/ECE342/project_camera2/STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="project_camera2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+project_camera2.elf project_camera2.map: $(OBJS) $(USER_OBJS) C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\project_camera2\STM32F446ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "project_camera2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\project_camera2\STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="project_camera2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

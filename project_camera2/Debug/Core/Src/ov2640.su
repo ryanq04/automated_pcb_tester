@@ -1,3 +1,5 @@
-../Core/Src/ov2640.c:252:9:ov2640_init	112	static
-../Core/Src/ov2640.c:273:9:ov2640_read	128	static
-../Core/Src/ov2640.c:294:6:i2c_scan	64	static
+../Core/Src/ov2640.c:251:9:ov2640_read	128	static
+../Core/Src/ov2640.c:268:9:ov2640_init	112	static
+../Core/Src/ov2640.c:290:6:i2c_scan	64	static
+../Core/Src/ov2640.c:302:6:ov2640_config	48	static
+../Core/Src/ov2640.c:322:6:read_all_ov2640_registers	64	static

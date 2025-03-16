@@ -18,6 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "ov2640.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -72,12 +76,8 @@ static void MX_TIM6_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-HAL_StatusTypeDef print_msg(char * msg) {
-  return HAL_UART_Transmit_DMA(&huart3, (uint8_t *)msg, strlen(msg));
-}
-
-HAL_StatusTypeDef uart_send_bin(uint8_t * buff, unsigned int len) {
-  return HAL_UART_Transmit_DMA(&huart3, (uint8_t *)buff, len);
+void print_msg(char * msg) {
+  HAL_UART_Transmit(&huart3, (uint8_t *)msg, strlen(msg), 100);
 }
 
 /* USER CODE END 0 */
@@ -120,6 +120,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   i2c_scan();
   ov2640_init();
+
+  ov2640_config();
+  read_all_ov2640_registers();
 
   /* USER CODE END 2 */
 
