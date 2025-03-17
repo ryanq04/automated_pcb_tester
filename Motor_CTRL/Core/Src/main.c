@@ -95,18 +95,18 @@ int main(void)
       // FS90R_SetSpeed(0, 0);
       // HAL_Delay(2000);
 
-      setServoAngle(15, 0);
+      //setServoAngle(15, 0);
 
-      // for(double i = 0; i < 180; i += 1){
-      //   setServoAngle(15, i);
-      //   HAL_Delay(10);
+      for(double i = 0; i < 180; i += 1){
+        setServoAngle(15, i);
+        HAL_Delay(10);
 
-      // }
-      // for(double i = 180; i > 0; i -= 1){
-      //   setServoAngle(15, i);
-      //   HAL_Delay(10);
+      }
+      for(double i = 180; i > 0; i -= 1){
+        setServoAngle(15, i);
+        HAL_Delay(10);
 
-      // }
+      }
 
 	  }
   }
