@@ -60,6 +60,19 @@
 
 /* USER CODE END PFP */
 
+void servotest(){
+   for(double i = 0; i < 180; i += 1){
+        setServoAngle(15, i);
+        HAL_Delay(10);
+
+      }
+      for(double i = 180; i > 0; i -= 1){
+        setServoAngle(15, i);
+        HAL_Delay(10);
+
+      }
+}
+
 
 int main(void)
 {
@@ -88,25 +101,25 @@ int main(void)
 	  	}
 
 	  if(start){
-		  // FS90R_SetSpeed(0, 0.5);
-      // HAL_Delay(2000);
-      // FS90R_SetSpeed(0, -0.5);
-      // HAL_Delay(2000);
-      // FS90R_SetSpeed(0, 0);
-      // HAL_Delay(2000);
+	  		  Stepper_Move(200, 10);
+	  		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  	  }
 
-      //setServoAngle(15, 0);
+	  if(start){
+		  FS90R_SetSpeed(0, 0.5);
+      setServoAngle(15, 0);
+		  HAL_Delay(2000);
+		  FS90R_SetSpeed(0, -0.5);
+		  HAL_Delay(2000);
+		  FS90R_SetSpeed(0, 0);
+      setServoAngle(15, 180);
+		  HAL_Delay(2000);
 
-      for(double i = 0; i < 180; i += 1){
-        setServoAngle(15, i);
-        HAL_Delay(10);
 
-      }
-      for(double i = 180; i > 0; i -= 1){
-        setServoAngle(15, i);
-        HAL_Delay(10);
 
-      }
+      
+
+
 
 	  }
   }

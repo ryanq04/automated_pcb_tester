@@ -61,6 +61,8 @@ void setServoAngle_r(uint8_t Channel, float Angle)
 void setServoAngle(uint8_t Channel, float Angle)
 {
   float Value;
+    if (Angle < 0) Angle = 0;
+    if (Angle > 180) Angle = 180;
 
   Value = (Angle * (511.9 - 102.4) / 180.0) + 102.4;
   PCA9685_SetPWM(Channel, 0, (uint16_t)Value);
