@@ -332,9 +332,80 @@ void p4(){
 		HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
 		dma_flag = 0;
 		HAL_DCMI_Resume(&hdcmi);
-		send_img(); 
+		//send_img();
+		send_img_rgb565();
 	}
 }
+
+void create_red_img(){
+	for(int i = 0; i < IMG_COLS*IMG_ROWS / 3; i = i+3){
+		snapshot_buff[i] = 0xf800;
+		snapshot_buff[i+1] = 0x07e0;
+		snapshot_buff[i+2] = 0x001f;
+
+	}
+
+}
+
+void create_red_green_blue_img(){
+    int stripe_width = 5;  // Adjust this for thicker or thinner stripes
+    for(int i = 0; i < IMG_COLS * IMG_ROWS; i++){
+        if ((i / stripe_width) % 3 == 0) {
+            snapshot_buff[i] = 0xF800;  // Red
+        } else if ((i / stripe_width) % 3 == 1) {
+            snapshot_buff[i] = 0x07E0;  // Green
+        } else {
+            snapshot_buff[i] = 0x001F;  // Blue
+        }
+    }
+}
+
+void create_vertical_stripes_img() {
+    int stripe_width = 5;  // Adjust this to make the stripes thicker or thinner
+    for(int i = 0; i < IMG_ROWS; i++) {
+        for(int j = 0; j < IMG_COLS; j++) {
+            uint16_t color = 0x0000;  // Default (black) color
+
+            // Determine which stripe (Red, Green, Blue) the current pixel belongs to based on the column (j)
+            if ((j / stripe_width) % 3 == 0) {
+                // Red stripe (5 bits for Red)
+                color = 0xF800;  // 0xF800 is RGB565 for Red (11111 000000 00000)
+            } else if ((j / stripe_width) % 3 == 1) {
+                // Green stripe (6 bits for Green)
+                color = 0x07E0;  // 0x07E0 is RGB565 for Green (00000 111111 00000)
+            } else {
+                // Blue stripe (5 bits for Blue)
+                color = 0x001F;  // 0x001F is RGB565 for Blue (00000 000000 11111)
+            }
+
+            // Assign the color to the correct pixel position in the buffer
+            snapshot_buff[i * IMG_COLS + j] = color;
+        }
+    }
+}
+
+void create_checkerboard_img() {
+    int box_size = 10;  // Size of each checkerbox (adjust this to control the size of the squares)
+
+    for(int i = 0; i < IMG_ROWS; i++) {
+        for(int j = 0; j < IMG_COLS; j++) {
+            uint16_t color = 0x0000;  // Default (black) color
+
+            // Determine if the current position (i, j) is in a purple or yellow box
+            if (((i / box_size) + (j / box_size)) % 2 == 0) {
+                // Purple box (combination of Red and Blue)
+                color = 0xb01a;  // 0x7F00 is RGB565 for Purple
+            } else {
+                // Yellow box (combination of Red and Green)
+                color = 0x9dfb;  // 0xFFE0 is RGB565 for Yellow
+            }
+
+            // Assign the color to the correct pixel position in the buffer
+            snapshot_buff[i * IMG_COLS + j] = color;
+        }
+    }
+}
+
 
 
 
@@ -374,8 +445,10 @@ int main(void)
 			HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 			HAL_Delay(100);
 			
-			p3();
-			//p4();
+			//p3();
+			p4();
+			//create_checkerboard_img();
+			//send_img_rgb565();
     }
   }
 }

@@ -10,4 +10,8 @@
 ../Core/Src/main.c:269:6:send_img	64	static
 ../Core/Src/main.c:308:6:p3	8	static
 ../Core/Src/main.c:324:6:p4	8	static
-../Core/Src/main.c:341:5:main	112	static
+../Core/Src/main.c:340:6:create_red_img	16	static
+../Core/Src/main.c:350:6:create_red_green_blue_img	16	static
+../Core/Src/main.c:363:6:create_vertical_stripes_img	24	static
+../Core/Src/main.c:387:6:create_checkerboard_img	24	static
+../Core/Src/main.c:412:5:main	112	static
