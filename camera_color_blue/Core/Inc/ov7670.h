@@ -6,7 +6,7 @@
 #define ADDR_OV7670 ((uint16_t)0x42)
 
 // #define OV7670_REG_NUM 123
-#define OV7670_REG_NUM 122
+#define OV7670_REG_NUM 123
 
 // Image settings
 #define IMG_ROWS 144
@@ -19,5 +19,6 @@ uint8_t ov7670_init(void);
 
 void ov7670_snapshot(uint16_t *buff);
 void ov7670_capture(uint16_t *buff);
+void ov7_config();
 
 #endif

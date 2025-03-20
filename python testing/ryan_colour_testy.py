@@ -111,7 +111,7 @@ def get_frame_rgb565(ser: Serial, rows: int, cols: int, suffix: bytes = b"") -> 
 
     
     # Convert raw bytes to RGB565 (16-bit) and then to RGB888
-    img_rgb565 = np.frombuffer(raw_img, dtype=">u2").reshape((rows, cols))
+    img_rgb565 = np.frombuffer(raw_img, dtype="<u2").reshape((rows, cols))
     #r_img = reverse_bits_16bit(img_rgb565)
     # img_rgb565 = img_rgb565.byteswap()
 
@@ -122,7 +122,7 @@ def get_frame_rgb565(ser: Serial, rows: int, cols: int, suffix: bytes = b"") -> 
     b = (img_rgb565 & 0x1F) * (255 // 31)
     
     # Stack to form an RGB image
-    frame = np.stack([r, g, b], axis=-1).astype(np.uint8)
+    frame = np.stack([b, r, g], axis=-1).astype(np.uint8)
     #frame = np.stack([b, r, g], axis=-1).astype(np.uint8)
     
     return frame
