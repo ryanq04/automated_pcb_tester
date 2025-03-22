@@ -60,6 +60,7 @@ void setServoAngle_r(uint8_t Channel, float Angle)
 
 void setServoAngle(uint8_t Channel, float Angle)
 {
+  // this one is for the continuous motor SERVO_MOTOR_Y???
   float Value;
     if (Angle < 0) Angle = 0;
     if (Angle > 180) Angle = 180;

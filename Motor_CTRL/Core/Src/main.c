@@ -114,13 +114,6 @@ int main(void)
 		  FS90R_SetSpeed(0, 0);
       setServoAngle(15, 180);
 		  HAL_Delay(2000);
-
-
-
-      
-
-
-
 	  }
   }
 }
