@@ -60,8 +60,8 @@ all: main-build
 main-build: camera_color_blue.elf secondary-outputs
 
 # Tool invocations
-camera_color_blue.elf camera_color_blue.map: $(OBJS) $(USER_OBJS) /Users/avaniyadav/Avani/University/Y3S2/ECE342/camera_color_blue/STM32F446ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "camera_color_blue.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/avaniyadav/Avani/University/Y3S2/ECE342/camera_color_blue/STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="camera_color_blue.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+camera_color_blue.elf camera_color_blue.map: $(OBJS) $(USER_OBJS) C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\camera_color_blue\STM32F446ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "camera_color_blue.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\camera_color_blue\STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="camera_color_blue.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
