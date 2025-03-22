@@ -21,6 +21,7 @@
 #include "steppermotors.h"
 #include "servomotors.h"
 #include "config.h"
+#include "motorposition.h"
 
  I2C_HandleTypeDef hi2c2;
  UART_HandleTypeDef huart3;
