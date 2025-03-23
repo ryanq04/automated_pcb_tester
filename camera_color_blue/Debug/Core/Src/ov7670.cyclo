@@ -1,6 +1,6 @@
-../Core/Src/ov7670.c:173:9:ov7670_init	2
-../Core/Src/ov7670.c:196:6:read_all_ov7670_registers	2
-../Core/Src/ov7670.c:212:6:ov7_config	3
-../Core/Src/ov7670.c:229:9:ov7670_read	2
-../Core/Src/ov7670.c:247:6:ov7670_snapshot	2
-../Core/Src/ov7670.c:257:6:ov7670_capture	2
+../Core/Src/ov7670.c:130:9:ov7670_init	2
+../Core/Src/ov7670.c:153:6:read_all_ov7670_registers	2
+../Core/Src/ov7670.c:169:6:ov7_config	3
+../Core/Src/ov7670.c:186:9:ov7670_read	2
+../Core/Src/ov7670.c:204:6:ov7670_snapshot	2
+../Core/Src/ov7670.c:214:6:ov7670_capture	2
