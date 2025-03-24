@@ -1,6 +1,0 @@
-../Core/Src/main.c:22:6:print_bb	3
-../Core/Src/main.c:38:6:print_sb	3
-../Core/Src/main.c:52:6:print_ss	3
-../Core/Src/main.c:70:6:send_img	4
-../Core/Src/main.c:105:6:p4	2
-../Core/Src/main.c:121:5:main	2
