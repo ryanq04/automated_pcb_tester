@@ -84,4 +84,13 @@ void FS90R_SetSpeed(uint8_t Channel, float speed)
     setServoAngle_r(Channel, Angle);
 }
 
+void FS90R_move_linear_distance(uint8_t Channel, float distance){
+
+    FS90R_SetSpeed(channel, speed);
+    HAL_Delay(DIST_OVER_SPEED_RATIO); // d = vt so we need to calulate the time needed to travel a distance 
+    FS90R_SetSpeed(channel, STOP_SERVO_SPEED); // stop moving, STOP_SERVO_ANGLE = 0, sends Angle 90°
+
+
+}
+
 

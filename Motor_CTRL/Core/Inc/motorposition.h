@@ -1,3 +1,6 @@
+/*
+
+
 #ifndef MOTORPOSITION_H
 #define MOTORPOSITION_H
 
@@ -10,25 +13,43 @@ extern "C" {
 
 // variable definitionss
 
-// Motor types
-typedef enum {
-    STEPPER_MOTOR, // z-axis
-    SERVO_MOTOR_Y,       // y-axis, continuous
-    SERVO_MOTOR_R     // theta, position control
-} MotorType;
+// Define GPIO pin numbers associated with motors
+typedef struct {
+    int motorPins[3];  // Stores 3 GPIO pins for 3 motors
+} GPIOMotorPins;
+
+
 
 // Probes & their home positions
 typedef enum {
-    PROBE_A, // Right
-    PROBE_B // Left
-} Probe;
+    RIGHT, // Right
+    LEFT // Left
+} ProbeSide;
+
 
 // Structure to store home positions
-typedef struct {
+typedef struct Position {
     int32_t x;
     int32_t y;
     int32_t z;
 } Position;
+
+
+ typedef struct {
+        int motorPins[4];  // Stores 4 GPIO pins for the NEMA17
+    } GPIOStepperPins;
+
+typedef struct Probe {
+    ProbeSide side;
+    Position probePos;
+    uint32_t R_Channel;
+    uint32_t Th_Channel; 
+    
+    // Define GPIO pin numbers associated with stepper NEMA17
+    GPIOStepperPins gpio_pins;
+
+}Probe;
+
 
 // Define home positions for each probe
 const Position HOME_A = {0, 0, 0}; // need to edit
@@ -52,17 +73,7 @@ const Position HOME_B = {0, 0, 0}; // need to edit
 #define STOP_SERVO_SPEED 0
 #define HOME_THETA 0
 
-// Define GPIO pin numbers associated with motors
-typedef struct {
-    int motorPins[3];  // Stores 3 GPIO pins for 3 motors
-} GPIOMotorPins;
 
-extern const GPIOMotorPins motorPins[] = {
-    // PROBE_A - GPIO pins for STEPPER_MOTOR, SERVO_MOTOR_Y, SERVO_MOTOR_R
-    { .motorPins = {10, 11, 12} },  // SET THESE
-    // PROBE_B - GPIO pins for STEPPER_MOTOR, SERVO_MOTOR_Y, SERVO_MOTOR_R
-    { .motorPins = {13, 14, 15} }   // SET THESE
-};
 
 
 
