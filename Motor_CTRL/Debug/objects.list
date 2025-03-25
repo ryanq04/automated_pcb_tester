@@ -1,5 +1,6 @@
 "./Core/Src/config.o"
 "./Core/Src/main.o"
+"./Core/Src/motorposition.o"
 "./Core/Src/servomotors.o"
 "./Core/Src/steppermotors.o"
 "./Core/Src/stm32f4xx_hal_msp.o"

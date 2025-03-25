@@ -4,4 +4,4 @@
 ../Core/Src/servomotors.c:38:6:PCA9685_SetPWM	1
 ../Core/Src/servomotors.c:51:6:setServoAngle_r	1
 ../Core/Src/servomotors.c:61:6:setServoAngle	3
-../Core/Src/servomotors.c:76:6:FS90R_SetSpeed	3
+../Core/Src/servomotors.c:77:6:FS90R_SetSpeed	3

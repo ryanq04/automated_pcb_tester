@@ -93,6 +93,10 @@ int main(void)
 
   int start = 0;
 
+  	FS90R_SetSpeed(0, 0);
+	setServoAngle(15, 0);
+	HAL_Delay(200);
+
   while (1)
   {
 	  if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin))
@@ -101,21 +105,27 @@ int main(void)
 			  HAL_Delay(200);
 	  	}
 
+	  /*
 	  if(start){
 	  		  Stepper_Move(200, 10);
 	  		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 	  	  }
+	  */
 
 	  if(start){
-		  FS90R_SetSpeed(0, 0.5);
-      setServoAngle(15, 0);
-		  HAL_Delay(2000);
-		  FS90R_SetSpeed(0, -0.5);
-		  HAL_Delay(2000);
+		  FS90R_SetSpeed(0, -0.1);
+		  HAL_Delay(500);
 		  FS90R_SetSpeed(0, 0);
-      setServoAngle(15, 180);
-		  HAL_Delay(2000);
+		  setServoAngle(15, 10);
+		  start  = 0;
+		  HAL_Delay(200);
 	  }
+    else{
+      FS90R_SetSpeed(0, 0);
+      setServoAngle(15, 0);
+      HAL_Delay(200);
+
+    }
   }
 }
 

@@ -84,6 +84,7 @@ void FS90R_SetSpeed(uint8_t Channel, float speed)
     setServoAngle_r(Channel, Angle);
 }
 
+/*
 void FS90R_move_linear_distance(uint8_t Channel, float distance){
 
     FS90R_SetSpeed(channel, speed);
@@ -92,5 +93,6 @@ void FS90R_move_linear_distance(uint8_t Channel, float distance){
 
 
 }
+*/
 
 
