@@ -73,10 +73,6 @@ const Position HOME_B = {0, 0, 0}; // need to edit
 #define STOP_SERVO_SPEED 0
 #define HOME_THETA 0
 
-
-
-
-
 // functions
 
 void Y_align(Probe myProbe, Position desiredLoc);
