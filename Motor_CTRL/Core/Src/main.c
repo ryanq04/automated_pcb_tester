@@ -159,8 +159,8 @@ if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin))
 			  HAL_Delay(200);
 	  	}
 
-	  if(start){
-		  Stepper_Move(200, 10);
-		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	  }
+if(start){
+  Stepper_Move(200, 10);
+  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+}
       */
