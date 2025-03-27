@@ -144,3 +144,17 @@ if(start){
   HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 }
       */
+
+/*
+Code to measure distance for servo
+1) set servo angle to 0° --> mark the starting position of the slider (plug in the motor)
+2) move servo in 10° increments --> measure how far the slider moves each time
+3) create lookup table for each angle mapping to distance from start position 
+
+4) create a linear equation: Position = m × Angle
+  m = (pos_fin - pos_start)/ (deg_fin - def_start)
+  angle = position / m 
+
+#define  M1 // for channel 0 
+#define  M2 // for channel 15
+*/
