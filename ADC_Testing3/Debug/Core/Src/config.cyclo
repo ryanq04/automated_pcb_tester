@@ -1,0 +1,9 @@
+../Core/Src/config.c:5:6:print_msg	1
+../Core/Src/config.c:12:6:SystemClock_Config	3
+../Core/Src/config.c:59:6:MX_ADC1_Init	3
+../Core/Src/config.c:111:6:MX_TIM2_Init	4
+../Core/Src/config.c:156:6:MX_USART3_UART_Init	2
+../Core/Src/config.c:189:6:MX_USB_OTG_FS_PCD_Init	2
+../Core/Src/config.c:222:6:MX_DMA_Init	1
+../Core/Src/config.c:240:6:MX_GPIO_Init	1
+../Core/Src/config.c:324:6:Error_Handler	1

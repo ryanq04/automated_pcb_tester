@@ -1,0 +1,9 @@
+../Core/MDK-ARM/config.c:5:6:print_msg	16	static
+../Core/MDK-ARM/config.c:12:6:SystemClock_Config	88	static
+../Core/MDK-ARM/config.c:59:6:MX_ADC1_Init	24	static
+../Core/MDK-ARM/config.c:111:6:MX_TIM2_Init	32	static
+../Core/MDK-ARM/config.c:156:6:MX_USART3_UART_Init	8	static
+../Core/MDK-ARM/config.c:189:6:MX_USB_OTG_FS_PCD_Init	8	static
+../Core/MDK-ARM/config.c:222:6:MX_DMA_Init	16	static
+../Core/MDK-ARM/config.c:240:6:MX_GPIO_Init	56	static
+../Core/MDK-ARM/config.c:324:6:Error_Handler	4	static,ignoring_inline_asm
