@@ -75,6 +75,20 @@ void servotest(){
 }
 
 
+void actuateProbe(){
+
+  setServoAngle(15, 15);
+  FS90R_SetSpeed(0, -0.3);
+  HAL_Delay(500);
+  FS90R_SetSpeed(0, 0.3);
+  HAL_Delay(500);
+  FS90R_SetSpeed(0, 0);
+  setServoAngle(15, 30);
+
+  HAL_Delay(200);
+
+}
+
 int main(void)
 {
 
@@ -93,8 +107,8 @@ int main(void)
 
   int start = 0;
 
-  	FS90R_SetSpeed(0, 0);
-	setServoAngle(15, 0);
+  FS90R_SetSpeed(0, 0);
+	setServoAngle(30, 0);
 	HAL_Delay(200);
 
   while (1)
@@ -105,6 +119,11 @@ int main(void)
 			  HAL_Delay(200);
 	  	}
 
+	  Stepper_Move(200, 10);
+	  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  Stepper_Move(-200, 10);
+	  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+
 	  /*
 	  if(start){
 	  		  Stepper_Move(200, 10);
@@ -113,17 +132,18 @@ int main(void)
 	  */
 
 	  if(start){
-		  FS90R_SetSpeed(0, -0.1);
-		  HAL_Delay(500);
-		  FS90R_SetSpeed(0, 0);
-		  setServoAngle(15, 10);
-		  start  = 0;
-		  HAL_Delay(200);
+
+		  Stepper_Move(200, 20);
+		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		  Stepper_Move(-200, 20);
+		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		  actuateProbe();
+		  start = 0;
 	  }
     else{
-      FS90R_SetSpeed(0, 0);
-      setServoAngle(15, 0);
-      HAL_Delay(200);
+//      FS90R_SetSpeed(0, 0);
+//      setServoAngle(15, 30);
+//      HAL_Delay(200);
 
     }
   }

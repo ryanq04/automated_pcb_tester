@@ -14,6 +14,7 @@
 
 void Stepper_Step(int step);
 void Stepper_Move(int steps, int delay);
+void Stepper_Stop();
 
 
 #endif /* STEPPERMOTORS_H */

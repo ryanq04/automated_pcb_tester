@@ -60,8 +60,8 @@ all: main-build
 main-build: Motor_CTRL.elf secondary-outputs
 
 # Tool invocations
-Motor_CTRL.elf Motor_CTRL.map: $(OBJS) $(USER_OBJS) /Users/avaniyadav/Avani/University/Y3S2/ECE342/flying_probe_tester/Motor_CTRL/STM32F446ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Motor_CTRL.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/avaniyadav/Avani/University/Y3S2/ECE342/flying_probe_tester/Motor_CTRL/STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor_CTRL.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Motor_CTRL.elf Motor_CTRL.map: $(OBJS) $(USER_OBJS) C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Motor_CTRL\STM32F446ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Motor_CTRL.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Motor_CTRL\STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor_CTRL.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

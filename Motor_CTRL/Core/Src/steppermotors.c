@@ -31,14 +31,23 @@ void Stepper_Step(int step) {
     }
 }
 
+void Stepper_Stop(){
+	HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(MOTOR_PORT, IN3, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(MOTOR_PORT, IN4, GPIO_PIN_RESET);
+
+}
 
 void Stepper_Move(int steps, int delay) {
     int direction = (steps > 0) ? 1 : -1;  // Determine direction
     int stepCount = abs(steps);            // Get absolute step count
+    int stepIndex = 0;
 
     for (int i = 0; i < stepCount; i++) {
-        int stepIndex = (direction > 0) ? (i % 4) : ((3 - (i % 4)));  // Reverse sequence for negative steps
+        stepIndex = (direction > 0) ? (i % 4) : ((3 - (i % 4))); 
         Stepper_Step(stepIndex);
         HAL_Delay(delay);  // Speed control
     }
+    Stepper_Stop();
 }
