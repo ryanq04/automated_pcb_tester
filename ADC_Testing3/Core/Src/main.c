@@ -50,6 +50,7 @@ char msg[100];
 uint16_t adc_res;
 uint16_t adc_buffer[ADC_BUF_LEN];
 uint8_t ADC_full = 0;
+uint8_t sendFFT_ready = 0;
 
 
 
@@ -68,21 +69,41 @@ FreqMagPair freq_plot[FFT_BUFFER_SIZE];
 
 
 
-//get the frequency components
-void computeCoeffs(float output_FFT[FFT_BUFFER_SIZE]){
-	int fIndex = 0;
-	for(int i = 0; i < FFT_BUFFER_SIZE; i += 2){
-		float mag = sqrtf((output_FFT[i] * output_FFT[i]) + (output_FFT[i+1] * output_FFT[i+1]));
-		freq_plot[fIndex].frequency = (float) (fIndex * SAMPLE_RATE_HZ / ((float) FFT_BUFFER_SIZE)); //FREQ TO FREQUENCY BIN MAPPING 2048 bins 
-		freq_plot[fIndex].magnitude = mag;
-		fIndex++;
-	}
-	// Print first 20 bins
-    for (int i = 0; i < 20; i++) {
-        sprintf(msg, "Freq[%d] = %.2f Hz, Mag = %.2f\r\n", i, freq_plot[i].frequency, freq_plot[i].magnitude);
-        print_msg(msg);
+//get the frequency components and store them to reuse in the globals input_FFT (freq) and output_FFT (mag)
+void computeCoeffs(float output_FFT[FFT_BUFFER_SIZE]) {
+    for (int i = 0, fIndex = 0; i < FFT_BUFFER_SIZE; i += 2, fIndex++) {
+        float real = output_FFT[i];
+        float imag = output_FFT[i + 1];
+        float mag = fabs(sqrtf(real * real + imag * imag));
+
+        // Overwrite input/output FFT arrays with freq/mag
+        input_FFT[fIndex] = ((float) fIndex * SAMPLE_RATE_HZ / (float) FFT_BUFFER_SIZE);
+        output_FFT[fIndex] = mag;
     }
+		
+		sendFFT_ready = 1;
 }
+
+
+void sendADC_UART() {
+    const char *preamble = "ADC\r\n";
+    HAL_UART_Transmit(&huart3, (uint8_t *)preamble, strlen(preamble), HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart3, (uint8_t *)adc_buffer, sizeof(adc_buffer), HAL_MAX_DELAY);
+}
+
+
+void sendFFT_UART() {
+		if(sendFFT_ready == 1){
+			//note that this ensures that the input and output buffers are Hz/Mag after compute coeffs. 
+			sendFFT_ready = 0;
+			const char *preamble = "FFT\r\n";
+			HAL_UART_Transmit(&huart3, (uint8_t *)preamble, strlen(preamble), HAL_MAX_DELAY);
+
+			HAL_UART_Transmit(&huart3, (uint8_t *)input_FFT, (FFT_BUFFER_SIZE / 2) * sizeof(float), HAL_MAX_DELAY);
+			HAL_UART_Transmit(&huart3, (uint8_t *)output_FFT, (FFT_BUFFER_SIZE / 2) * sizeof(float), HAL_MAX_DELAY);
+		}
+}
+
 
 //FFT CODE INITS END
 
@@ -128,10 +149,7 @@ int main(void)
 			HAL_ADC_Stop_DMA(&hadc1);
 			HAL_TIM_Base_Stop(&htim2); // stop the adc and timer
 
-			for (int i = 0; i < 50; i++) {
-				sprintf(msg, "ADC[%d] = %u\r\n", i, adc_buffer[i]);
-				print_msg(msg);
-			}
+			
 
 			for(int i = 0; i < ADC_BUF_LEN; i++){ //since DMA is faster than code, we should be able to immediately load values
 				input_FFT[i] = (float)(adc_buffer[i]); //note the usage of float here - should consider optimization reasons and configurations
@@ -140,6 +158,9 @@ int main(void)
 			//FFT
 			arm_rfft_fast_f32(&fftHandler, input_FFT, output_FFT, 0);
 			computeCoeffs(output_FFT);
+			
+			sendADC_UART();
+			sendFFT_UART();
 		}
   }
 }

@@ -137,8 +137,11 @@ os.makedirs(output_dir, exist_ok=True)
 
 def show_clickable_image(ser, img, rows, cols, suffix, preamble):
     """
-    Displays the image and captures click positions. Returns False if 'q' is pressed.
-    Press 'w' to capture a new image.
+    Displays the image and captures click positions. 
+    - Press 'q' to quit
+    - Press 's' to save image
+    - Press 'w' to capture a new image
+    Returns False if 'q' is pressed.
     """
     def on_mouse_click(event, x, y, flags, param):
         if event == cv.EVENT_LBUTTONDOWN:
@@ -152,8 +155,15 @@ def show_clickable_image(ser, img, rows, cols, suffix, preamble):
         key = cv.waitKey(1) & 0xFF
 
         if key == ord('q'):
+            print("Quitting...")
             cv.destroyAllWindows()
             return False
+
+        elif key == ord('s'):
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = os.path.join(output_dir, f"saved_{timestamp}.jpg")
+            cv.imwrite(filename, img)
+            print(f"Image saved as {filename}")
 
         elif key == ord('w'):
             print("Capturing new image...")
@@ -162,15 +172,10 @@ def show_clickable_image(ser, img, rows, cols, suffix, preamble):
             try:
                 new_frame = get_frame_ycbcr(ser, rows, cols, suffix)
                 img[:] = cv.resize(new_frame, (cols * 3, rows * 3), interpolation=cv.INTER_LINEAR)
-
-                # Save image with timestamped filename
-                timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-                filename = os.path.join(output_dir, f"capture_{timestamp}.jpg")
-                cv.imwrite(filename, img)
-                print(f"Image saved as {filename}")
-
+                print("New image captured.")
             except ValueError:
                 print("Failed to capture new image.")
+
 
 if __name__ == "__main__":
     monitor()
