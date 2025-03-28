@@ -24,16 +24,27 @@ extern "C" {
 // PCA9685 I2C Address
 #define PCA9685_ADDRESS 0x80
 
+#define GEAR_RADIUS 0.9 //0.9cm 
+#define PI 3.1415
 
+//SG90 struct
+typedef struct Servo {
+   float currAngle;
+   float homeAngle;
+   uint8_t Channel;
+}Servo;
 
 // Function Prototypes
 void PCA9685_SetBit(uint8_t Register, uint8_t Bit, uint8_t Value);
 void PCA9685_SetPWMFrequency(uint16_t frequency);
 void PCA9685_Init(uint16_t frequency);
 void PCA9685_SetPWM(uint8_t Channel, uint16_t OnTime, uint16_t OffTime);
-void setServoAngle(uint8_t Channel, float Angle);
+void setServoAngle(Servo* sv, float Angle);
 void setServoAngle_r(uint8_t Channel, float Angle);
 void FS90R_SetSpeed(uint8_t Channel, float speed);
+void sv_moveDistance(Servo* sv, float distance_cm);
+void sv_sendHome(Servo *lin, Servo *rot);
+void sv_init(Servo* sv, uint8_t Channel, float homeAngle);
 
 #ifdef __cplusplus
 }

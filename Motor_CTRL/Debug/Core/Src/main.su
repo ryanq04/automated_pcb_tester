@@ -1,3 +1,4 @@
 ../Core/Src/main.c:64:6:servotest	24	static
 ../Core/Src/main.c:78:6:actuateProbe	8	static
-../Core/Src/main.c:92:5:main	16	static
+../Core/Src/main.c:92:6:linearMove	16	static
+../Core/Src/main.c:105:5:main	24	static

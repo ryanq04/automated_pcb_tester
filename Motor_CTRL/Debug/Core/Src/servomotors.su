@@ -4,4 +4,5 @@
 ../Core/Src/servomotors.c:38:6:PCA9685_SetPWM	40	static
 ../Core/Src/servomotors.c:51:6:setServoAngle_r	24	static
 ../Core/Src/servomotors.c:61:6:setServoAngle	24	static
-../Core/Src/servomotors.c:77:6:FS90R_SetSpeed	24	static
+../Core/Src/servomotors.c:79:6:FS90R_SetSpeed	24	static
+../Core/Src/servomotors.c:101:6:sv_moveDistance	24	static

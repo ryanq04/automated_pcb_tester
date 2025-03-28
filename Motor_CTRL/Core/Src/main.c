@@ -89,6 +89,19 @@ void actuateProbe(){
 
 }
 
+void linearMove(){
+    for(int i = 180; i >= 0; i -= 10){
+      setServoAngle(0, i);
+      HAL_Delay(500);
+    }
+    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+      
+    HAL_Delay(2000);
+    setServoAngle(0, 180);
+    HAL_Delay(500);
+
+}
+
 int main(void)
 {
 
@@ -106,10 +119,13 @@ int main(void)
   /* USER CODE END 2 */
 
   int start = 0;
+  setServoAngle(0, 0);
+  setServoAngle(15, 0);
 
-  FS90R_SetSpeed(0, 0);
-	setServoAngle(30, 0);
-	HAL_Delay(200);
+  Servo lin;
+  lin.Channel = 0;
+  lin.currAngle = 0;
+ 
 
   while (1)
   {
@@ -119,31 +135,17 @@ int main(void)
 			  HAL_Delay(200);
 	  	}
 
-	  Stepper_Move(200, 10);
-	  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	  Stepper_Move(-200, 10);
-	  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  // Stepper_Move(200, 10);
+	  // HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  // Stepper_Move(-200, 10);
+	  // HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 
-	  /*
-	  if(start){
-	  		  Stepper_Move(200, 10);
-	  		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	  	  }
-	  */
 
 	  if(start){
-
-		  Stepper_Move(200, 20);
-		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		  Stepper_Move(-200, 20);
-		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		  actuateProbe();
+      sv_moveDistance(&lin, 1.8);
 		  start = 0;
 	  }
     else{
-//      FS90R_SetSpeed(0, 0);
-//      setServoAngle(15, 30);
-//      HAL_Delay(200);
 
     }
   }

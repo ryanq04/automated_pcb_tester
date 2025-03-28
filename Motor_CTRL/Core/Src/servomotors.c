@@ -58,15 +58,17 @@ void setServoAngle_r(uint8_t Channel, float Angle)
   PCA9685_SetPWM(Channel, 0, (uint16_t)Value);
 }
 
-void setServoAngle(uint8_t Channel, float Angle)
+void setServoAngle(Servo* sv, float Angle)
 {
   // this one is for the position
   float Value;
     if (Angle < 0) Angle = 0;
     if (Angle > 180) Angle = 180;
 
-  Value = (Angle * (511.9 - 102.4) / 180.0) + 102.4;
-  PCA9685_SetPWM(Channel, 0, (uint16_t)Value);
+    float Rev_Angle = 180 - Angle; //in order to make positive values forward and negative values backwards ;)
+
+  Value = (Rev_Angle * (511.9 - 102.4) / 180.0) + 102.4;
+  PCA9685_SetPWM(sv->Channel, 0, (uint16_t)Value);
 }
 
 /*
@@ -95,30 +97,51 @@ void FS90R_move_linear_distance(uint8_t Channel, float distance){
 }
 */
 
-/*
-Code to measure distance for servo
-1) set servo angle to 0° --> mark the starting position of the slider (plug in the motor)
-2) move servo in 10° increments --> measure how far the slider moves each time
-3) create lookup table for each angle mapping to distance from start position 
-
-4) create a linear equation: Position = m × Angle
-  m = (pos_fin - pos_start)/ (deg_fin - def_start)
-  angle = position / m 
-
-#define  M1 // for channel 0 
-#define  M2 // for channel 15
-
-void moveServoDistance(uint8_t Channel, float distance_cm) {
-    if(Channel == 0){
-      float angle = distance_cm / M1; 
-    }
-    else{
-      float angle = distance_cm / M2; 
-    }
-    if (angle < 0) angle = 0;
-    if (angle > 180) angle = 180;
-    setServoAngle(Channel, angle);  // Move servo to computed angle
+void sv_init(Servo* sv, uint8_t Channel, float homeAngle){
+  sv->Channel = Channel;
+  sv->homeAngle = homeAngle;
+  setServoAngle(sv, homeAngle);
 }
 
-*/
+//pass in the current Angle of the servo, and modify that value by its angle equivalent of the distance 
+void sv_moveDistance(Servo* sv, float distance_cm) {
+
+  //theoretically we have around 2.8cm per 180 deg
+  //experimentally we have around 2.52cm per 180 deg. 
+
+    float delta_angle = distance_cm / 2.52 * 180.0;
+
+    
+    if(delta_angle + sv->currAngle > 0 && delta_angle + sv->currAngle < 180){
+      sv->currAngle += delta_angle;
+    }else{
+      //print_msg("Angle change request exceeded bounds");
+      HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+    }
+
+    setServoAngle(sv->Channel, sv->currAngle);
+  
+}
+
+void sv_sendHome(Servo *lin, Servo *rot){
+    setServoAngle(lin, lin->homeAngle);
+    setServoAngle(rot, rot->homeAngle);
+}
+
+
+// Code to measure distance for servo
+// 1) set servo angle to 0° --> mark the starting position of the slider (plug in the motor)
+// 2) move servo in 10° increments --> measure how far the slider moves each time
+// 3) create lookup table for each angle mapping to distance from start position 
+
+// 4) create a linear equation: Position = m × Angle
+//   m = (pos_fin - pos_start)/ (deg_fin - def_start)
+//   angle = position / m 
+
+// #define  M1 // for channel 0 
+// #define  M2 // for channel 15
+
+
+
+
 
