@@ -899,7 +899,6 @@ void send_floats(void)
  8000824:	e883 0007 	stmia.w	r3, {r0, r1, r2}
 
 
-    // Send the byte array over UART
     HAL_UART_Transmit(&huart3, byte_array, sizeof(byte_array), HAL_MAX_DELAY);
  8000828:	1d39      	adds	r1, r7, #4
  800082a:	f04f 33ff 	mov.w	r3, #4294967295	@ 0xffffffff

@@ -7,24 +7,24 @@
 #include <math.h>
 
 //input the base and height of the triangle that needs to be solved. Assumes that the Servo is sent home first 
-void moveProbe(float base, float height, Servo *lin, Servo *rot){
-    float theta_rad = atan((height)/base); 
-    float theta_deg = theta_rad * DEGREE_CONVERSION;
-    float radius = base * base + height * height;
-    radius = sqrtf(radius);
-
-    float displacement = radius - RESTING_LENGTH;
-
-    sv_moveDistance(lin, displacement);
-    setServoAngle(rot, theta_deg);
-
-}
-
-void runInits(Servo* lin, Servo* rot, Stepper* nema){
-    sv_init(lin, 0, 0);
-    sv_init(rot, 0, 0);
-    stp_init(nema, MOTOR_PORT, IN1, IN2, IN3, IN4);
-}
+//void moveProbe(float base, float height, Servo *lin, Servo *rot){
+//    float theta_rad = atan((height)/base);
+//    float theta_deg = theta_rad * DEGREE_CONVERSION;
+//    float radius = base * base + height * height;
+//    radius = sqrtf(radius);
+//
+//    float displacement = radius - RESTING_LENGTH;
+//
+//    sv_moveDistance(lin, displacement);
+//    setServoAngle(rot, theta_deg);
+//
+//}
+//
+//void runInits(Servo* lin, Servo* rot, Stepper* nema){
+//    sv_init(lin, 0, 0);
+//    sv_init(rot, 0, 0);
+//    stp_init(nema, MOTOR_PORT, IN1, IN2, IN3, IN4);
+//}
 
 
 // void initProbe(Probe* probe, ProbeSide side, Position homePosition, uint32_t R_Channel, uint32_t Th_Channel, GPIOStepperPins pins){

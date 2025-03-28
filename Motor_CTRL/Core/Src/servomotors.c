@@ -109,17 +109,19 @@ void sv_moveDistance(Servo* sv, float distance_cm) {
   //theoretically we have around 2.8cm per 180 deg
   //experimentally we have around 2.52cm per 180 deg. 
 
-    float delta_angle = distance_cm / 2.52 * 180.0;
+    float delta_angle = distance_cm / 0.01544; // (0.014)
+
 
     
-    if(delta_angle + sv->currAngle > 0 && delta_angle + sv->currAngle < 180){
+    if(delta_angle + sv->currAngle > 0 && delta_angle + sv->currAngle <= 180){
       sv->currAngle += delta_angle;
     }else{
       //print_msg("Angle change request exceeded bounds");
-      HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+      HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+
     }
 
-    setServoAngle(sv->Channel, sv->currAngle);
+    setServoAngle(sv, sv->currAngle);
   
 }
 

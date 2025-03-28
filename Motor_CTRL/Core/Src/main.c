@@ -125,7 +125,16 @@ int main(void)
   Servo lin;
   lin.Channel = 0;
   lin.currAngle = 0;
+
+  Servo rot;
+	rot.Channel = 15;
+	rot.currAngle = 0;
  
+
+
+	sv_moveDistance(&lin, 0);
+	HAL_Delay(1000);
+	setServoAngle(&rot, 0);
 
   while (1)
   {
@@ -142,10 +151,15 @@ int main(void)
 
 
 	  if(start){
-      sv_moveDistance(&lin, 1.8);
+		  setServoAngle(&rot, 34);
+		  HAL_Delay(1000);
+		  sv_moveDistance(&lin, 2.7);
 		  start = 0;
+
 	  }
     else{
+    	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+    	HAL_Delay(200);
 
     }
   }
