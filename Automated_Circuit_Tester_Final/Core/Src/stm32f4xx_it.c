@@ -62,6 +62,7 @@ extern TIM_HandleTypeDef htim6;
 extern UART_HandleTypeDef huart3;
 /* USER CODE BEGIN EV */
 
+extern uint8_t dma_flag;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -258,17 +259,18 @@ void DMA2_Stream0_IRQHandler(void)
   /* USER CODE END DMA2_Stream0_IRQn 1 */
 }
 
+
 /**
   * @brief This function handles DMA2 stream1 global interrupt.
   */
 void DMA2_Stream1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream1_IRQn 0 */
-
+	
   /* USER CODE END DMA2_Stream1_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_dcmi);
   /* USER CODE BEGIN DMA2_Stream1_IRQn 1 */
-
+	dma_flag = 1;
   /* USER CODE END DMA2_Stream1_IRQn 1 */
 }
 

@@ -1,0 +1,5 @@
+../Core/Src/steppermotors.c:6:6:stp_Step	5
+../Core/Src/steppermotors.c:37:6:stp_init	1
+../Core/Src/steppermotors.c:43:6:stp_Stop	1
+../Core/Src/steppermotors.c:51:6:stp_Move	4
+../Core/Src/steppermotors.c:63:6:stp_moveDistance	1

@@ -288,7 +288,6 @@ Discarded input sections
  .data          0x00000000        0x0 ./Core/Src/main.o
  .bss           0x00000000        0x0 ./Core/Src/main.o
  .bss.msg       0x00000000       0x64 ./Core/Src/main.o
- .bss.adc_res   0x00000000        0x2 ./Core/Src/main.o
  .bss.freq_plot
                 0x00000000     0x4000 ./Core/Src/main.o
  .debug_macro   0x00000000      0xab4 ./Core/Src/main.o
@@ -5441,34 +5440,34 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000    0x1675f
+.debug_info     0x00000000    0x1674e
  .debug_info    0x00000000     0x1ba6 ./Core/Src/config.o
- .debug_info    0x00001ba6     0x1638 ./Core/Src/main.o
- .debug_info    0x000031de     0x177b ./Core/Src/stm32f4xx_hal_msp.o
- .debug_info    0x00004959      0x403 ./Core/Src/stm32f4xx_it.o
- .debug_info    0x00004d5c      0x6a3 ./Core/Src/syscalls.o
- .debug_info    0x000053ff      0x168 ./Core/Src/sysmem.o
- .debug_info    0x00005567      0x54a ./Core/Src/system_stm32f4xx.o
- .debug_info    0x00005ab1       0x30 ./Core/Startup/startup_stm32f446zetx.o
- .debug_info    0x00005ae1      0x99a ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_info    0x0000647b      0xcd4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
- .debug_info    0x0000714f      0xdaa ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_info    0x00007ef9      0x8e7 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
- .debug_info    0x000087e0      0x70b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_info    0x00008eeb     0x15e3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o
- .debug_info    0x0000a4ce      0x7b4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o
- .debug_info    0x0000ac82      0x8eb ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_info    0x0000b56d      0x956 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
- .debug_info    0x0000bec3     0x299d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
- .debug_info    0x0000e860     0x14db ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_info    0x0000fd3b     0x2f4f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
- .debug_info    0x00012c8a     0x19f1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
- .debug_info    0x0001467b      0x4c3 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
- .debug_info    0x00014b3e      0x72d C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
- .debug_info    0x0001526b      0x6b9 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_f32.o)
- .debug_info    0x00015924      0x99d C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
- .debug_info    0x000162c1       0x85 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_bitreversal2.o)
- .debug_info    0x00016346      0x419 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+ .debug_info    0x00001ba6     0x1627 ./Core/Src/main.o
+ .debug_info    0x000031cd     0x177b ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_info    0x00004948      0x403 ./Core/Src/stm32f4xx_it.o
+ .debug_info    0x00004d4b      0x6a3 ./Core/Src/syscalls.o
+ .debug_info    0x000053ee      0x168 ./Core/Src/sysmem.o
+ .debug_info    0x00005556      0x54a ./Core/Src/system_stm32f4xx.o
+ .debug_info    0x00005aa0       0x30 ./Core/Startup/startup_stm32f446zetx.o
+ .debug_info    0x00005ad0      0x99a ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_info    0x0000646a      0xcd4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
+ .debug_info    0x0000713e      0xdaa ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_info    0x00007ee8      0x8e7 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
+ .debug_info    0x000087cf      0x70b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_info    0x00008eda     0x15e3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o
+ .debug_info    0x0000a4bd      0x7b4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o
+ .debug_info    0x0000ac71      0x8eb ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_info    0x0000b55c      0x956 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
+ .debug_info    0x0000beb2     0x299d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_info    0x0000e84f     0x14db ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_info    0x0000fd2a     0x2f4f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_info    0x00012c79     0x19f1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
+ .debug_info    0x0001466a      0x4c3 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .debug_info    0x00014b2d      0x72d C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .debug_info    0x0001525a      0x6b9 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .debug_info    0x00015913      0x99d C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_info    0x000162b0       0x85 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_bitreversal2.o)
+ .debug_info    0x00016335      0x419 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
 
 .debug_abbrev   0x00000000     0x3290
  .debug_abbrev  0x00000000      0x2a1 ./Core/Src/config.o
@@ -5750,58 +5749,58 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x000171ab       0x98 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_bitreversal2.o)
  .debug_line    0x00017243      0x67a C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
 
-.debug_str      0x00000000    0xe36b6
+.debug_str      0x00000000    0xe36ae
  .debug_str     0x00000000    0xdb821 ./Core/Src/config.o
                               0xdbc52 (size before relaxing)
- .debug_str     0x000db821     0x16a8 ./Core/Src/main.o
-                              0xdc95d (size before relaxing)
- .debug_str     0x000dcec9      0x29c ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_str     0x000db821     0x16a0 ./Core/Src/main.o
+                              0xdc955 (size before relaxing)
+ .debug_str     0x000dcec1      0x29c ./Core/Src/stm32f4xx_hal_msp.o
                               0xd84a5 (size before relaxing)
- .debug_str     0x000dd165      0x146 ./Core/Src/stm32f4xx_it.o
+ .debug_str     0x000dd15d      0x146 ./Core/Src/stm32f4xx_it.o
                               0xd771b (size before relaxing)
- .debug_str     0x000dd2ab     0x20ad ./Core/Src/syscalls.o
+ .debug_str     0x000dd2a3     0x20ad ./Core/Src/syscalls.o
                                0x98c8 (size before relaxing)
- .debug_str     0x000df358       0x6b ./Core/Src/sysmem.o
+ .debug_str     0x000df350       0x6b ./Core/Src/sysmem.o
                                0x60e0 (size before relaxing)
- .debug_str     0x000df3c3       0xdb ./Core/Src/system_stm32f4xx.o
+ .debug_str     0x000df3bb       0xdb ./Core/Src/system_stm32f4xx.o
                               0xd70ac (size before relaxing)
- .debug_str     0x000df49e       0x44 ./Core/Startup/startup_stm32f446zetx.o
+ .debug_str     0x000df496       0x44 ./Core/Startup/startup_stm32f446zetx.o
                                  0x93 (size before relaxing)
- .debug_str     0x000df4e2      0x608 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_str     0x000df4da      0x608 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
                               0xd7c71 (size before relaxing)
- .debug_str     0x000dfaea      0x27f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
+ .debug_str     0x000dfae2      0x27f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
                               0xd7674 (size before relaxing)
- .debug_str     0x000dfd69      0x37f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_str     0x000dfd61      0x37f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
                               0xd79c8 (size before relaxing)
- .debug_str     0x000e00e8      0x2cf ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
+ .debug_str     0x000e00e0      0x2cf ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
                               0xd74a1 (size before relaxing)
- .debug_str     0x000e03b7       0xe4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_str     0x000e03af       0xe4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
                               0xd7227 (size before relaxing)
- .debug_str     0x000e049b      0x831 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o
+ .debug_str     0x000e0493      0x831 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o
                               0xd7bbd (size before relaxing)
- .debug_str     0x000e0ccc      0x12d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o
+ .debug_str     0x000e0cc4      0x12d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o
                               0xd74bf (size before relaxing)
- .debug_str     0x000e0df9      0x21f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_str     0x000e0df1      0x21f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
                               0xd74e5 (size before relaxing)
- .debug_str     0x000e1018      0x193 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
+ .debug_str     0x000e1010      0x193 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
                               0xd7518 (size before relaxing)
- .debug_str     0x000e11ab      0xdcc ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_str     0x000e11a3      0xdcc ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
                               0xd8411 (size before relaxing)
- .debug_str     0x000e1f77      0x493 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_str     0x000e1f6f      0x493 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
                               0xd7c1d (size before relaxing)
- .debug_str     0x000e240a      0x5fb ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_str     0x000e2402      0x5fb ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
                               0xd7a9c (size before relaxing)
- .debug_str     0x000e2a05      0x4a7 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
+ .debug_str     0x000e29fd      0x4a7 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
                               0xd7a79 (size before relaxing)
- .debug_str     0x000e2eac      0x328 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
+ .debug_str     0x000e2ea4      0x328 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_rfft_fast_init_f32.o)
                                 0x517 (size before relaxing)
- .debug_str     0x000e31d4       0x6a C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
+ .debug_str     0x000e31cc       0x6a C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_rfft_fast_f32.o)
                                 0x2f4 (size before relaxing)
- .debug_str     0x000e323e      0x104 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_f32.o)
+ .debug_str     0x000e3236      0x104 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_f32.o)
                                 0x35f (size before relaxing)
- .debug_str     0x000e3342      0x331 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+ .debug_str     0x000e333a      0x331 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
                                 0x704 (size before relaxing)
- .debug_str     0x000e3673       0x43 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
+ .debug_str     0x000e366b       0x43 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\ADC_Testing3\Lib\libarm_cortexM4lf_math.a(arm_cfft_radix8_f32.o)
                                 0x256 (size before relaxing)
 
 .comment        0x00000000       0xb3

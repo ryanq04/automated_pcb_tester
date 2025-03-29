@@ -1,0 +1,4 @@
+../Core/Src/adc_fft.c:5:6:computeCoeffs	2
+../Core/Src/adc_fft.c:20:6:sendADC_UART	1
+../Core/Src/adc_fft.c:26:6:HAL_ADC_ConvCpltCallback	2
+../Core/Src/adc_fft.c:37:6:sendFFT_UART	2
