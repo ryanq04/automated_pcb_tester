@@ -111,8 +111,6 @@ void sv_moveDistance(Servo* sv, float distance_cm) {
 
     float delta_angle = distance_cm / 0.01544; // (0.014)
 
-
-    
     if(delta_angle + sv->currAngle > 0 && delta_angle + sv->currAngle <= 180){
       sv->currAngle += delta_angle;
     }else{

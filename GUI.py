@@ -143,6 +143,8 @@ def show_clickable_image(ser, img, rows, cols, suffix, preamble):
     - Press 'w' to capture a new image
     Returns False if 'q' is pressed.
     """
+    img = cv.rotate(img, cv.ROTATE_180)
+    
     def on_mouse_click(event, x, y, flags, param):
         if event == cv.EVENT_LBUTTONDOWN:
             print(f"Clicked at: ({x}, {y})")
@@ -151,6 +153,7 @@ def show_clickable_image(ser, img, rows, cols, suffix, preamble):
     cv.setMouseCallback("Video Stream", on_mouse_click)
 
     while True:
+        # img = cv.rotate(img, cv.ROTATE_180)
         cv.imshow("Video Stream", img)
         key = cv.waitKey(1) & 0xFF
 
@@ -172,6 +175,7 @@ def show_clickable_image(ser, img, rows, cols, suffix, preamble):
             try:
                 new_frame = get_frame_ycbcr(ser, rows, cols, suffix)
                 img[:] = cv.resize(new_frame, (cols * 3, rows * 3), interpolation=cv.INTER_LINEAR)
+                img = cv.rotate(img, cv.ROTATE_180)
                 print("New image captured.")
             except ValueError:
                 print("Failed to capture new image.")

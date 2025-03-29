@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 # Image points (2D) and their real-world counterparts (3D but assumed to be on a plane)
-image_pts = np.array([[287, 368], [281, 263], [191, 372], [185, 266]], dtype=np.float32)
-world_pts = np.array([[0, 0, 0], [0, 3, 0], [3, 0, 0], [3, 3, 0]], dtype=np.float32)
+image_pts = np.array([[449, 24], [458, 197], [286, 29], [139, 399], [292, 206]], dtype=np.float32)
+world_pts = np.array([[0, 0, 0], [3, 0, 0], [0, 3, 0], [6, 6, 0], [3, 3, 0]], dtype=np.float32)
 
 # Compute homography
 H, _ = cv2.findHomography(image_pts, world_pts[:, :2])
@@ -18,5 +18,5 @@ def project_2D_to_3D(pt_2D, H):
     
     return pt_3D_rounded
 
-new_3D_coord = project_2D_to_3D([87, 171], H)
+new_3D_coord = project_2D_to_3D([131, 220], H)
 print("Approximate 3D Coordinates:", new_3D_coord)
