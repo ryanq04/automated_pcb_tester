@@ -3,8 +3,12 @@
 #include "main.h"
 #include <stdio.h>
 #include <math.h>
+
+
 #include "adc_fft.h"
 #include "ov7670.h"
+
+#include "fsm.h"
 
 
 
@@ -19,7 +23,7 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim6;
 UART_HandleTypeDef huart3;
 
-//FFT globals
+//ADC_FFT globals
 uint16_t adc_buffer[ADC_BUF_LEN];
 uint8_t ADC_full = 0;
 uint8_t sendFFT_ready = 0;
@@ -31,32 +35,35 @@ uint16_t snapshot_buff[IMG_ROWS * IMG_COLS] = {0};
 uint8_t send_ptr[FRAMESIZE * 2] = {0};
 uint8_t dma_flag = 0;
 
+//fsm globals
+StateFunc current_state = State_Listen;
+
 
 int main(void)
 {
-  HAL_Init();
-  SystemClock_Config();
-  MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_DCMI_Init();
-  MX_USART3_UART_Init();
-  MX_I2C2_Init();
-  MX_TIM1_Init();
-  MX_TIM6_Init();
-  MX_ADC1_Init();
-  MX_I2C1_Init();
-  MX_TIM2_Init();
-  MX_USB_OTG_FS_USB_Init();
-  
-  //init FFT
-  arm_rfft_fast_instance_f32 fftHandler;
-  arm_rfft_fast_init_f32(&fftHandler, FFT_BUFFER_SIZE);
+	HAL_Init();
+  	SystemClock_Config();
+	MX_GPIO_Init();
+	MX_DMA_Init();
+	MX_DCMI_Init();
+	MX_USART3_UART_Init();
+	MX_I2C2_Init();
+	MX_TIM1_Init();
+	MX_TIM6_Init();
+	MX_ADC1_Init();
+	MX_I2C1_Init();
+	MX_TIM2_Init();
+	MX_USB_OTG_FS_USB_Init();
+	
+	//init FFT
+	arm_rfft_fast_instance_f32 fftHandler;
+	arm_rfft_fast_init_f32(&fftHandler, FFT_BUFFER_SIZE);
 
 
 
-  //MAIN CONTROL LOOP
-  while (1)
-  {
+	//MAIN CONTROL LOOP
+	while (1)
+	{
 		HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
 			HAL_Delay(100);
 		if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin)) {
@@ -84,5 +91,15 @@ int main(void)
 			sendADC_UART();
 			sendFFT_UART();
 		}
-  }
+	}
+
+  /*
+	while(1){
+		assert_param(current_state != NULL);
+        current_state();  // Call the current state function
+        
+	
+	}
+ 
+  */
 }

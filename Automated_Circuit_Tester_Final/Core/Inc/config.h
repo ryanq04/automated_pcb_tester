@@ -43,7 +43,7 @@ void MX_I2C1_Init(void);
 void MX_TIM2_Init(void);
 void MX_USB_OTG_FS_USB_Init(void);
 
-
+void flashLED(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin, uint8_t delay_ms, uint8_t toggles);
 
 // Optional Error Handler declaration
 void Error_Handler(void);
