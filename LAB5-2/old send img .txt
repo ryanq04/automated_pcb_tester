@@ -1,0 +1,72 @@
+/*
+void send_img(){
+	uint8_t pream[] = "\r\nPREAMBLE!\r\n";
+	uint8_t end[] = "\r\nEND!\r\n";
+	uint8_t byte_ptr[FRAMESIZE*2] = {0};
+	for(int i = 0, j = 1; i < FRAMESIZE && j < FRAMESIZE*2; i++, j+=2){
+		byte_ptr[j - 1] = 0x00FF & snapshot_buff[i];
+		byte_ptr[j] = 0x00FF & (snapshot_buff[i] >> 8);
+	}//takes the 16 bit and puts it into 8 bits
+	
+	uint8_t send_ptr[FRAMESIZE] = {0};
+	for(int i = 0; i < FRAMESIZE; i++){
+		send_ptr[i] = byte_ptr[i*2];
+	}
+	
+	for(int i = 0; i < 13; i++){
+		HAL_UART_Transmit(&huart3, &pream[i], 1, HAL_MAX_DELAY);
+	}
+	
+	HAL_UART_Transmit(&huart3, send_ptr, FRAMESIZE/2, HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart3, &send_ptr[FRAMESIZE/2 - 1], FRAMESIZE/2, HAL_MAX_DELAY);
+	
+	for(int i = 0; i < 7; i++){
+		HAL_UART_Transmit(&huart3, &end[i], 1, HAL_MAX_DELAY);
+	}
+}
+*/
+/*
+void send_img() {
+    uint8_t pream[] = "\r\nPREAMBLE!\r\n";
+    uint8_t end[] = "\r\nEND!\r\n";
+
+    // Allocate memory dynamically to prevent stack overflow
+    uint8_t *byte_ptr = (uint8_t*)malloc(FRAMESIZE * 2);
+    if (byte_ptr == NULL) {
+        return; // Handle memory allocation failure
+    }
+	uint8_t *send_ptr = (uint8_t*)malloc(FRAMESIZE);
+    if (send_ptr == NULL) {
+        return; // Handle memory allocation failure
+    }
+
+    // Convert 16-bit image buffer into 8-bit data
+    for (int i = 0, j = 0; i < FRAMESIZE; i++, j+=2) {
+        byte_ptr[j] = snapshot_buff[i] & 0xFF;         // LSB
+        byte_ptr[j+1] = (snapshot_buff[i] >> 8) & 0xFF; // MSB
+    }
+	//take odd ones 
+	for(int i = 0; i < FRAMESIZE - 1; i++){
+		send_ptr[i] = byte_ptr[i*2 + 1];
+	}
+	send_ptr[FRAMESIZE] = 0xFF;
+	
+
+	// Send Preamble
+	for(int i = 0; i < 13; i++){
+		HAL_UART_Transmit(&huart3, &pream[i], 1, HAL_MAX_DELAY);
+	}
+
+    // Send Image Data
+    HAL_UART_Transmit(&huart3, send_ptr, FRAMESIZE, HAL_MAX_DELAY);
+
+    // Send End of Transmission
+    for(int i = 0; i < 8; i++){
+		HAL_UART_Transmit(&huart3, &end[i], 1, HAL_MAX_DELAY);
+	}
+
+    // Free allocated memory
+    free(byte_ptr);
+	free(send_ptr);
+}
+*/

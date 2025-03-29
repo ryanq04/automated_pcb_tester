@@ -1,0 +1,9 @@
+maybe try 32 bits
+feed the input into an array of 32 bits, pass this one into the function, and then
+
+
+ok, so we tried to face the problem of overflowing the stack by taking the transfer in segments. However, it doesn't work because it just takes separate pics.
+always only get the top segment of the pic if you do less. Need to just adjust stack size I'd say
+
+
+Make sure u understand which ones correspond to stack and whatnot  
