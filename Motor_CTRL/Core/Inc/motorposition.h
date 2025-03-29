@@ -1,6 +1,3 @@
-//
-//
-//
 #ifndef MOTORPOSITION_H
 #define MOTORPOSITION_H
 //
