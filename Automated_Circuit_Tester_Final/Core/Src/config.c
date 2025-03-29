@@ -1,4 +1,5 @@
 #include "config.h"
+#include <stdint.h>
 #include <string.h>
 #include "main.h"
 #include <string.h>
@@ -9,6 +10,12 @@ void print_msg(char * msg) {
   HAL_UART_Transmit(&huart3, (uint8_t *)msg, strlen(msg), 100);
 }
 
+void flashLED(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin, uint8_t delay_ms, uint8_t toggles) {
+    for (uint8_t i = 0; i < toggles; i++) {
+        HAL_GPIO_TogglePin(GPIO_Port, GPIO_Pin);
+        HAL_Delay(delay_ms);
+    }
+}
 
 
 
@@ -540,6 +547,8 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
+#define USE_FULL_ASSERT
+
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
@@ -550,9 +559,14 @@ void Error_Handler(void)
   */
 void assert_failed(uint8_t *file, uint32_t line)
 {
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+  // Send debug message over UART or blink LED
+    print_msg("ASSERT FAILED: %s, line %lu\r\n", file, line);
+
+    // Flash error LED rapidly
+    flashLED(LD3_GPIO_Port, LD3_Pin, 100, 10);
+
+    // Stop the program
+    __disable_irq();
+    while (1);
 }
 #endif /* USE_FULL_ASSERT */
