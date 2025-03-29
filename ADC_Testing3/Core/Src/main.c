@@ -47,7 +47,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 
 char msg[100];
-uint16_t adc_res;
+
 uint16_t adc_buffer[ADC_BUF_LEN];
 uint8_t ADC_full = 0;
 uint8_t sendFFT_ready = 0;

@@ -1,0 +1,6 @@
+../Core/Src/ov7670.c:165:9:ov7670_init	2
+../Core/Src/ov7670.c:188:6:read_all_ov7670_registers	2
+../Core/Src/ov7670.c:204:6:ov7_config	3
+../Core/Src/ov7670.c:221:9:ov7670_read	2
+../Core/Src/ov7670.c:240:6:ov7670_snapshot	2
+../Core/Src/ov7670.c:250:6:ov7670_capture	2

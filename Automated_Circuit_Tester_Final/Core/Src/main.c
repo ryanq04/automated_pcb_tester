@@ -1,6 +1,10 @@
 
 #include "config.h"
 #include "main.h"
+#include <stdio.h>
+#include <math.h>
+#include "adc_fft.h"
+
 
 
 ADC_HandleTypeDef hadc1;
@@ -17,15 +21,13 @@ UART_HandleTypeDef huart3;
 
 
 
+
+
+
 int main(void)
 {
-
-  
   HAL_Init();
-
-
   SystemClock_Config();
-
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_DCMI_Init();
@@ -38,6 +40,13 @@ int main(void)
   MX_TIM2_Init();
   MX_USB_OTG_FS_USB_Init();
   
+  //init FFT
+  arm_rfft_fast_instance_f32 fftHandler;
+  arm_rfft_fast_init_f32(&fftHandler, FFT_BUFFER_SIZE);
+
+
+
+  //MAIN CONTROL LOOP
   while (1)
   {
   
