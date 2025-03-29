@@ -1,25 +1,4 @@
 #include "adc_fft.h"
-#include "config.h"
-#include "main.h"
-
-
-uint16_t adc_buffer[ADC_BUF_LEN];
-uint8_t ADC_full = 0;
-uint8_t sendFFT_ready = 0;
-
-
-
-//FFT CODE
-float input_FFT[FFT_BUFFER_SIZE];
-float output_FFT[FFT_BUFFER_SIZE];
-
-typedef struct FreqMagPair {
-    float frequency;
-    float magnitude;
-} FreqMagPair;
-
-FreqMagPair freq_plot[FFT_BUFFER_SIZE];
-
 
 
 //get the frequency components and store them to reuse in the globals input_FFT (freq) and output_FFT (mag)

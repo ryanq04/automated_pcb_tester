@@ -61,7 +61,7 @@ main-build: Automated_Circuit_Tester_Final.elf secondary-outputs
 
 # Tool invocations
 Automated_Circuit_Tester_Final.elf Automated_Circuit_Tester_Final.map: $(OBJS) $(USER_OBJS) C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\STM32F446ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Automated_Circuit_Tester_Final.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Automated_Circuit_Tester_Final.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "Automated_Circuit_Tester_Final.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\STM32F446ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Automated_Circuit_Tester_Final.map" -Wl,--gc-sections -static -L"C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

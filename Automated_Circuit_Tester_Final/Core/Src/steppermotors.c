@@ -6,47 +6,46 @@
 void stp_Step(Stepper* motor, int step) {
    switch(step % 4) {
        case 0:
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[0], GPIO_PIN_SET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[1], GPIO_PIN_RESET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[2], GPIO_PIN_SET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[3], GPIO_PIN_RESET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_SET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_RESET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN3, GPIO_PIN_SET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN4, GPIO_PIN_RESET);
            break;
        case 1:
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[0], GPIO_PIN_RESET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[1], GPIO_PIN_SET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[2], GPIO_PIN_SET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[3], GPIO_PIN_RESET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_RESET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_SET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN3, GPIO_PIN_SET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN4, GPIO_PIN_RESET);
            break;
        case 2:
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[0], GPIO_PIN_RESET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[1], GPIO_PIN_SET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[2], GPIO_PIN_RESET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[3], GPIO_PIN_SET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_RESET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_SET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN3, GPIO_PIN_RESET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN4, GPIO_PIN_SET);
            break;
        case 3:
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[0], GPIO_PIN_SET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[1], GPIO_PIN_RESET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[2], GPIO_PIN_RESET);
-           HAL_GPIO_WritePin(motor->port, motor->motorPins[3], GPIO_PIN_SET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_SET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_RESET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN3, GPIO_PIN_RESET);
+           HAL_GPIO_WritePin(MOTOR_PORT, IN4, GPIO_PIN_SET);
            break;
    }
 }
 
 
 
-void stp_init(Stepper* nema, int port, int in1, int in2, int in3, int in4){
-   nema->port = port;
-   GPIOStepperPins pins = {in1, in2, in3, in4}
-   nema->pins = pins;
+void stp_init(Stepper* nema){
    nema->homeAngle = 0;
    nema->currAngle = 0;
 }
 
 
 void stp_Stop(Stepper* motor) {
-   for (int i = 0; i < 4; i++) {
-       HAL_GPIO_WritePin(motor->port, motor->motorPins[i], GPIO_PIN_RESET);
-   }
+	HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_RESET);
+   HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_RESET);
+   HAL_GPIO_WritePin(MOTOR_PORT, IN3, GPIO_PIN_RESET);
+   HAL_GPIO_WritePin(MOTOR_PORT, IN4, GPIO_PIN_RESET);
+
 }
 
 void stp_Move(Stepper* motor, int steps, int delay) {
@@ -65,5 +64,6 @@ void stp_moveDistance(Stepper* motor, float distance_cm){
 
    int convertedSteps = distance_cm * NEMA_DISTANCE_TO_STEPS;
    stp_Move(motor, convertedSteps, 5);
+   HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
 
 }

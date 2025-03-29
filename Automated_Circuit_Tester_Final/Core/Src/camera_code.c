@@ -8,13 +8,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#define FRAMESIZE 25056
-#define BUFFER_SIZE 25056
 
 
-uint16_t snapshot_buff[IMG_ROWS * IMG_COLS] = {0};
-uint8_t send_ptr[FRAMESIZE * 2] = {0};
-uint8_t dma_flag = 0;
+extern uint16_t snapshot_buff[IMG_ROWS * IMG_COLS] ;
+extern uint8_t send_ptr[FRAMESIZE * 2];
+extern uint8_t dma_flag;
 
 
 void print_buf(void);
@@ -147,30 +145,30 @@ void p4(){
 }
 
 
-{
-	
-	__HAL_DMA_ENABLE_IT(&hdma_dcmi, DMA_IT_TC);
-	HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
-
-  char msg[100];
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-  ov7670_init();
-  ov7_config();
-
-
-  while (1)
-  {
-		HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
-		HAL_Delay(100);
-    
-    if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin)) {
-			HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-			HAL_Delay(100);
-			
-			//p3();
-			p4();
-    }
-  }
-}
-
+//{
+//
+//	__HAL_DMA_ENABLE_IT(&hdma_dcmi, DMA_IT_TC);
+//	HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
+//
+//  char msg[100];
+//  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+//  ov7670_init();
+//  ov7_config();
+//
+//
+//  while (1)
+//  {
+//		HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+//		HAL_Delay(100);
+//
+//    if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin)) {
+//			HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+//			HAL_Delay(100);
+//
+//			//p3();
+//			p4();
+//    }
+//  }
+//}
+//
 

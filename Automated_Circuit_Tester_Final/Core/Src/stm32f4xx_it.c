@@ -62,6 +62,7 @@ extern TIM_HandleTypeDef htim6;
 extern UART_HandleTypeDef huart3;
 /* USER CODE BEGIN EV */
 
+extern uint8_t dma_flag;
 /* USER CODE END EV */
 
 /******************************************************************************/

@@ -12,6 +12,11 @@
 // Image settings
 #define IMG_ROWS 144
 #define IMG_COLS 174
+#define FRAMEX 144
+#define FRAMEY 174
+#define BUFFER_SIZE (FRAMEX * FRAMEY)
+#define FRAMESIZE BUFFER_SIZE
+
 
 uint8_t ov7670_read(uint8_t reg);
 HAL_StatusTypeDef ov7670_write(uint8_t reg,uint8_t val);

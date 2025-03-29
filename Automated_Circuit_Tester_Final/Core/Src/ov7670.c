@@ -8,12 +8,9 @@ extern I2C_HandleTypeDef hi2c2;
 extern DCMI_HandleTypeDef hdcmi;
 extern DMA_HandleTypeDef hdma_dcmi;
 
-#define FRAMEX 144
-#define FRAMEY 174
-#define BUFFER_SIZE (FRAMEX * FRAMEY)
 
 
-//extern uint32_t DMA_Data[BUFFER_SIZE/2];
+
 extern uint16_t snapshot_buff[IMG_ROWS * IMG_COLS];
 
 const uint8_t OV7670_reg[OV7670_REG_NUM][2] = {

@@ -1,6 +1,6 @@
-../Core/Src/ov7670.c:165:9:ov7670_init	112	static
-../Core/Src/ov7670.c:188:6:read_all_ov7670_registers	64	static
-../Core/Src/ov7670.c:204:6:ov7_config	48	static
-../Core/Src/ov7670.c:221:9:ov7670_read	128	static
-../Core/Src/ov7670.c:240:6:ov7670_snapshot	120	static
-../Core/Src/ov7670.c:250:6:ov7670_capture	120	static
+../Core/Src/ov7670.c:162:9:ov7670_init	112	static
+../Core/Src/ov7670.c:185:6:read_all_ov7670_registers	64	static
+../Core/Src/ov7670.c:201:6:ov7_config	48	static
+../Core/Src/ov7670.c:218:9:ov7670_read	128	static
+../Core/Src/ov7670.c:237:6:ov7670_snapshot	120	static
+../Core/Src/ov7670.c:247:6:ov7670_capture	120	static
