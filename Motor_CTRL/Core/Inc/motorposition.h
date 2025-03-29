@@ -59,6 +59,7 @@ void x_align(Probe myProbe, Position desiredLoc);
 void theta_align(Probe myProbe, Position desiredLoc);
 void R_align(Probe myProbe, Position desiredLoc);
 void moveProbe_test(Probe myProbe, Position desiredLoc);
+void init_home(Probe myProbe);
 
 #ifdef __cplusplus
 }

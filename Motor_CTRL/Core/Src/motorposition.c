@@ -77,6 +77,17 @@ void moveProbe_test(Probe myProbe, Position desiredLoc){
 
 }
 
+void init_home(Probe myProbe){
+    myProbe.nema->homeAngle = HOME.x;
+    myProbe.nema->currAngle = myProbe.nema->homeAngle;
+
+    myProbe.lin->currAngle = 0; 
+    myProbe.lin->homeAngle = 0; 
+    myProbe.rot->currAngle = 0; 
+    myProbe.rot->homeAngle = 0; 
+
+}
+
 //input the base and height of the triangle that needs to be solved. Assumes that the Servo is sent home first 
 //void moveProbe(float base, float height, Servo *lin, Servo *rot){
 //    float theta_rad = atan((height)/base);
