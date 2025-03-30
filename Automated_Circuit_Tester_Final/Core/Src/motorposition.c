@@ -27,7 +27,7 @@ void home_Align(Probe* myProbe){
 }
 
 void x_align(Probe* myProbe, Position desiredLoc){
-    flashLED(LD3_GPIO_Port, LD3_Pin, 1000, 5);
+    flashLED(LD1_GPIO_Port, LD1_Pin, 1000, 5);
     float move_cm = -(HOME.x - desiredLoc.x);
     if(move_cm > X_MAX){
         move_cm = X_MAX;
