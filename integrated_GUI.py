@@ -213,10 +213,7 @@ class SignalViewer(QMainWindow):
 
 
     def get_image_click_position(self, event):
-        if not self.awaiting_click_coords:
-            print("Click ignored: not in coordinate selection mode.")
-            return
-
+        
         if hasattr(self, 'image_shape') and self.image_label.pixmap() is not None:
             label_width = self.image_label.width()
             label_height = self.image_label.height()

@@ -49,7 +49,7 @@ Servo lin;
 Servo rot;
 Stepper nema;
 
-const Position HOME = {9.0, 8.0, 12.2};
+const Position HOME = {6.0, 6.0, 12.2};
 	
 
 int main(void)
