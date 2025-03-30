@@ -1,4 +1,5 @@
 import sys
+import cv2
 import time
 import struct
 import numpy as np
@@ -232,7 +233,7 @@ class SignalViewer(QMainWindow):
                 img_x = float(x * img_width / displayed_width)
                 img_y = float(y * img_height / displayed_height)
                 img_arr2D = [img_x, img_y]
-                print(f"Clicked on actual image at: ({img_x:.2f}, {img_y:.2f})")
+                print(f"Clicked on actual image at: ({x}, {y})")
                 
                 img_arr3D = project_2D_to_3D(img_arr2D)
                 print(f"Corresponding 3D coord: ({img_arr3D[0]:.2f}, {img_arr3D[1]:.2f})")
@@ -256,7 +257,7 @@ class SignalViewer(QMainWindow):
                     ser.write(packed)
                     print(f"Sent coordinates: ({img_arr3D[0]:.2f}, {img_arr3D[1]:.2f})")
 
-                    if self.wait_for_float_echo(ser, img_x, img_y):
+                    if self.wait_for_float_echo(ser, img_arr3D[0], img_arr3D[1]):
                         print("Float echo verified successfully.")
                     else:
                         print("Float echo mismatch or timeout.")
