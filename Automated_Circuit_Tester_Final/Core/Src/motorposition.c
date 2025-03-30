@@ -37,7 +37,7 @@ void x_align(Probe* myProbe, Position desiredLoc){
 }
 
 void theta_align(Probe* myProbe, Position desiredLoc){
-    float theta_rad = atan(desiredLoc.y / H);
+    float theta_rad = atan((desiredLoc.y - HOME.y) / H);
     float theta_deg = theta_rad * DEGREE_CONVERSION;
     if(theta_deg > THETA_MAX){
         theta_deg = THETA_MAX;
