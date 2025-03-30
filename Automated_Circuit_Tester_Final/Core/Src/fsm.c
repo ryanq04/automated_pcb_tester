@@ -39,24 +39,25 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     switch (state) {
         case STATE_LISTEN:
             if (match_command(rx_data_arr, CMD_TAKEPIC)) {
-                state = STATE_TAKEPIC;
+
                 ptr_state = State_Picture; //next state 
                 HAL_UART_Transmit(&huart3, CMD_TAKEPIC, 8, 100); //ack
-            } else if (match_command(rx_data_arr, CMD_ADCFFT)) {
-                state = STATE_ADCFFT;
-                ptr_state = State_ADC_FFT;
-                HAL_UART_Transmit(&huart3, CMD_ADCFFT, 8, 100);
             } else if (match_command(rx_data_arr, CMD_COORDS)) {
-                state = STATE_COORDS;
+
                 ptr_state = State_Coord_RX;
                 HAL_UART_Transmit(&huart3, CMD_COORDS, 8, 100);
+            } else if (match_command(rx_data_arr, CMD_ADCFFT)) {
+
+                ptr_state = State_ADC_FFT;
+                HAL_UART_Transmit(&huart3, CMD_ADCFFT, 8, 100);
             } else {
-                state = STATE_LISTEN;
+
                 ptr_state = State_Listen;
             }
             break;
 
         case STATE_COORDS:
+        	//SOMETHING IS BROKEN IN HERE I THINK
             memcpy(&posX, &rx_data_arr[0], 4);
             memcpy(&posY, &rx_data_arr[4], 4);
 
