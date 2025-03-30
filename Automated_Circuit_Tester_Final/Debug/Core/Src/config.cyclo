@@ -12,5 +12,5 @@
 ../Core/Src/config.c:412:7:MX_USB_OTG_FS_USB_Init	1
 ../Core/Src/config.c:431:7:MX_DMA_Init	1
 ../Core/Src/config.c:452:7:MX_GPIO_Init	1
-../Core/Src/config.c:540:6:Error_Handler	1
-../Core/Src/config.c:561:6:assert_failed	1
+../Core/Src/config.c:542:6:Error_Handler	1
+../Core/Src/config.c:563:6:assert_failed	1

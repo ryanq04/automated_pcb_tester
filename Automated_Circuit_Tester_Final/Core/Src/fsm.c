@@ -99,7 +99,7 @@ void State_Coord_RX(void){
 }
 
 void State_Motors(void){
-	HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+    flashLED(LD2_GPIO_Port, LD2_Pin, 200, 10);
     state = STATE_MOTORS;
     init_home(&myProbe);
     Position test = {3, 3, 0};

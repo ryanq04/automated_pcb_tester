@@ -11,6 +11,10 @@ extern "C" {
 // Datasheet link --> https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf
 
 
+//I2C1 SCL PB6 - D26 on board
+//I2C1 SDA PB9 - D14 on board
+
+
 // PCA9685 Register Definitions
 #define PCA9685_MODE1         0x0         // as in the datasheet page no 10/52
 #define PCA9685_PRE_SCALE     0xFE        // as in the datasheet page no 13/52

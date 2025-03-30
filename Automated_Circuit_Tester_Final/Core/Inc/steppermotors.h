@@ -4,12 +4,14 @@
 #include "stm32f4xx_hal.h"
 #include "config.h"
 
-#define MOTOR_PORT GPIOA  // Choose an unused port that has all of the gpio pins below.
+#define MOTOR_PORT GPIOF  // Choose an unused port that has all of the gpio pins below.
 
-#define IN1 GPIO_PIN_3  // Connect to L298N IN1 from A0
-#define IN2 GPIO_PIN_5  // Connect to L298N IN2 from D13
-#define IN3 GPIO_PIN_6  // Connect to L298N IN3 from D12
-#define IN4 GPIO_PIN_7  // Connect to L298N IN4 from D11
+#define IN1 GPIO_PIN_12  // Connect to L298N IN1 from D8
+#define IN2 GPIO_PIN_13  // Connect to L298N IN2 from D7
+#define IN3 GPIO_PIN_14  // Connect to L298N IN3 from D4
+#define IN4 GPIO_PIN_15  // Connect to L298N IN4 from D2
+
+
 
 #define NEMA_DISTANCE_TO_STEPS 49
 

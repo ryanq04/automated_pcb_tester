@@ -64,6 +64,5 @@ void stp_moveDistance(Stepper* motor, float distance_cm){
 
    int convertedSteps = distance_cm * NEMA_DISTANCE_TO_STEPS;
    stp_Move(motor, convertedSteps, 5);
-   HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
 
 }

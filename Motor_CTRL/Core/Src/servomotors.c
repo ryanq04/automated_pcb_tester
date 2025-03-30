@@ -8,10 +8,10 @@ void PCA9685_SetBit(uint8_t Register, uint8_t Bit, uint8_t Value)
 {
   uint8_t readValue;
   // Read all 8 bits and set only one bit to 0/1 and write all 8 bits back
-  HAL_I2C_Mem_Read(&hi2c2, PCA9685_ADDRESS, Register, 1, &readValue, 1, 10);
+  HAL_I2C_Mem_Read(&hi2c1, PCA9685_ADDRESS, Register, 1, &readValue, 1, 10);
   if (Value == 0) readValue &= ~(1 << Bit);
   else readValue |= (1 << Bit);
-  HAL_I2C_Mem_Write(&hi2c2, PCA9685_ADDRESS, Register, 1, &readValue, 1, 10);
+  HAL_I2C_Mem_Write(&hi2c1, PCA9685_ADDRESS, Register, 1, &readValue, 1, 10);
   HAL_Delay(1);
 }
 
@@ -24,7 +24,7 @@ void PCA9685_SetPWMFrequency(uint16_t frequency)
   else prescale = 25000000 / (4096 * frequency);
   // prescale changes 3 to 255 for 1526Hz to 24Hz as in the datasheet page no 1/52
   PCA9685_SetBit(PCA9685_MODE1, PCA9685_MODE1_SLEEP_BIT, 1);
-  HAL_I2C_Mem_Write(&hi2c2, PCA9685_ADDRESS, PCA9685_PRE_SCALE, 1, &prescale, 1, 10);
+  HAL_I2C_Mem_Write(&hi2c1, PCA9685_ADDRESS, PCA9685_PRE_SCALE, 1, &prescale, 1, 10);
   PCA9685_SetBit(PCA9685_MODE1, PCA9685_MODE1_SLEEP_BIT, 0);
   PCA9685_SetBit(PCA9685_MODE1, PCA9685_MODE1_RESTART_BIT, 1);
 }
@@ -45,7 +45,7 @@ void PCA9685_SetPWM(uint8_t Channel, uint16_t OnTime, uint16_t OffTime)
   pwm[1] = OnTime>>8;
   pwm[2] = OffTime & 0xFF;
   pwm[3] = OffTime>>8;
-  HAL_I2C_Mem_Write(&hi2c2, PCA9685_ADDRESS, registerAddress, 1, pwm, 4, 10);
+  HAL_I2C_Mem_Write(&hi2c1, PCA9685_ADDRESS, registerAddress, 1, pwm, 4, 10);
 }
 
 void setServoAngle_r(uint8_t Channel, float Angle)
