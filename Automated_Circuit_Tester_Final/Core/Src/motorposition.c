@@ -12,18 +12,18 @@ void home_Align(Probe* myProbe){
     // 1. retract the motor
     setServoAngle(myProbe->lin, myProbe->lin->homeAngle);
     myProbe->lin->currAngle = myProbe->rot->homeAngle; 
-    HAL_Delay(10); 
+    HAL_Delay(500); 
 
     // 2. rotate to home angle
     setServoAngle(myProbe->rot, myProbe->rot->homeAngle);
     myProbe->rot->currAngle = myProbe->rot->homeAngle; 
-    HAL_Delay(10); 
+    HAL_Delay(500); 
 
     // 3. retract to home direction in stepper
     float move_cm = -(myProbe->nema->currAngle - HOME.x); // move right
     stp_moveDistance((myProbe->nema), move_cm);
     myProbe->nema->currAngle = myProbe->nema->homeAngle;
-    HAL_Delay(10); 
+    HAL_Delay(500); 
 }
 
 void x_align(Probe* myProbe, Position desiredLoc){
