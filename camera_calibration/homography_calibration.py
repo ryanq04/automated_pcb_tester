@@ -14,8 +14,7 @@ def project_2D_to_3D(pt_2D):
     pt_3D = np.dot(H, np.array([pt_2D[0], pt_2D[1], 1]))
     pt_3D_normalized = pt_3D / pt_3D[2]
     pt_3D_rounded = np.round(pt_3D_normalized, 2)
-    
-    print("Approximate 3D Coordinates:", new_3D_coord)
-    
-    return pt_3D_rounded
 
+    return ([pt_3D_rounded[0], pt_3D_rounded[1]])
+
+print(project_2D_to_3D([449, 24]))

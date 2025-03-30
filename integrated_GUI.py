@@ -231,8 +231,11 @@ class SignalViewer(QMainWindow):
                 img_height, img_width = self.image_shape[:2]
                 img_x = float(x * img_width / displayed_width)
                 img_y = float(y * img_height / displayed_height)
-                img_arr = [img_x, img_y]
+                img_arr2D = [img_x, img_y]
                 print(f"Clicked on actual image at: ({img_x:.2f}, {img_y:.2f})")
+                
+                img_arr3D = project_2D_to_3D(img_arr2D)
+                print(f"Corresponding 3D coord: ({img_arr3D[0]:.2f}, {img_arr3D[1]:.2f})")
 
                 try:
                     ser = self.serial_for_coords
@@ -247,11 +250,11 @@ class SignalViewer(QMainWindow):
                         return
                     ser.reset_input_buffer()
 
-                    packed = struct.pack('<ff', *img_arr)
+                    packed = struct.pack('<ff', *img_arr3D)
                     print("Packed bytes (as ints):", list(packed))
                     # packed = struct.pack('<ff', img_x, img_y)
                     ser.write(packed)
-                    print(f"Sent coordinates: ({img_x:.2f}, {img_y:.2f})")
+                    print(f"Sent coordinates: ({img_arr3D[0]:.2f}, {img_arr3D[1]:.2f})")
 
                     if self.wait_for_float_echo(ser, img_x, img_y):
                         print("Float echo verified successfully.")
@@ -338,6 +341,21 @@ class SignalViewer(QMainWindow):
                         self.fft_curve.setData(frequencies, magnitudes_db)
         except Exception as e:
             print(f"Error during UART communication: {e}")
+            
+def project_2D_to_3D(pt_2D):
+    
+    # Image points (2D) and their real-world counterparts (3D but assumed to be on a plane)
+    image_pts = np.array([[449, 24], [458, 197], [286, 29], [139, 399], [292, 206]], dtype=np.float32)
+    world_pts = np.array([[0, 0, 0], [3, 0, 0], [0, 3, 0], [6, 6, 0], [3, 3, 0]], dtype=np.float32)
+
+    # Compute homography
+    H, _ = cv2.findHomography(image_pts, world_pts[:, :2])
+
+    pt_3D = np.dot(H, np.array([pt_2D[0], pt_2D[1], 1]))
+    pt_3D_normalized = pt_3D / pt_3D[2]
+    pt_3D_rounded = np.round(pt_3D_normalized, 2)
+
+    return ([pt_3D_rounded[0], pt_3D_rounded[1]])
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
