@@ -71,6 +71,9 @@ int main(void)
 	//init FFT
 	arm_rfft_fast_init_f32(&fftHandler, FFT_BUFFER_SIZE);
 
+
+	//init PCA
+	PCA9685_Init(50); // 50Hz for servo
 	//init probe
 	myProbe.lin = &lin;
 	myProbe.rot = &rot;
