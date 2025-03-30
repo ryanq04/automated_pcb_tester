@@ -343,8 +343,12 @@ class SignalViewer(QMainWindow):
 def project_2D_to_3D(pt_2D):
     
     # Image points (2D) and their real-world counterparts (3D but assumed to be on a plane)
-    image_pts = np.array([[124.61, 7.72], [125.06, 64.05], [69.78, 7.27], [19.03, 124.92], [69.33, 66.32], [19.48, 10.0], [18.58, 6.63]], dtype=np.float32)
-    world_pts = np.array([[0, 0, 0], [3, 0, 0], [0, 3, 0], [6, 6, 0], [3, 3, 0], [0, 6, 0], [3, 6, 0]], dtype=np.float32)
+    image_pts = np.array([[138.1, 144.2], [120.4, 97.4], [100.4, 78.8], [80.85, 59.8], 
+                          [61.3, 42.1], [40.88, 25.37], [20.9, 10.87], 
+                          [24.08, 115.55], [133.1, 9.51], [82.67, 114.64], [137.2, 59.8], [21.35, 62.5], [77.68, 9.51]], dtype=np.float32)
+    world_pts = np.array([[0, 0, 0], [1, 1, 0], [2, 2, 0], [3, 3, 0], 
+                          [4, 4, 0], [5, 5, 0], [6, 6, 0], 
+                          [6, 0, 0], [0, 6, 0], [3, 0, 0], [0, 3, 0], [6, 3, 0], [3, 6, 0]], dtype=np.float32)
 
     # Compute homography
     H, _ = cv2.findHomography(image_pts, world_pts[:, :2])
