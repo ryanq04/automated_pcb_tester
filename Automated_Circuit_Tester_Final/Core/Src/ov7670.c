@@ -206,7 +206,7 @@ void ov7_config(){
 		data[1] = OV7670_reg[i][1];
 		HAL_StatusTypeDef status = HAL_I2C_Master_Transmit(&hi2c2, ADDR_OV7670, data, 2, 10000); //send address frame
 		while(status != HAL_OK) {
-			 sprintf(msg, "Error\n");
+			 sprintf(msg, "Error hi\n");
        print_msg(msg);
        HAL_Delay(1000);
        status = HAL_I2C_Master_Transmit(&hi2c2, ADDR_OV7670, data, 2, 10000); 

@@ -31,11 +31,15 @@ Note: source file '..\..\ADC_Testing3\Core\Src\config.c' - object file renamed f
 Note: source file '..\..\ADC_Testing3\Core\Src\main.c' - object file renamed from 'ADC_Testing2\main.o' to 'ADC_Testing2\main_1.o'.
 Note: source file '..\..\ADC_Testing3\Core\Src\stm32f4xx_hal_msp.c' - object file renamed from 'ADC_Testing2\stm32f4xx_hal_msp.o' to 'ADC_Testing2\stm32f4xx_hal_msp_1.o'.
 Note: source file '..\..\ADC_Testing3\Core\Src\stm32f4xx_it.c' - object file renamed from 'ADC_Testing2\stm32f4xx_it.o' to 'ADC_Testing2\stm32f4xx_it_1.o'.
+compiling config.c...
 compiling main.c...
 linking...
-Program Size: Code=14676 RO-data=516 RW-data=12 ZI-data=7404  
-FromELF: creating hex file...
-"ADC_Testing2\ADC_Testing2.axf" - 0 Error(s), 0 Warning(s).
+ADC_Testing2\ADC_Testing2.axf: Error: L6218E: Undefined symbol arm_rfft_fast_init_f32 (referred from main_1.o).
+ADC_Testing2\ADC_Testing2.axf: Error: L6218E: Undefined symbol arm_rfft_fast_f32 (referred from main_1.o).
+Not enough information to list image symbols.
+Not enough information to list load addresses in the image map.
+Finished: 2 information, 0 warning and 2 error messages.
+"ADC_Testing2\ADC_Testing2.axf" - 2 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -58,7 +62,8 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:01
+Target not created.
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

@@ -26,11 +26,11 @@ TIM_HandleTypeDef htim6;
 UART_HandleTypeDef huart3;
 
 //ADC_FFT globals
-uint16_t adc_buffer[ADC_BUF_LEN];
-uint8_t ADC_full = 0;
-uint8_t sendFFT_ready = 0;
-float input_FFT[FFT_BUFFER_SIZE];
-float output_FFT[FFT_BUFFER_SIZE];
+// uint16_t adc_buffer[ADC_BUF_LEN];
+// uint8_t ADC_full = 0;
+// uint8_t sendFFT_ready = 0;
+// float input_FFT[FFT_BUFFER_SIZE];
+// float output_FFT[FFT_BUFFER_SIZE];
 arm_rfft_fast_instance_f32 fftHandler;
 
 //camera globals
@@ -39,7 +39,8 @@ uint8_t send_ptr[FRAMESIZE * 2] = {0};
 uint8_t dma_flag = 0;
 
 //fsm globals
-StateFunc current_state = NULL;
+StateFunc ptr_state = NULL;
+State state = STATE_LISTEN;
 
 
 //init motor globals
@@ -86,13 +87,20 @@ int main(void)
     myProbe.nema->currAngle = HOME.x;
     myProbe.nema->homeAngle = HOME.x;
 	
-	current_state = State_Listen;
+	ptr_state = State_Listen;
+
+	__HAL_DMA_ENABLE_IT(&hdma_dcmi, DMA_IT_TC);
+	HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
+
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	ov7670_init();
+	ov7_config();
 
 	while(1){
 		flashLED(LD1_GPIO_Port, LD1_Pin, 500, 1);
 
-		if (current_state != NULL) {
-            current_state();       // Run the state logic
+		if (ptr_state != NULL) {
+            ptr_state();       // Run the state logic
         }
 	}
 

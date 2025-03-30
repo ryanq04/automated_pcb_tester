@@ -1,8 +1,19 @@
 #ifndef __FSM_H__
 #define __FSM_H__
 
+typedef enum {
+    STATE_LISTEN,
+    STATE_TAKEPIC,
+    STATE_ADCFFT,
+    STATE_COORDS,
+    STATE_MOTORS,
+    STATE_GO
+} State;
+
+
 typedef void (*StateFunc)(void);
-extern StateFunc current_state;
+extern StateFunc ptr_state;
+extern State state;
 
 void State_Listen(void);
 void State_Motors(void);

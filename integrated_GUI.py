@@ -1,4 +1,5 @@
 import sys
+import time
 import numpy as np
 import serial
 from PyQt5.QtWidgets import (
@@ -88,9 +89,16 @@ class SignalViewer(QMainWindow):
                 ser.write(b"TAKEPC\r\n")
 
                 print("Waiting for STM32 echo handshake...")
+                handshake_timeout = 5
+                start_time = time.time()
                 while True:
+                    if time.time() - start_time > handshake_timeout:
+                        print("Handshake timeout. No response from STM32.")
+                        return
                     try:
-                        if ser.readline().decode() == "TAKEPC":
+                        line = ser.readline().decode().strip()
+                        print(f"Received during handshake: '{line}'")
+                        if line == "TAKEPC":
                             break
                     except UnicodeDecodeError:
                         pass
@@ -126,7 +134,7 @@ class SignalViewer(QMainWindow):
                 B = np.clip(Y + 1.772 * (Cb - 128), 0, 255).astype(np.uint8)
 
                 frame = np.stack((B, G, R), axis=-1)
-                frame = np.rot90(frame, 2)  # Rotate image 180 degrees
+                frame = np.rot90(frame, 2)
 
                 self.latest_image = frame
                 self.image_shape = frame.shape
