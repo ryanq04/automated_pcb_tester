@@ -10,13 +10,13 @@ extern const Position HOME;
 // Calculates the motor position based on given (x, y) coords
 void home_Align(Probe* myProbe){
     // 1. retract the motor
-    setServoAngle(myProbe->lin, 0);
-    myProbe->lin->currAngle = 0; 
+    setServoAngle(myProbe->lin, myProbe->lin->homeAngle);
+    myProbe->lin->currAngle = myProbe->lin->homeAngle; 
     HAL_Delay(10); 
 
     // 2. rotate to home angle
-    setServoAngle(myProbe->rot, 0);
-    myProbe->rot->currAngle = 0; 
+    setServoAngle(myProbe->rot, myProbe->rot->homeAngle);
+    myProbe->rot->currAngle = myProbe->rot->homeAngle; 
     HAL_Delay(10); 
 
     // 3. retract to home direction in stepper
@@ -37,7 +37,7 @@ void x_align(Probe* myProbe, Position desiredLoc){
 }
 
 void theta_align(Probe* myProbe, Position desiredLoc){
-    float theta_rad = atan(desiredLoc.x / H);
+    float theta_rad = atan(desiredLoc.y / H);
     float theta_deg = theta_rad * DEGREE_CONVERSION;
     if(theta_deg > THETA_MAX){
         theta_deg = THETA_MAX;
