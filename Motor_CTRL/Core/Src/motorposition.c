@@ -13,18 +13,18 @@ void home_Align(Probe myProbe){
     // 1. retract the motor
     setServoAngle(&(myProbe.lin), 0);
     myProbe.lin->currAngle = 0; 
-    HAL_Delay(10); 
+    HAL_Delay(1000); 
 
     // 2. rotate to home angle
     setServoAngle(&(myProbe.rot), 0);
     myProbe.rot->currAngle = 0; 
-    HAL_Delay(10); 
+    HAL_Delay(1000); 
 
     // 3. retract to home direction in stepper
     float move_cm = -(myProbe.nema->currAngle - HOME.x); // move right
     stp_moveDistance(&(myProbe.nema), move_cm);
     myProbe.nema->currAngle = myProbe.nema->homeAngle;
-    HAL_Delay(10); 
+    HAL_Delay(1000); 
 }
 
 void x_align(Probe myProbe, Position desiredLoc){
@@ -63,11 +63,11 @@ void moveProbe_test(Probe myProbe, Position desiredLoc){
 
     // 2. align stepper, theta, R in order
     x_align(myProbe, desiredLoc);
-    HAL_Delay(100); 
+    HAL_Delay(1000); 
     theta_align(myProbe, desiredLoc);
-    HAL_Delay(100); 
+    HAL_Delay(1000); 
     R_align(myProbe, desiredLoc);
-    HAL_Delay(100); 
+    HAL_Delay(1000); 
 
     // 3. wait
     HAL_Delay(3000); 
@@ -88,22 +88,22 @@ void init_home(Probe myProbe){
 
 }
 
-Probe get_probe(){
-    Probe myProbe; 
-    myProbe.probePos = HOME; 
-    myProbe.lin->Channel = 0;
-    myProbe.lin->currAngle = 0;
-    myProbe.lin->homeAngle = 0;
+// Probe get_probe(){
+//     Probe myProbe; 
+//     myProbe.probePos = HOME; 
+//     myProbe.lin->Channel = 0;
+//     myProbe.lin->currAngle = 0;
+//     myProbe.lin->homeAngle = 0;
 
-    myProbe.rot->Channel = 15;
-    myProbe.rot->currAngle = 0;
-    myProbe.rot->homeAngle = 0;
+//     myProbe.rot->Channel = 15;
+//     myProbe.rot->currAngle = 0;
+//     myProbe.rot->homeAngle = 0;
 
-    myProbe.nema->currAngle = HOME.x;
-    myProbe.nema->homeAngle = HOME.x;
+//     myProbe.nema->currAngle = HOME.x;
+//     myProbe.nema->homeAngle = HOME.x;
 
-    return myProbe
-}
+//     return myProbe;
+// }
 
 //input the base and height of the triangle that needs to be solved. Assumes that the Servo is sent home first 
 //void moveProbe(float base, float height, Servo *lin, Servo *rot){
