@@ -123,7 +123,7 @@ void p3(){
 		{
 			HAL_Delay(10);	
 		}
-		HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 		dma_flag = 0;
 		//print_ss(); 
 		send_img(); 

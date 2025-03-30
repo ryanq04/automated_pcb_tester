@@ -1,12 +1,14 @@
 
 #include "config.h"
 #include "main.h"
+#include <stddef.h>
 #include <stdio.h>
 #include <math.h>
 
 
 #include "adc_fft.h"
 #include "ov7670.h"
+#include "motorposition.h"
 
 #include "fsm.h"
 
@@ -29,6 +31,7 @@ uint8_t ADC_full = 0;
 uint8_t sendFFT_ready = 0;
 float input_FFT[FFT_BUFFER_SIZE];
 float output_FFT[FFT_BUFFER_SIZE];
+arm_rfft_fast_instance_f32 fftHandler;
 
 //camera globals
 uint16_t snapshot_buff[IMG_ROWS * IMG_COLS] = {0};
@@ -36,8 +39,16 @@ uint8_t send_ptr[FRAMESIZE * 2] = {0};
 uint8_t dma_flag = 0;
 
 //fsm globals
-StateFunc current_state = State_Listen;
+StateFunc current_state = NULL;
 
+
+//init motor globals
+Probe myProbe; 
+Servo lin;
+Servo rot;
+Stepper nema;
+const Position HOME = {9, 8, 12.2};
+	
 
 int main(void)
 {
@@ -56,50 +67,33 @@ int main(void)
 	MX_USB_OTG_FS_USB_Init();
 	
 	//init FFT
-	arm_rfft_fast_instance_f32 fftHandler;
 	arm_rfft_fast_init_f32(&fftHandler, FFT_BUFFER_SIZE);
 
-
-
-	//MAIN CONTROL LOOP
-	while (1)
-	{
-		HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-			HAL_Delay(100);
-		if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin)) {
-			HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-			HAL_Delay(100);
-
-			HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, ADC_BUF_LEN); //start DMA and ADC
-			HAL_TIM_Base_Start(&htim2);  // Start the timer that triggers ADC
-			//data is ready for FFT
-		}
-
-		if(ADC_full == 1){
-			ADC_full = 0;
-			HAL_ADC_Stop_DMA(&hadc1);
-			HAL_TIM_Base_Stop(&htim2); // stop the adc and timer
-
-			for(int i = 0; i < ADC_BUF_LEN; i++){ //since DMA is faster than code, we should be able to immediately load values
-				input_FFT[i] = (float)(adc_buffer[i]); //note the usage of float here - should consider optimization reasons and configurations
-			}
-
-			//FFT
-			arm_rfft_fast_f32(&fftHandler, input_FFT, output_FFT, 0);
-			computeCoeffs(output_FFT);
-
-			sendADC_UART();
-			sendFFT_UART();
-		}
-	}
-
-  /*
-	while(1){
-		assert_param(current_state != NULL);
-        current_state();  // Call the current state function
-        
+	//init probe
+	myProbe.lin = &lin;
+	myProbe.rot = &rot;
+	myProbe.nema = &nema;
 	
+    myProbe.probePos = HOME; 
+    myProbe.lin->Channel = 0;
+    myProbe.lin->currAngle = 0;
+    myProbe.lin->homeAngle = 0;
+
+    myProbe.rot->Channel = 15;
+    myProbe.rot->currAngle = 0;
+    myProbe.rot->homeAngle = 0;
+
+    myProbe.nema->currAngle = HOME.x;
+    myProbe.nema->homeAngle = HOME.x;
+	
+	current_state = State_Listen;
+
+	while(1){
+		flashLED(LD1_GPIO_Port, LD1_Pin, 500, 1);
+
+		if (current_state != NULL) {
+            current_state();       // Run the state logic
+        }
 	}
- 
-  */
+
 }

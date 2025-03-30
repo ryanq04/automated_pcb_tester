@@ -11,8 +11,7 @@ import pyqtgraph as pg
 import ctypes
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
-
-PORT = 'COM8'
+PORT = 'COM7'
 BAUDRATE = 115200
 ADC_LENGTH = 2048
 FFT_LENGTH = 2048
@@ -39,19 +38,19 @@ class SignalViewer(QMainWindow):
         self.image_label.mousePressEvent = self.get_image_click_position
         left_layout.addWidget(self.image_label)
 
-        self.capture_button = QPushButton("Capture Image")
+        self.capture_button = QPushButton("Capture Dummy Image")
+        self.real_capture_button = QPushButton("Capture Real Image")
         self.test_button = QPushButton("Test")
         self.uart_button = QPushButton("ADC + FFT")
-        self.save_button = QPushButton("Save Image")
         self.quit_button = QPushButton("Quit")
 
         self.capture_button.clicked.connect(self.capture_image_only)
+        self.real_capture_button.clicked.connect(self.capture_real_image)
         self.test_button.clicked.connect(self.run_test_signal)
         self.uart_button.clicked.connect(self.handle_test_uart)
-        self.save_button.clicked.connect(self.save_image)
         self.quit_button.clicked.connect(self.close)
 
-        for btn in (self.capture_button, self.test_button, self.uart_button, self.save_button, self.quit_button):
+        for btn in (self.capture_button, self.real_capture_button, self.test_button, self.uart_button, self.quit_button):
             left_layout.addWidget(btn)
 
         self.time_plot = pg.PlotWidget(title="Time Domain Signal")
@@ -82,6 +81,66 @@ class SignalViewer(QMainWindow):
     def capture_image_only(self):
         self.display_dummy_image()
 
+    def capture_real_image(self):
+        try:
+            with serial.Serial(PORT, BAUDRATE, timeout=2) as ser:
+                print("Sending TAKEPC command...")
+                ser.write(b"TAKEPC\r\n")
+
+                print("Waiting for STM32 echo handshake...")
+                while True:
+                    try:
+                        if ser.readline().decode() == "TAKEPC":
+                            break
+                    except UnicodeDecodeError:
+                        pass
+
+                print("Handshake confirmed.")
+
+                print("Waiting for PREAMBLE...")
+                while ser.readline().decode().strip() != "PREAMBLE!":
+                    pass
+                print("PREAMBLE received. Reading image...")
+
+                rows, cols = 144, 174
+                expected_bytes = rows * cols * 2
+                raw = b''
+                while len(raw) < expected_bytes:
+                    raw += ser.read(expected_bytes - len(raw))
+
+                img_ycbcr422 = np.frombuffer(raw, dtype=np.uint8).reshape((rows, cols // 2, 4))
+
+                Y0 = img_ycbcr422[:, :, 0].astype(np.float32)
+                Cb = img_ycbcr422[:, :, 1].astype(np.float32)
+                Y1 = img_ycbcr422[:, :, 2].astype(np.float32)
+                Cr = img_ycbcr422[:, :, 3].astype(np.float32)
+
+                Y = np.zeros((rows, cols), dtype=np.float32)
+                Y[:, 0::2] = Y0
+                Y[:, 1::2] = Y1
+                Cb = np.repeat(Cb, 2, axis=1)
+                Cr = np.repeat(Cr, 2, axis=1)
+
+                R = np.clip(Y + 1.402 * (Cr - 128), 0, 255).astype(np.uint8)
+                G = np.clip(Y - 0.344136 * (Cb - 128) - 0.714136 * (Cr - 128), 0, 255).astype(np.uint8)
+                B = np.clip(Y + 1.772 * (Cb - 128), 0, 255).astype(np.uint8)
+
+                frame = np.stack((B, G, R), axis=-1)
+                frame = np.rot90(frame, 2)  # Rotate image 180 degrees
+
+                self.latest_image = frame
+                self.image_shape = frame.shape
+                height, width, channels = frame.shape
+                bytes_per_line = channels * width
+                image = QImage(frame.data, width, height, bytes_per_line, QImage.Format_RGB888)
+                pixmap = QPixmap.fromImage(image)
+                scaled_pixmap = pixmap.scaled(self.image_label.width(), self.image_label.height(), Qt.KeepAspectRatio)
+                self.image_label.setPixmap(scaled_pixmap)
+                self.displayed_image_size = (scaled_pixmap.width(), scaled_pixmap.height())
+
+        except Exception as e:
+            print(f"Failed to capture real image: {e}")
+
     def display_dummy_image(self):
         dummy_data = np.random.randint(0, 255, (144, 174), dtype=np.uint8)
         image = QImage(dummy_data.data, dummy_data.shape[1], dummy_data.shape[0],
@@ -96,14 +155,14 @@ class SignalViewer(QMainWindow):
     def run_test_signal(self):
         t = np.linspace(0, ADC_LENGTH / SAMPLE_RATE, ADC_LENGTH)
         signal_type = np.random.choice(['sine', 'square'])
-        freq = np.random.uniform(1000, 100_000)  # 1 kHz to 100 kHz
+        freq = np.random.uniform(1000, 100_000)
 
         if signal_type == 'sine':
             signal = np.sin(2 * np.pi * freq * t)
         else:
             signal = np.sign(np.sin(2 * np.pi * freq * t))
 
-        signal += 0.2 * np.random.randn(ADC_LENGTH)  # Add some noise
+        signal += 0.2 * np.random.randn(ADC_LENGTH)
         print(f"Test signal: {signal_type} wave, Frequency: {freq:.1f} Hz, with mild noise")
         self.update_plots(signal)
 
@@ -112,7 +171,7 @@ class SignalViewer(QMainWindow):
         signal_volts = (signal * 3.3 / 4095.0)
         self.time_curve.setData(t, signal_volts)
         fft = np.abs(np.fft.rfft(signal_volts))
-        fft_db = 20 * np.log10((fft * 3.3 / 4095.0) + 1e-12)  # Avoid log(0)
+        fft_db = 20 * np.log10((fft * 3.3 / 4095.0) + 1e-12)
         freqs = np.fft.rfftfreq(len(signal), d=1/SAMPLE_RATE)
 
         if self.fft_curve is None:
@@ -134,7 +193,7 @@ class SignalViewer(QMainWindow):
             y = event.pos().y() - offset_y
 
             if 0 <= x < displayed_width and 0 <= y < displayed_height:
-                img_height, img_width = self.image_shape
+                img_height, img_width = self.image_shape[:2]
                 img_x = int(x * img_width / displayed_width)
                 img_y = int(y * img_height / displayed_height)
                 print(f"Clicked on actual image at: ({img_x}, {img_y})")
@@ -143,12 +202,6 @@ class SignalViewer(QMainWindow):
 
     def update_plot(self):
         pass
-
-    def save_image(self):
-        if hasattr(self, 'latest_image'):
-            image = QImage(self.latest_image.data, self.latest_image.shape[1], self.latest_image.shape[0],
-                           self.latest_image.strides[0], QImage.Format_Grayscale8)
-            image.save("captured_image.png")
 
     def handle_test_uart(self):
         try:
@@ -171,7 +224,7 @@ class SignalViewer(QMainWindow):
                 frequencies = np.frombuffer(freqs, dtype='<f4')
                 magnitudes = np.frombuffer(mags, dtype='<f4')
 
-                magnitudes_db = 20 * np.log10((magnitudes * 3.3 / 4095.0) + 1e-12 )  # Convert to dBV
+                magnitudes_db = 20 * np.log10((magnitudes * 3.3 / 4095.0) + 1e-12)
 
                 print("FFT magnitudes stats (dBV):")
                 print("Min:", np.min(magnitudes_db))

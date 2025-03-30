@@ -3,6 +3,7 @@
 #include <string.h>
 #include "main.h"
 #include <string.h>
+#include <stdio.h>
 
 
 
@@ -10,7 +11,7 @@ void print_msg(char * msg) {
   HAL_UART_Transmit(&huart3, (uint8_t *)msg, strlen(msg), 100);
 }
 
-void flashLED(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin, uint8_t delay_ms, uint8_t toggles) {
+void flashLED(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin, uint32_t delay_ms, uint8_t toggles) {
     for (uint8_t i = 0; i < toggles; i++) {
         HAL_GPIO_TogglePin(GPIO_Port, GPIO_Pin);
         HAL_Delay(delay_ms);
@@ -398,7 +399,7 @@ void SystemClock_Config(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART3_Init 2 */
-
+  __HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
   /* USER CODE END USART3_Init 2 */
 
 }
@@ -560,7 +561,9 @@ void Error_Handler(void)
 void assert_failed(uint8_t *file, uint32_t line)
 {
   // Send debug message over UART or blink LED
-    print_msg("ASSERT FAILED: %s, line %lu\r\n", file, line);
+    char msg[50];
+    sprintf(msg, "ASSERT FAILED: %s, line %lu\r\n", file, line);
+    print_msg(msg);
 
     // Flash error LED rapidly
     flashLED(LD3_GPIO_Port, LD3_Pin, 100, 10);

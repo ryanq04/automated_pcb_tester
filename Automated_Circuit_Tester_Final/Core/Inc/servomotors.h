@@ -24,8 +24,6 @@ extern "C" {
 // PCA9685 I2C Address
 #define PCA9685_ADDRESS 0x80
 
-#define GEAR_RADIUS 0.9 //0.9cm 
-#define PI 3.1415
 
 //SG90 struct
 typedef struct Servo {

@@ -1,0 +1,6 @@
+../Core/Src/motorposition.c:11:6:home_Align	1
+../Core/Src/motorposition.c:29:6:x_align	2
+../Core/Src/motorposition.c:38:6:theta_align	2
+../Core/Src/motorposition.c:48:6:R_align	2
+../Core/Src/motorposition.c:58:6:moveProbe_test	1
+../Core/Src/motorposition.c:79:6:init_home	1

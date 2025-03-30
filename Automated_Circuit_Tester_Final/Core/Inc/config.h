@@ -2,7 +2,8 @@
 #define __CONFIG_H__
 
 #include "main.h"
-
+#include <string.h>
+#include <stdio.h>
 
 
 
@@ -43,7 +44,8 @@ void MX_I2C1_Init(void);
 void MX_TIM2_Init(void);
 void MX_USB_OTG_FS_USB_Init(void);
 
-void flashLED(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin, uint8_t delay_ms, uint8_t toggles);
+void flashLED(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin, uint32_t delay_ms, uint8_t toggles);
+void assert_failed(uint8_t *file, uint32_t line);
 
 // Optional Error Handler declaration
 void Error_Handler(void);

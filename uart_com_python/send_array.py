@@ -2,7 +2,7 @@ import serial
 import struct
 import time
 
-SERIAL_PORT = "/dev/tty.usbmodem1203"  # Adjust with the correct port
+SERIAL_PORT = "COM8"  # Adjust with the correct port
 BAUD_RATE = 115200
 
 # Set up serial communication
