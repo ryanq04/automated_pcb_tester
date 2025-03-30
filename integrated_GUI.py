@@ -221,6 +221,8 @@ class SignalViewer(QMainWindow):
                     if not self.wait_for_response(ser, "COORDS"):
                         print("No echo back for COORDS.")
                         return
+                    
+                    time.sleep(0.2)  # 200 ms delay 
 
                     packed = struct.pack('<ff', img_x, img_y)
                     ser.write(packed)

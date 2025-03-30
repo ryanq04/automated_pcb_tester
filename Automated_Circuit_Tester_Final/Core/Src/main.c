@@ -97,7 +97,6 @@ int main(void)
 	ov7_config();
 
 	while(1){
-		flashLED(LD1_GPIO_Port, LD1_Pin, 500, 1);
 
 		if (ptr_state != NULL) {
             ptr_state();       // Run the state logic

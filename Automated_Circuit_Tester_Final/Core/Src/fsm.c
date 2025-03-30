@@ -30,11 +30,12 @@ extern arm_rfft_fast_instance_f32 fftHandler;
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 
     if (!(huart->Instance == USART3)) {
         return; // Not from USART3, ignore
     }
+
+
 
     switch (state) {
         case STATE_LISTEN:
@@ -58,19 +59,22 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 
         case STATE_COORDS:
         	//SOMETHING IS BROKEN IN HERE I THINK
+
             memcpy(&posX, &rx_data_arr[0], 4);
             memcpy(&posY, &rx_data_arr[4], 4);
 
-            assert_param(posX >= -20.0f && posX <= 20.0f && posY >= -20.0f && posY <= 20.0f);
+            //assert_param(posX >= -20.0f && posX <= 20.0f && posY >= -20.0f && posY <= 20.0f);
 
-            state = STATE_MOTORS;
+
             ptr_state = State_Motors;
 
             HAL_UART_Transmit(&huart3, CMD_COORDS_RX, 8, 100);
             break;
 
+
         default:
             // Unexpected state in UART callback
+        	HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
             state = STATE_LISTEN;
             ptr_state = State_Listen;
             break;
@@ -96,15 +100,14 @@ void State_Coord_RX(void){
     state = STATE_COORDS;
     ptr_state = NULL;
     HAL_UART_Receive_IT(&huart3, rx_data_arr, 8);  //arm the interrupt for 2 floats
-    
 }
 
 void State_Motors(void){
+	HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
     state = STATE_MOTORS;
     init_home(&myProbe);
     Position test = {3, 3, 0};
     moveProbe_test(&myProbe, test);
-    flashLED(LD2_GPIO_Port, LD2_Pin, 100, 5);
     ptr_state = State_Listen;
 }
 
