@@ -56,6 +56,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             memcpy(&posX, &rx_data_arr[0], 4);
             memcpy(&posY, &rx_data_arr[4], 4);
             ptr_state = State_Motors;
+
+//            posX = 1.0;
+//            posY = 1.0;
+//
+//            HAL_UART_Transmit(&huart3, (uint8_t*) &posX, 4, 100);
+//            HAL_UART_Transmit(&huart3, (uint8_t*) &posY, 4, 100);
+
             HAL_UART_Transmit(&huart3, rx_data_arr, 8, 100); //return received coords
             break;
 

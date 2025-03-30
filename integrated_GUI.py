@@ -248,6 +248,7 @@ class SignalViewer(QMainWindow):
                     ser.reset_input_buffer()
 
                     packed = struct.pack('<ff', *img_arr)
+                    print("Packed bytes (as ints):", list(packed))
                     # packed = struct.pack('<ff', img_x, img_y)
                     ser.write(packed)
                     print(f"Sent coordinates: ({img_x:.2f}, {img_y:.2f})")
