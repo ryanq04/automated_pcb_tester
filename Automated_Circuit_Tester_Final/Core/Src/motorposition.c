@@ -73,7 +73,7 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
     HAL_Delay(3000); 
 
     // 4. Align back home
-    home_Align(myProbe);
+    //home_Align(myProbe);
 
 }
 

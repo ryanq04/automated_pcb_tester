@@ -102,7 +102,7 @@ void State_Motors(void){
     flashLED(LD2_GPIO_Port, LD2_Pin, 200, 10);
     state = STATE_MOTORS;
     init_home(&myProbe);
-    Position test = {posX, posY, 0.0};
+    Position test = {3.0, 3.0, 0.0};
     moveProbe_test(&myProbe, test);
     ptr_state = State_Listen;
 }

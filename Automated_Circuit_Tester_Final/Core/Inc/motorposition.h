@@ -48,7 +48,6 @@ extern const Position HOME; // probe home, 3 mm off the ground
 #define THETA_MAX 34.0
 #define X_MAX 13.0 // max distance stepper can move
 #define DR_MAX 2.7
-#define DR_MIN 0.2 // touch probe when not tilted
 
 // Speed & scaling for motors
 #define DEGREE_CONVERSION (180.0 / M_PI)
