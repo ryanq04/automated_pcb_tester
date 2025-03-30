@@ -63,11 +63,11 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
 
     // 2. align stepper, theta, R in order
     //x_align(myProbe, desiredLoc);
-    HAL_Delay(100); 
+    HAL_Delay(500); 
     theta_align(myProbe, desiredLoc);
-    HAL_Delay(100); 
+    HAL_Delay(500); 
     R_align(myProbe, desiredLoc);
-    HAL_Delay(100); 
+    HAL_Delay(500); 
 
     // 3. wait
     HAL_Delay(3000); 
