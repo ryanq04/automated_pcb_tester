@@ -47,12 +47,12 @@ void theta_align(Probe* myProbe, Position desiredLoc){
 }
 
 void R_align(Probe* myProbe, Position desiredLoc){
-    float hypotenuse = hypot(H, desiredLoc.y);
+    float hypotenuse = hypot(H, abs(HOME.y - desiredLoc.y));
     float move_cm = hypotenuse - PROBE_LEN;
-    sv_moveDistance(myProbe->lin, move_cm); // automatically updates cur_angle
     if(move_cm > DR_MAX){
         move_cm = DR_MAX; 
     }
+    sv_moveDistance(myProbe->lin, move_cm); // automatically updates cur_angle
 }
 
 // assume probe at home
