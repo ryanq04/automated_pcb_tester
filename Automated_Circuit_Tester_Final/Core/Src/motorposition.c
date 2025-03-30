@@ -11,7 +11,7 @@ extern const Position HOME;
 void home_Align(Probe* myProbe){
     // 1. retract the motor
     setServoAngle(myProbe->lin, myProbe->lin->homeAngle);
-    myProbe->lin->currAngle = myProbe->lin->homeAngle; 
+    myProbe->lin->currAngle = myProbe->rot->homeAngle; 
     HAL_Delay(10); 
 
     // 2. rotate to home angle
@@ -37,7 +37,7 @@ void x_align(Probe* myProbe, Position desiredLoc){
 }
 
 void theta_align(Probe* myProbe, Position desiredLoc){
-    float theta_rad = atan((desiredLoc.y - HOME.y) / H);
+    float theta_rad = atan(abs(HOME.y -desiredLoc.y) / H);
     float theta_deg = theta_rad * DEGREE_CONVERSION;
     if(theta_deg > THETA_MAX){
         theta_deg = THETA_MAX;
