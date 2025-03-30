@@ -63,7 +63,7 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
 
     // 2. align stepper, theta, R in order
     flashLED(LD3_GPIO_Port, LD3_Pin, 1000, 5);
-    x_align(myProbe, desiredLoc);
+    //x_align(myProbe, desiredLoc);
     HAL_Delay(100); 
     theta_align(myProbe, desiredLoc);
     HAL_Delay(100); 
