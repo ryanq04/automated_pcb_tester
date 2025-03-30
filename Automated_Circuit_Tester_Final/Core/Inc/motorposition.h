@@ -65,5 +65,5 @@ void init_home(Probe* myProbe);
 }
 #endif
 
-#endif /* SERVOMOTORS_H */
+#endif /* MOTORPOSITION_H */
 

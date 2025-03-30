@@ -59,6 +59,7 @@
   "files.associations": {
     "steppermotors.h": "c",
     "locale": "c",
-    "servomotors.h": "c"
+    "servomotors.h": "c",
+    "motorposition.h": "c"
   }
 }
