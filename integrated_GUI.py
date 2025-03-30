@@ -231,6 +231,7 @@ class SignalViewer(QMainWindow):
                 img_height, img_width = self.image_shape[:2]
                 img_x = float(x * img_width / displayed_width)
                 img_y = float(y * img_height / displayed_height)
+                img_arr = [img_x, img_y]
                 print(f"Clicked on actual image at: ({img_x:.2f}, {img_y:.2f})")
 
                 try:
@@ -246,7 +247,8 @@ class SignalViewer(QMainWindow):
                         return
                     ser.reset_input_buffer()
 
-                    packed = struct.pack('<ff', img_x, img_y)
+                    packed = struct.pack('<ff', *img_arr)
+                    # packed = struct.pack('<ff', img_x, img_y)
                     ser.write(packed)
                     print(f"Sent coordinates: ({img_x:.2f}, {img_y:.2f})")
 
