@@ -35,18 +35,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
         return; // Not from USART3, ignore
     }
 
-
-
     switch (state) {
         case STATE_LISTEN:
             if (match_command(rx_data_arr, CMD_TAKEPIC)) {
-
                 ptr_state = State_Picture; //next state 
-                HAL_UART_Transmit(&huart3, CMD_TAKEPIC, 8, 100); //ack
             } else if (match_command(rx_data_arr, CMD_COORDS)) {
-
                 ptr_state = State_Coord_RX;
-                HAL_UART_Transmit(&huart3, CMD_COORDS, 8, 100);
             } else if (match_command(rx_data_arr, CMD_ADCFFT)) {
 
                 ptr_state = State_ADC_FFT;
@@ -58,19 +52,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             break;
 
         case STATE_COORDS:
-        	//SOMETHING IS BROKEN IN HERE I THINK
-
+        	
             memcpy(&posX, &rx_data_arr[0], 4);
             memcpy(&posY, &rx_data_arr[4], 4);
-
-            //assert_param(posX >= -20.0f && posX <= 20.0f && posY >= -20.0f && posY <= 20.0f);
-
-
             ptr_state = State_Motors;
-
-            HAL_UART_Transmit(&huart3, CMD_COORDS_RX, 8, 100);
+            HAL_UART_Transmit(&huart3, rx_data_arr, 8, 100); //return received coords
             break;
-
 
         default:
             // Unexpected state in UART callback
@@ -91,6 +78,7 @@ void State_Listen(void){
 }
 
 void State_Picture(void){
+    HAL_UART_Transmit(&huart3, CMD_TAKEPIC, 8, 100); //ack state entry
     state = STATE_TAKEPIC;
     p3();
     ptr_state = State_Listen;
@@ -100,6 +88,7 @@ void State_Coord_RX(void){
     state = STATE_COORDS;
     ptr_state = NULL;
     HAL_UART_Receive_IT(&huart3, rx_data_arr, 8);  //arm the interrupt for 2 floats
+    HAL_UART_Transmit(&huart3, CMD_COORDS, 8, 100); //ack ready for coords
 }
 
 void State_Motors(void){

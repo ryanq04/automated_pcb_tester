@@ -105,6 +105,28 @@ class SignalViewer(QMainWindow):
             except UnicodeDecodeError:
                 pass
 
+    
+    def wait_for_float_echo(self, ser, expected_x, expected_y, timeout=5):
+        import struct, time
+        start_time = time.time()
+        while True:
+            if time.time() - start_time > timeout:
+                print(f"Timeout waiting for float echo ({expected_x:.2f}, {expected_y:.2f})")
+                return False
+            try:
+                echoed = ser.read(8)
+                print(f"Raw echoed bytes: {list(echoed)}")
+                if len(echoed) == 8:
+                    echoed_x, echoed_y = struct.unpack('<ff', echoed)
+                    print(f"Received echo: ({echoed_x:.2f}, {echoed_y:.2f})")
+                    if abs(echoed_x - expected_x) < 0.01 and abs(echoed_y - expected_y) < 0.01:
+                        return True
+                    else:
+                        print("Echo mismatch.")
+            except Exception as e:
+                print(f"Error reading float echo: {e}")
+
+
     def capture_image_only(self):
         dummy_data = np.random.randint(0, 255, (144, 174), dtype=np.uint8)
         image = QImage(dummy_data.data, dummy_data.shape[1], dummy_data.shape[0],
@@ -188,6 +210,7 @@ class SignalViewer(QMainWindow):
             self.image_label.setPixmap(scaled_pixmap)
             self.displayed_image_size = (scaled_pixmap.width(), scaled_pixmap.height())
 
+
     def get_image_click_position(self, event):
         if not self.awaiting_click_coords:
             print("Click ignored: not in coordinate selection mode.")
@@ -215,23 +238,22 @@ class SignalViewer(QMainWindow):
                     if not ser:
                         print("No serial connection available.")
                         return
-
+                    
                     print("Sending COORDS command...")
                     ser.write(b"COORDS\r\n")
                     if not self.wait_for_response(ser, "COORDS"):
                         print("No echo back for COORDS.")
                         return
-                    
-                    time.sleep(0.2)  # 200 ms delay 
+                    ser.reset_input_buffer()
 
                     packed = struct.pack('<ff', img_x, img_y)
                     ser.write(packed)
                     print(f"Sent coordinates: ({img_x:.2f}, {img_y:.2f})")
 
-                    if self.wait_for_response(ser, "CRD_RX"):
-                        print("Coordinate acknowledge received.")
+                    if self.wait_for_float_echo(ser, img_x, img_y):
+                        print("Float echo verified successfully.")
                     else:
-                        print("Coordinate acknowledge timeout.")
+                        print("Float echo mismatch or timeout.")
 
                 except Exception as e:
                     print(f"Error sending coordinates: {e}")
@@ -242,6 +264,8 @@ class SignalViewer(QMainWindow):
                     self.display_real_image(self.latest_image)
             else:
                 print("Click was outside of image area.")
+
+
 
     def display_real_image(self, frame):
         height, width, channels = frame.shape
