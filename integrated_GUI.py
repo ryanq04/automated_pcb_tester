@@ -182,7 +182,7 @@ class SignalViewer(QMainWindow):
             B = np.clip((Y + 1.772 * (Cb - 128)), 0, 255).astype(np.uint8)
 
             frame = np.stack((G, R, B), axis=-1)
-            frame = np.rot90(frame, 2)
+            frame = np.rot90(frame, 1)
 
             self.latest_image = frame
             self.image_shape = frame.shape
