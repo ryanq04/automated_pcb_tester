@@ -1,11 +1,12 @@
 import sys
 import time
+import struct
 import numpy as np
 import serial
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+    QApplication, QMainWindow, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit
 )
-from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtGui import QImage, QPixmap, QPainter, QColor, QPen, QFont
 from PyQt5.QtCore import QTimer, Qt
 import pyqtgraph as pg
 
@@ -21,9 +22,13 @@ SAMPLE_RATE = 1_000_000  # 1 MSps
 class SignalViewer(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.port = PORT
+        self.baudrate = BAUDRATE
         self.setWindowTitle("Signal Viewer with FFT")
         self.setup_ui()
         self.setup_timer()
+        self.awaiting_click_coords = False
+        self.serial_for_coords = None
 
     def setup_ui(self):
         central_widget = QWidget()
@@ -39,9 +44,13 @@ class SignalViewer(QMainWindow):
         self.image_label.mousePressEvent = self.get_image_click_position
         left_layout.addWidget(self.image_label)
 
+        self.port_input = QLineEdit(self.port)
+        self.port_input.setPlaceholderText("Enter COM port")
+        left_layout.addWidget(self.port_input)
+
         self.capture_button = QPushButton("Capture Dummy Image")
         self.real_capture_button = QPushButton("Capture Real Image")
-        self.test_button = QPushButton("Test")
+        self.test_button = QPushButton("Test Signal")
         self.uart_button = QPushButton("ADC + FFT")
         self.quit_button = QPushButton("Quit")
 
@@ -79,77 +88,24 @@ class SignalViewer(QMainWindow):
         self.timer.timeout.connect(self.update_plot)
         self.timer.start(1000)
 
+    def update_plot(self):
+        pass
+
+    def wait_for_response(self, ser, expected, timeout=5):
+        start_time = time.time()
+        while True:
+            if time.time() - start_time > timeout:
+                print(f"Timeout waiting for '{expected}'")
+                return False
+            try:
+                line = ser.readline().decode().strip()
+                print(f"Received: '{line}'")
+                if line == expected:
+                    return True
+            except UnicodeDecodeError:
+                pass
+
     def capture_image_only(self):
-        self.display_dummy_image()
-
-    def capture_real_image(self):
-        try:
-            with serial.Serial(PORT, BAUDRATE, timeout=2) as ser:
-                print("Sending TAKEPC command...")
-                ser.write(b"TAKEPC\r\n")
-
-                print("Waiting for STM32 echo handshake...")
-                handshake_timeout = 5
-                start_time = time.time()
-                while True:
-                    if time.time() - start_time > handshake_timeout:
-                        print("Handshake timeout. No response from STM32.")
-                        return
-                    try:
-                        line = ser.readline().decode().strip()
-                        print(f"Received during handshake: '{line}'")
-                        if line == "TAKEPC":
-                            break
-                    except UnicodeDecodeError:
-                        pass
-
-                print("Handshake confirmed.")
-
-                print("Waiting for PREAMBLE...")
-                while ser.readline().decode().strip() != "PREAMBLE!":
-                    pass
-                print("PREAMBLE received. Reading image...")
-
-                rows, cols = 144, 174
-                expected_bytes = rows * cols * 2
-                raw = b''
-                while len(raw) < expected_bytes:
-                    raw += ser.read(expected_bytes - len(raw))
-
-                img_ycbcr422 = np.frombuffer(raw, dtype=np.uint8).reshape((rows, cols // 2, 4))
-
-                Y0 = img_ycbcr422[:, :, 0].astype(np.float32)
-                Cb = img_ycbcr422[:, :, 1].astype(np.float32)
-                Y1 = img_ycbcr422[:, :, 2].astype(np.float32)
-                Cr = img_ycbcr422[:, :, 3].astype(np.float32)
-
-                Y = np.zeros((rows, cols), dtype=np.float32)
-                Y[:, 0::2] = Y0
-                Y[:, 1::2] = Y1
-                Cb = np.repeat(Cb, 2, axis=1)
-                Cr = np.repeat(Cr, 2, axis=1)
-
-                R = np.clip(Y + 1.402 * (Cr - 128), 0, 255).astype(np.uint8)
-                G = np.clip(Y - 0.344136 * (Cb - 128) - 0.714136 * (Cr - 128), 0, 255).astype(np.uint8)
-                B = np.clip(Y + 1.772 * (Cb - 128), 0, 255).astype(np.uint8)
-
-                frame = np.stack((B, G, R), axis=-1)
-                frame = np.rot90(frame, 2)
-
-                self.latest_image = frame
-                self.image_shape = frame.shape
-                height, width, channels = frame.shape
-                bytes_per_line = channels * width
-                image = QImage(frame.data, width, height, bytes_per_line, QImage.Format_RGB888)
-                pixmap = QPixmap.fromImage(image)
-                scaled_pixmap = pixmap.scaled(self.image_label.width(), self.image_label.height(), Qt.KeepAspectRatio)
-                self.image_label.setPixmap(scaled_pixmap)
-                self.displayed_image_size = (scaled_pixmap.width(), scaled_pixmap.height())
-
-        except Exception as e:
-            print(f"Failed to capture real image: {e}")
-
-    def display_dummy_image(self):
         dummy_data = np.random.randint(0, 255, (144, 174), dtype=np.uint8)
         image = QImage(dummy_data.data, dummy_data.shape[1], dummy_data.shape[0],
                        dummy_data.strides[0], QImage.Format_Grayscale8)
@@ -158,6 +114,140 @@ class SignalViewer(QMainWindow):
         self.image_label.setPixmap(scaled_pixmap)
         self.latest_image = dummy_data
         self.image_shape = dummy_data.shape
+        self.displayed_image_size = (scaled_pixmap.width(), scaled_pixmap.height())
+
+    def capture_real_image(self):
+        try:
+            port_name = self.port_input.text().strip() or self.port
+            ser = serial.Serial(port_name, self.baudrate, timeout=2)
+            self.serial_for_coords = ser
+
+            print("Sending TAKEPC command...")
+            ser.write(b"TAKEPC\r\n")
+
+            print("Waiting for STM32 echo handshake...")
+            if not self.wait_for_response(ser, "TAKEPC"):
+                ser.close()
+                return
+
+            print("Waiting for PREAMBLE...")
+            if not self.wait_for_response(ser, "PREAMBLE!", timeout=10):
+                ser.close()
+                return
+
+            print("PREAMBLE received. Reading image...")
+            rows, cols = 144, 174
+            expected_bytes = rows * cols * 2
+            raw = b''
+            while len(raw) < expected_bytes:
+                raw += ser.read(expected_bytes - len(raw))
+
+            img_ycbcr422 = np.frombuffer(raw, dtype=np.uint8).reshape((rows, cols // 2, 4))
+            Y0 = img_ycbcr422[:, :, 0].astype(np.float32)
+            Cb = img_ycbcr422[:, :, 1].astype(np.float32)
+            Y1 = img_ycbcr422[:, :, 2].astype(np.float32)
+            Cr = img_ycbcr422[:, :, 3].astype(np.float32)
+
+            Y = np.zeros((rows, cols), dtype=np.float32)
+            Y[:, 0::2] = Y0
+            Y[:, 1::2] = Y1
+            Cb = np.repeat(Cb, 2, axis=1)
+            Cr = np.repeat(Cr, 2, axis=1)
+
+            R = np.clip((Y + 1.402 * (Cr - 128)), 0, 255).astype(np.uint8)
+            G = np.clip((Y - 0.344136 * (Cb - 128) - 0.714136 * (Cr - 128)), 0, 255).astype(np.uint8)
+            B = np.clip((Y + 1.772 * (Cb - 128)), 0, 255).astype(np.uint8)
+
+            frame = np.stack((G, R, B), axis=-1)
+            frame = np.rot90(frame, 2)
+
+            self.latest_image = frame
+            self.image_shape = frame.shape
+            self.awaiting_click_coords = True
+            self.show_select_pad_overlay()
+
+        except Exception as e:
+            print(f"Failed to capture real image: {e}")
+
+    def show_select_pad_overlay(self):
+        if hasattr(self, 'latest_image'):
+            frame = self.latest_image.copy()
+            height, width = frame.shape[:2]
+            image = QImage(frame.data.tobytes(), width, height, width * 3, QImage.Format_RGB888)
+            pixmap = QPixmap.fromImage(image)
+
+            painter = QPainter(pixmap)
+            pen = QPen(QColor(0, 255, 0), 4)
+            painter.setPen(pen)
+            painter.drawRect(0, 0, pixmap.width() - 1, pixmap.height() - 1)
+            painter.setFont(QFont("Arial", 10, QFont.Bold))
+            painter.drawText(pixmap.rect(), Qt.AlignTop | Qt.AlignHCenter, "Select pad")
+            painter.end()
+
+            scaled_pixmap = pixmap.scaled(self.image_label.width(), self.image_label.height(), Qt.KeepAspectRatio)
+            self.image_label.setPixmap(scaled_pixmap)
+            self.displayed_image_size = (scaled_pixmap.width(), scaled_pixmap.height())
+
+    def get_image_click_position(self, event):
+        if not self.awaiting_click_coords:
+            print("Click ignored: not in coordinate selection mode.")
+            return
+
+        if hasattr(self, 'image_shape') and self.image_label.pixmap() is not None:
+            label_width = self.image_label.width()
+            label_height = self.image_label.height()
+            displayed_width, displayed_height = self.displayed_image_size
+
+            offset_x = (label_width - displayed_width) // 2
+            offset_y = (label_height - displayed_height) // 2
+
+            x = event.pos().x() - offset_x
+            y = event.pos().y() - offset_y
+
+            if 0 <= x < displayed_width and 0 <= y < displayed_height:
+                img_height, img_width = self.image_shape[:2]
+                img_x = float(x * img_width / displayed_width)
+                img_y = float(y * img_height / displayed_height)
+                print(f"Clicked on actual image at: ({img_x:.2f}, {img_y:.2f})")
+
+                try:
+                    ser = self.serial_for_coords
+                    if not ser:
+                        print("No serial connection available.")
+                        return
+
+                    print("Sending COORDS command...")
+                    ser.write(b"COORDS\r\n")
+                    if not self.wait_for_response(ser, "COORDS"):
+                        print("No echo back for COORDS.")
+                        return
+
+                    packed = struct.pack('<ff', img_x, img_y)
+                    ser.write(packed)
+                    print(f"Sent coordinates: ({img_x:.2f}, {img_y:.2f})")
+
+                    if self.wait_for_response(ser, "CRD_RX"):
+                        print("Coordinate acknowledge received.")
+                    else:
+                        print("Coordinate acknowledge timeout.")
+
+                except Exception as e:
+                    print(f"Error sending coordinates: {e}")
+
+                finally:
+                    self.awaiting_click_coords = False
+                    self.serial_for_coords = None
+                    self.display_real_image(self.latest_image)
+            else:
+                print("Click was outside of image area.")
+
+    def display_real_image(self, frame):
+        height, width, channels = frame.shape
+        bytes_per_line = channels * width
+        image = QImage(frame.data.tobytes(), width, height, bytes_per_line, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(image)
+        scaled_pixmap = pixmap.scaled(self.image_label.width(), self.image_label.height(), Qt.KeepAspectRatio)
+        self.image_label.setPixmap(scaled_pixmap)
         self.displayed_image_size = (scaled_pixmap.width(), scaled_pixmap.height())
 
     def run_test_signal(self):
@@ -171,6 +261,7 @@ class SignalViewer(QMainWindow):
             signal = np.sign(np.sin(2 * np.pi * freq * t))
 
         signal += 0.2 * np.random.randn(ADC_LENGTH)
+        signal *= 4095.0 / 3.3
         print(f"Test signal: {signal_type} wave, Frequency: {freq:.1f} Hz, with mild noise")
         self.update_plots(signal)
 
@@ -188,32 +279,9 @@ class SignalViewer(QMainWindow):
         else:
             self.fft_curve.setData(freqs, fft_db)
 
-    def get_image_click_position(self, event):
-        if hasattr(self, 'image_shape') and self.image_label.pixmap() is not None:
-            label_width = self.image_label.width()
-            label_height = self.image_label.height()
-            displayed_width, displayed_height = self.displayed_image_size
-
-            offset_x = (label_width - displayed_width) // 2
-            offset_y = (label_height - displayed_height) // 2
-
-            x = event.pos().x() - offset_x
-            y = event.pos().y() - offset_y
-
-            if 0 <= x < displayed_width and 0 <= y < displayed_height:
-                img_height, img_width = self.image_shape[:2]
-                img_x = int(x * img_width / displayed_width)
-                img_y = int(y * img_height / displayed_height)
-                print(f"Clicked on actual image at: ({img_x}, {img_y})")
-            else:
-                print("Click was outside of image area.")
-
-    def update_plot(self):
-        pass
-
     def handle_test_uart(self):
         try:
-            with serial.Serial(PORT, BAUDRATE, timeout=2) as ser:
+            with serial.Serial(self.port, self.baudrate, timeout=2) as ser:
                 print("Waiting for ADC preamble...")
                 while ser.readline().decode().strip() != "ADC":
                     pass
@@ -233,24 +301,12 @@ class SignalViewer(QMainWindow):
                 magnitudes = np.frombuffer(mags, dtype='<f4')
 
                 magnitudes_db = 20 * np.log10((magnitudes * 3.3 / 4095.0) + 1e-12)
-
-                print("FFT magnitudes stats (dBV):")
-                print("Min:", np.min(magnitudes_db))
-                print("Max:", np.max(magnitudes_db))
-                print("Mean:", np.mean(magnitudes_db))
-                print("Any NaNs?", np.isnan(magnitudes_db).any())
-                print("First 10 FFT bins:")
-                for i in range(min(10, len(frequencies))):
-                    print(f"  Bin {i}: {frequencies[i]:.1f} Hz -> {magnitudes_db[i]:.2f} dBV")
                 if not np.isnan(magnitudes_db).any():
                     if self.fft_curve is None:
                         self.fft_curve = pg.PlotDataItem(frequencies, magnitudes_db, pen='y')
                         self.fft_plot.addItem(self.fft_curve)
                     else:
                         self.fft_curve.setData(frequencies, magnitudes_db)
-                else:
-                    print("Invalid FFT data received – skipping plot.")
-
         except Exception as e:
             print(f"Error during UART communication: {e}")
 

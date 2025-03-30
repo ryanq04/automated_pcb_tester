@@ -102,8 +102,6 @@ void send_img(){
 		#define LOG() do { } while (0)
 	#endif
 
-	LOG();
-
 	//SEND PREAMBLE
 	for(int i = 0; i < 13; i++){ 
 		HAL_UART_Transmit(&huart3, &pream[i], 1, HAL_MAX_DELAY);

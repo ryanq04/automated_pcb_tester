@@ -3,5 +3,5 @@
 ../Core/Src/camera_code.c:49:6:print_ss	3
 ../Core/Src/camera_code.c:68:6:send_frame	4
 ../Core/Src/camera_code.c:85:6:send_img	4
-../Core/Src/camera_code.c:120:6:p3	2
-../Core/Src/camera_code.c:132:6:p4	2
+../Core/Src/camera_code.c:118:6:p3	2
+../Core/Src/camera_code.c:130:6:p4	2
