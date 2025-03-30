@@ -47,7 +47,7 @@ void theta_align(Probe* myProbe, Position desiredLoc){
 }
 
 void R_align(Probe* myProbe, Position desiredLoc){
-    float hypotenuse = hypot(H, abs(HOME.y - desiredLoc.y));
+    float hypotenuse = hypot(H, fabsf(HOME.y - desiredLoc.y));
     float move_cm = hypotenuse - PROBE_LEN;
     if(move_cm > DR_MAX){
         move_cm = DR_MAX; 
