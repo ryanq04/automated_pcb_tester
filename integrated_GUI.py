@@ -347,7 +347,7 @@ def project_2D_to_3D(pt_2D):
     
     # Image points (2D) and their real-world counterparts (3D but assumed to be on a plane)
     image_pts = np.array([[124.61, 7.72], [125.06, 64.05], [69.78, 7.27], [19.03, 124.92], [69.33, 66.32], [19.48, 10.0], [18.58, 6.63]], dtype=np.float32)
-    world_pts = np.array([[0, 0, 0], [3, 0, 0], [0, 3, 0], [6, 6, 0], [3, 3, 0], [0, 6], [3, 6]], dtype=np.float32)
+    world_pts = np.array([[0, 0, 0], [3, 0, 0], [0, 3, 0], [6, 6, 0], [3, 3, 0], [0, 6, 0], [3, 6, 0]], dtype=np.float32)
 
     # Compute homography
     H, _ = cv2.findHomography(image_pts, world_pts[:, :2])
