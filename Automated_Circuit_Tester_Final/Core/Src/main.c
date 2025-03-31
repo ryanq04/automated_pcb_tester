@@ -88,8 +88,7 @@ int main(void)
     myProbe.rot->currAngle = 0;
     myProbe.rot->homeAngle = 0;
 
-    myProbe.nema->currAngle = HOME.x;
-    myProbe.nema->homeAngle = HOME.x;
+    myProbe.nema->currAngle = 0;
 	
 	ptr_state = State_Listen;
 

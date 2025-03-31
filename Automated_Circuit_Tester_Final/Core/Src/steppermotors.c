@@ -35,7 +35,6 @@ void stp_Step(Stepper* motor, int step) {
 
 
 void stp_init(Stepper* nema){
-   nema->homeAngle = 0;
    nema->currAngle = 0;
 }
 
@@ -61,7 +60,12 @@ void stp_Move(Stepper* motor, int steps, int delay) {
 }
 
 void stp_moveDistance(Stepper* motor, float distance_cm){
-
-   int convertedSteps = distance_cm * NEMA_DISTANCE_TO_STEPS;
+	int sign = 1;
+    if(distance_cm < 0.0){
+        sign = -1;
+        flashLED(LD3_GPIO_Port, LD3_Pin, 500, 10);
+    }
+    
+   int convertedSteps = sign * abs(distance_cm * NEMA_DISTANCE_TO_STEPS);
    stp_Move(motor, convertedSteps, 5);
 }

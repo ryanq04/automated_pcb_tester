@@ -17,7 +17,6 @@
 
 
 typedef struct Stepper{
-    float homeAngle;
     float currAngle;
 } Stepper;
 

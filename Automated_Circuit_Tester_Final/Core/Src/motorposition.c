@@ -20,20 +20,24 @@ void home_Align(Probe* myProbe){
     HAL_Delay(500); 
 
     // 3. retract to home direction in stepper
-    float move_cm = -(myProbe->nema->currAngle - HOME.x); // move right
+    float move_cm =  -1 * myProbe->nema->currAngle; // move left
+    if(move_cm == 0.0){
+        flashLED(LD1_GPIO_Port, LD1_Pin, 500, 10);
+    }
     stp_moveDistance((myProbe->nema), move_cm);
-    myProbe->nema->currAngle = myProbe->nema->homeAngle;
+    myProbe->nema->currAngle = 0.0;
     HAL_Delay(500); 
 }
 
 void x_align(Probe* myProbe, Position desiredLoc){
-    flashLED(LD1_GPIO_Port, LD1_Pin, 1000, 5);
-    float move_cm = (HOME.x - desiredLoc.x);
+
+    float move_cm = fabsf(HOME.x - desiredLoc.x); //move right
     if(move_cm > X_MAX){
         move_cm = X_MAX;
     }
-    stp_moveDistance(((myProbe->nema)), move_cm);
     myProbe->nema->currAngle = move_cm; 
+    stp_moveDistance(((myProbe->nema)), move_cm);
+    
 }
 
 void theta_align(Probe* myProbe, Position desiredLoc){
@@ -73,13 +77,12 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
     HAL_Delay(3000); 
 
     // 4. Align back home
-    //home_Align(myProbe);
+    home_Align(myProbe);
 
 }
 
 void init_home(Probe* myProbe){
-    myProbe->nema->homeAngle = HOME.x;
-    myProbe->nema->currAngle = myProbe->nema->homeAngle;
+    myProbe->nema->currAngle = 0;
 
     myProbe->lin->currAngle = 0; 
     myProbe->lin->homeAngle = 0; 
