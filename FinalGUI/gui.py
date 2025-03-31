@@ -22,10 +22,17 @@ class SignalViewer(QMainWindow):
         self.port = PORT
         self.baudrate = BAUDRATE
         self.setWindowTitle("Signal Viewer with FFT")
+        self.serial = None
+        self.awaiting_click_coords = False
+
+        try:
+            self.serial = serial.Serial(self.port, self.baudrate, timeout=2)
+            print(f"Opened serial port {self.port} at {self.baudrate} baud.")
+        except Exception as e:
+            print(f"Failed to open serial port: {e}")
+
         self.setup_ui()
         self.setup_timer()
-        self.awaiting_click_coords = False
-        self.serial_for_coords = None
 
     def setup_ui(self):
         central_widget = QWidget()
@@ -47,17 +54,26 @@ class SignalViewer(QMainWindow):
 
         self.real_capture_button = QPushButton("Capture Real Image")
         self.probe_button = QPushButton("Probe PCB")
+        self.send_home_button = QPushButton("Send Home")  # NEW
         self.test_button = QPushButton("Test Signal")
         self.uart_button = QPushButton("ADC + FFT")
         self.quit_button = QPushButton("Quit")
 
         self.real_capture_button.clicked.connect(self.capture_real_image)
         self.probe_button.clicked.connect(self.enable_probing)
+        self.send_home_button.clicked.connect(self.send_home_coordinates)  # NEW
         self.test_button.clicked.connect(self.run_test_signal)
         self.uart_button.clicked.connect(self.handle_test_uart)
         self.quit_button.clicked.connect(self.close)
 
-        for btn in (self.real_capture_button, self.probe_button, self.test_button, self.uart_button, self.quit_button):
+        for btn in (
+            self.real_capture_button,
+            self.probe_button,
+            self.send_home_button,  # NEW
+            self.test_button,
+            self.uart_button,
+            self.quit_button,
+        ):
             left_layout.addWidget(btn)
 
         self.time_plot = pg.PlotWidget(title="Time Domain Signal")
@@ -87,9 +103,10 @@ class SignalViewer(QMainWindow):
 
     def capture_real_image(self):
         try:
-            port_name = self.port_input.text().strip() or self.port
-            ser = serial.Serial(port_name, self.baudrate, timeout=2)
-            self.serial_for_coords = ser
+            ser = self.serial
+            if not ser or not ser.is_open:
+                print("Serial port is not available.")
+                return
 
             ser.write(b"TAKEPC\r\n")
             if not wait_for_response(ser, "TAKEPC"): return
@@ -153,7 +170,7 @@ class SignalViewer(QMainWindow):
 
                 img_arr3D = project_2D_to_3D([img_x, img_y])
                 try:
-                    ser = self.serial_for_coords
+                    ser = self.serial
                     if not ser: return
                     ser.write(b"COORDS\r\n")
                     if not wait_for_response(ser, "COORDS"): return
@@ -182,4 +199,39 @@ class SignalViewer(QMainWindow):
         self.fft_curve = update_time_and_fft(signal, self.time_curve, self.fft_curve, self.fft_plot)
 
     def handle_test_uart(self):
-        self.fft_curve = handle_uart_adc_fft(self.port, self.baudrate, self.time_curve, self.fft_curve, self.fft_plot)
+        self.fft_curve = handle_uart_adc_fft(self.serial, self.time_curve, self.fft_curve, self.fft_plot)
+        
+
+    def closeEvent(self, event):
+        if self.serial and self.serial.is_open:
+            print("Closing serial port...")
+            self.serial.close()
+        super().closeEvent(event)
+
+
+    def send_home_coordinates(self):
+        home_coords = (6.0, 6.0)
+        try:
+            ser = self.serial
+            if not ser:
+                print("Serial port not available.")
+                return
+
+            print("Sending COORDS for home position...")
+            ser.write(b"COORDS\r\n")
+            if not wait_for_response(ser, "COORDS"):
+                print("No echo back for COORDS.")
+                return
+            ser.reset_input_buffer()
+
+            packed = struct.pack('<ff', *home_coords)
+            ser.write(packed)
+            print(f"Sent home coordinates: {home_coords}")
+
+            if wait_for_float_echo(ser, *home_coords):
+                print("Home float echo verified successfully.")
+            else:
+                print("Float echo mismatch or timeout.")
+
+        except Exception as e:
+            print(f"Error sending home coordinates: {e}")

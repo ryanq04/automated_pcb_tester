@@ -1,8 +1,8 @@
 ../Core/Src/fsm.c:32:6:HAL_UART_RxCpltCallback	16	static
-../Core/Src/fsm.c:78:6:State_Listen	8	static
-../Core/Src/fsm.c:87:6:State_Picture	8	static
-../Core/Src/fsm.c:94:6:State_Coord_RX	8	static
-../Core/Src/fsm.c:101:6:State_Motors	24	static
-../Core/Src/fsm.c:109:6:State_WaitForGo	4	static
-../Core/Src/fsm.c:116:6:State_ADC_FFT	4	static
-../Core/Src/fsm.c:149:9:match_command	16	static
+../Core/Src/fsm.c:68:6:State_Listen	8	static
+../Core/Src/fsm.c:76:6:State_Picture	8	static
+../Core/Src/fsm.c:83:6:State_Coord_RX	8	static
+../Core/Src/fsm.c:90:6:State_Motors	24	static
+../Core/Src/fsm.c:97:6:State_WaitForGo	4	static
+../Core/Src/fsm.c:104:6:State_ADC_FFT	16	static
+../Core/Src/fsm.c:140:9:match_command	16	static

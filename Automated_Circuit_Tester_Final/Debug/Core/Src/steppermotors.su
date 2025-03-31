@@ -1,5 +1,4 @@
 ../Core/Src/steppermotors.c:6:6:stp_Step	16	static
-../Core/Src/steppermotors.c:37:6:stp_init	16	static
-../Core/Src/steppermotors.c:42:6:stp_Stop	16	static
-../Core/Src/steppermotors.c:50:6:stp_Move	40	static
-../Core/Src/steppermotors.c:62:6:stp_moveDistance	24	static
+../Core/Src/steppermotors.c:36:6:stp_Stop	16	static
+../Core/Src/steppermotors.c:44:6:stp_Move	40	static
+../Core/Src/steppermotors.c:56:6:stp_moveDistance	24	static

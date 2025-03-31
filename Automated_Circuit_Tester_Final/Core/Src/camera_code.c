@@ -11,7 +11,7 @@
 
 
 extern uint16_t snapshot_buff[IMG_ROWS * IMG_COLS] ;
-extern uint8_t send_ptr[FRAMESIZE * 2];
+// extern uint8_t send_ptr[FRAMESIZE * 2];
 extern uint8_t dma_flag;
 
 
@@ -84,6 +84,7 @@ void send_frame() {
 
 void send_img(){
 	uint8_t pream[] = "\r\nPREAMBLE!\r\n"; 
+	uint8_t send_ptr[FRAMESIZE * 2] = {0};
 
 	uint8_t* byte_ptr = (uint8_t*)snapshot_buff;
 

@@ -20,7 +20,6 @@ typedef struct Stepper{
     float currAngle;
 } Stepper;
 
-void stp_init(Stepper* nema);
 void stp_Step(Stepper* motor, int step);
 void stp_Move(Stepper* motor, int steps, int delay);
 void stp_Stop(Stepper* motor);

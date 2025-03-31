@@ -25,18 +25,20 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim6;
 UART_HandleTypeDef huart3;
 
-//ADC_FFT globals
-// uint16_t adc_buffer[ADC_BUF_LEN];
-// uint8_t ADC_full = 0;
-// uint8_t sendFFT_ready = 0;
-// float input_FFT[FFT_BUFFER_SIZE];
-// float output_FFT[FFT_BUFFER_SIZE];
-arm_rfft_fast_instance_f32 fftHandler;
+
 
 //camera globals
-uint16_t snapshot_buff[IMG_ROWS * IMG_COLS] = {0};
-uint8_t send_ptr[FRAMESIZE * 2] = {0};
+uint16_t snapshot_buff[IMG_ROWS * IMG_COLS] = {0}; // 25056
+// uint8_t send_ptr[FRAMESIZE * 2] = {0};
 uint8_t dma_flag = 0;
+
+//ADC_FFT globals
+uint16_t adc_buffer[ADC_BUF_LEN]; // bufflen = 2048
+uint8_t ADC_full = 0;
+uint8_t sendFFT_ready = 0;
+float input_FFT[FFT_BUFFER_SIZE];
+float output_FFT[FFT_BUFFER_SIZE];
+arm_rfft_fast_instance_f32 fftHandler;
 
 //fsm globals
 StateFunc ptr_state = NULL;

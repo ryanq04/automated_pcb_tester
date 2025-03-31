@@ -42,11 +42,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             } else if (match_command(rx_data_arr, CMD_COORDS)) {
                 ptr_state = State_Coord_RX;
             } else if (match_command(rx_data_arr, CMD_ADCFFT)) {
-
                 ptr_state = State_ADC_FFT;
-                HAL_UART_Transmit(&huart3, CMD_ADCFFT, 8, 100);
             } else {
-
                 ptr_state = State_Listen;
             }
             break;
@@ -56,13 +53,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             memcpy(&posX, &rx_data_arr[0], 4);
             memcpy(&posY, &rx_data_arr[4], 4);
             ptr_state = State_Motors;
-
-//            posX = 1.0;
-//            posY = 1.0;
-//
-//            HAL_UART_Transmit(&huart3, (uint8_t*) &posX, 4, 100);
-//            HAL_UART_Transmit(&huart3, (uint8_t*) &posY, 4, 100);
-
             HAL_UART_Transmit(&huart3, rx_data_arr, 8, 100); //return received coords
             break;
 
@@ -78,7 +68,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 void State_Listen(void){
     state = STATE_LISTEN;
     ptr_state = NULL;
-    //flashLED(LD1_GPIO_Port, LD1_Pin, 100, 5);
     //State listen will blink LED1 and wait for UART communications to determine the next state to go into 
     //it will wait for certain preambles
     HAL_UART_Receive_IT(&huart3, rx_data_arr, 8);  //arm the interrupt for preamble
@@ -100,7 +89,6 @@ void State_Coord_RX(void){
 
 void State_Motors(void){
     state = STATE_MOTORS;
-    init_home(&myProbe);
     Position test = {posX, posY, 0.0};
     moveProbe_test(&myProbe, test);
     ptr_state = State_Listen;
@@ -114,29 +102,32 @@ void State_WaitForGo(void){
 
 
 void State_ADC_FFT(void){
-    // state = STATE_ADCFFT;
-    // HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, ADC_BUF_LEN); //start DMA and ADC
-	// HAL_TIM_Base_Start(&htim2);  // Start the timer that triggers ADC
-	// //data is ready for FFT
-    // while(1){
-    //     if(ADC_full == 1){
-    //         ADC_full = 0;
-    //         HAL_ADC_Stop_DMA(&hadc1);
-    //         HAL_TIM_Base_Stop(&htim2); // stop the adc and timer
+	HAL_UART_Transmit(&huart3, CMD_ADCFFT, 8, 100);
+    state = STATE_ADCFFT;
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, ADC_BUF_LEN); //start DMA and ADC
+	HAL_TIM_Base_Start(&htim2);  // Start the timer that triggers ADC
+	//data is ready for FFT
+    while(1){
+        if(ADC_full == 1){
+            ADC_full = 0;
+            HAL_ADC_Stop_DMA(&hadc1);
+            HAL_TIM_Base_Stop(&htim2); // stop the adc and timer
 
-    //         for(int i = 0; i < ADC_BUF_LEN; i++){ //since DMA is faster than code, we should be able to immediately load values
-	// 		    input_FFT[i] = (float)(adc_buffer[i]); //note the usage of float here - should consider optimization reasons and configurations
-	// 	    }
+            for(int i = 0; i < ADC_BUF_LEN; i++){
+			    input_FFT[i] = (float)(adc_buffer[i]); //note the usage of float here - should consider optimization reasons and configurations
+		    }
 
-    //         //FFT
-    //         arm_rfft_fast_f32(&fftHandler, input_FFT, output_FFT, 0);
-    //         computeCoeffs(output_FFT);
+            //FFT
+            arm_rfft_fast_f32(&fftHandler, input_FFT, output_FFT, 0);
+            computeCoeffs(output_FFT);
 
-    //         sendADC_UART();
-    //         sendFFT_UART();
-    //     }
-    // }
-    // ptr_state = State_Listen;
+            sendADC_UART();
+            sendFFT_UART();
+            break;
+        }
+        flashLED(LD2_GPIO_Port, LD2_Pin, 100, 1);
+    }
+    ptr_state = State_Listen;
 }
 
 

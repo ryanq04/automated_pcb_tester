@@ -2,6 +2,6 @@
 ../Core/Src/camera_code.c:35:6:print_sb	128	static
 ../Core/Src/camera_code.c:49:6:print_ss	120	static
 ../Core/Src/camera_code.c:68:6:send_frame	56	static
-../Core/Src/camera_code.c:85:6:send_img	48	static
-../Core/Src/camera_code.c:118:6:p3	8	static
-../Core/Src/camera_code.c:130:6:p4	8	static
+../Core/Src/camera_code.c:85:6:send_img	50160	static
+../Core/Src/camera_code.c:119:6:p3	8	static
+../Core/Src/camera_code.c:131:6:p4	8	static

@@ -1,6 +1,6 @@
 import numpy as np
-import serial
 import pyqtgraph as pg
+from utils import wait_for_response
 
 ADC_LENGTH = 2048
 FFT_LENGTH = 2048
@@ -31,30 +31,43 @@ def update_time_and_fft(signal, time_curve, fft_curve, fft_plot):
         fft_curve.setData(freqs, fft_db)
     return fft_curve
 
-def handle_uart_adc_fft(port, baudrate, time_curve, fft_curve, fft_plot):
+def handle_uart_adc_fft(ser, time_curve, fft_curve, fft_plot):
     try:
-        with serial.Serial(port, baudrate, timeout=2) as ser:
-            while ser.readline().decode().strip() != "ADC":
-                pass
-            adc_data = ser.read(ADC_LENGTH * 2)
-            adc_values = np.frombuffer(adc_data, dtype=np.uint16)
-            t = np.arange(len(adc_values)) / SAMPLE_RATE
-            time_curve.setData(t, adc_values)
+        if not ser or not ser.is_open:
+            print("Serial port not available.")
+            return fft_curve
 
-            while ser.readline().decode().strip() != "FFT":
-                pass
-            freqs = ser.read((FFT_LENGTH // 2) * 4)
-            mags = ser.read((FFT_LENGTH // 2) * 4)
-            frequencies = np.frombuffer(freqs, dtype='<f4')
-            magnitudes = np.frombuffer(mags, dtype='<f4')
+        ser.write(b"ADCFFT\r\n")
+        if not wait_for_response(ser, "ADCFFT"): 
+            print("No echo back for ADCFFT")
+            return
+        ser.reset_input_buffer()
 
-            magnitudes_db = 20 * np.log10((magnitudes * 3.3 / 4095.0) + 1e-12)
-            if not np.isnan(magnitudes_db).any():
-                if fft_curve is None:
-                    fft_curve = pg.PlotDataItem(frequencies, magnitudes_db, pen='y')
-                    fft_plot.addItem(fft_curve)
-                else:
-                    fft_curve.setData(frequencies, magnitudes_db)
+        while ser.readline().decode().strip() != "ADC":
+            pass
+
+        adc_data = ser.read(ADC_LENGTH * 2)
+        adc_values = np.frombuffer(adc_data, dtype=np.uint16)
+        t = np.arange(len(adc_values)) / SAMPLE_RATE
+        time_curve.setData(t, adc_values)
+
+        while ser.readline().decode().strip() != "FFT":
+            pass
+
+        freqs = ser.read((FFT_LENGTH // 2) * 4)
+        mags = ser.read((FFT_LENGTH // 2) * 4)
+        frequencies = np.frombuffer(freqs, dtype='<f4')
+        magnitudes = np.frombuffer(mags, dtype='<f4')
+
+        magnitudes_db = 20 * np.log10((magnitudes * 3.3 / 4095.0) + 1e-12)
+        if not np.isnan(magnitudes_db).any():
+            if fft_curve is None:
+                fft_curve = pg.PlotDataItem(frequencies, magnitudes_db, pen='y')
+                fft_plot.addItem(fft_curve)
+            else:
+                fft_curve.setData(frequencies, magnitudes_db)
+
     except Exception as e:
         print(f"Error during UART communication: {e}")
+
     return fft_curve

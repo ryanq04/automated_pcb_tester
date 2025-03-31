@@ -8,7 +8,7 @@
 
 // External data buffers
 extern uint16_t snapshot_buff[IMG_ROWS * IMG_COLS];
-extern uint8_t send_ptr[FRAMESIZE * 2];
+// extern uint8_t send_ptr[FRAMESIZE * 2];
 extern uint8_t dma_flag;
 
 // Printing / debugging helpers

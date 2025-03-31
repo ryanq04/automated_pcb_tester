@@ -33,12 +33,6 @@ void stp_Step(Stepper* motor, int step) {
 }
 
 
-
-void stp_init(Stepper* nema){
-   nema->currAngle = 0;
-}
-
-
 void stp_Stop(Stepper* motor) {
 	HAL_GPIO_WritePin(MOTOR_PORT, IN1, GPIO_PIN_RESET);
    HAL_GPIO_WritePin(MOTOR_PORT, IN2, GPIO_PIN_RESET);
@@ -63,7 +57,7 @@ void stp_moveDistance(Stepper* motor, float distance_cm){
 	int sign = 1;
     if(distance_cm < 0.0){
         sign = -1;
-        flashLED(LD3_GPIO_Port, LD3_Pin, 500, 10);
+        // flashLED(LD3_GPIO_Port, LD3_Pin, 500, 10);
     }
     
    int convertedSteps = sign * abs(distance_cm * NEMA_DISTANCE_TO_STEPS);
