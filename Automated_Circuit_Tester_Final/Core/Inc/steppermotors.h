@@ -10,7 +10,7 @@
 #define IN2 GPIO_PIN_13  // Connect to L298N IN2 from D7
 #define IN3 GPIO_PIN_14  // Connect to L298N IN3 from D4
 #define IN4 GPIO_PIN_15  // Connect to L298N IN4 from D2
-
+// Connection: on L298 1, 3, 2, 4 --> bottom to top on NIMA
 
 
 #define NEMA_DISTANCE_TO_STEPS 49
