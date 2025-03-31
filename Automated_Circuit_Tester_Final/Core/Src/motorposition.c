@@ -64,8 +64,10 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
 
     // 1. send home
     home_Align(myProbe);
-    HAL_Delay(200); 
-
+    HAL_Delay(500); 
+    if(desiredLoc.x == 6.0 && desiredLoc.y ==6.0){
+        return;
+    }
     // 2. align stepper, theta, R in order
     x_align(myProbe, desiredLoc);
     HAL_Delay(200); 

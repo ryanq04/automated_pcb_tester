@@ -104,6 +104,7 @@ class SignalViewer(QMainWindow):
     def capture_real_image(self):
         try:
             ser = self.serial
+            ser.reset_input_buffer()
             if not ser or not ser.is_open:
                 print("Serial port is not available.")
                 return
@@ -167,6 +168,7 @@ class SignalViewer(QMainWindow):
                 img_height, img_width = self.image_shape[:2]
                 img_x = float(x * img_width / displayed_width)
                 img_y = float(y * img_height / displayed_height)
+                print("Clicked at:", img_x, img_y)
 
                 img_arr3D = project_2D_to_3D([img_x, img_y])
                 try:
