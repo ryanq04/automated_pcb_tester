@@ -3,6 +3,6 @@
 ../Core/Src/fsm.c:87:6:State_Picture	8	static
 ../Core/Src/fsm.c:94:6:State_Coord_RX	8	static
 ../Core/Src/fsm.c:101:6:State_Motors	24	static
-../Core/Src/fsm.c:110:6:State_WaitForGo	4	static
-../Core/Src/fsm.c:117:6:State_ADC_FFT	4	static
-../Core/Src/fsm.c:150:9:match_command	16	static
+../Core/Src/fsm.c:109:6:State_WaitForGo	4	static
+../Core/Src/fsm.c:116:6:State_ADC_FFT	4	static
+../Core/Src/fsm.c:149:9:match_command	16	static

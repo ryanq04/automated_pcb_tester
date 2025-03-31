@@ -99,7 +99,6 @@ void State_Coord_RX(void){
 }
 
 void State_Motors(void){
-    flashLED(LD2_GPIO_Port, LD2_Pin, 200, 10);
     state = STATE_MOTORS;
     init_home(&myProbe);
     Position test = {posX, posY, 0.0};
