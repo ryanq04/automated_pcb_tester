@@ -12,12 +12,12 @@ void home_Align(Probe* myProbe){
     // 1. retract the motor
     setServoAngle(myProbe->lin, myProbe->lin->homeAngle);
     myProbe->lin->currAngle = myProbe->rot->homeAngle; 
-    HAL_Delay(500); 
+    HAL_Delay(200); 
 
     // 2. rotate to home angle
     setServoAngle(myProbe->rot, myProbe->rot->homeAngle);
     myProbe->rot->currAngle = myProbe->rot->homeAngle; 
-    HAL_Delay(500); 
+    HAL_Delay(200); 
 
     // 3. retract to home direction in stepper
     float move_cm =  -1 * myProbe->nema->currAngle; // move left
@@ -26,7 +26,7 @@ void home_Align(Probe* myProbe){
     }
     stp_moveDistance((myProbe->nema), move_cm);
     myProbe->nema->currAngle = 0.0;
-    HAL_Delay(500); 
+    //HAL_Delay(500); 
 }
 
 void x_align(Probe* myProbe, Position desiredLoc){
@@ -64,15 +64,15 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
 
     // 1. send home
     home_Align(myProbe);
-    HAL_Delay(500); 
+    HAL_Delay(200); 
 
     // 2. align stepper, theta, R in order
     x_align(myProbe, desiredLoc);
-    HAL_Delay(500); 
+    HAL_Delay(200); 
     theta_align(myProbe, desiredLoc);
-    HAL_Delay(500); 
+    HAL_Delay(200); 
     R_align(myProbe, desiredLoc);
-    HAL_Delay(500); 
+    //HAL_Delay(200); 
 
     // 3. wait
     //HAL_Delay(1000); 
