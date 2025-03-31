@@ -2,5 +2,5 @@
 ../Core/Src/motorposition.c:32:6:x_align	2
 ../Core/Src/motorposition.c:43:6:theta_align	2
 ../Core/Src/motorposition.c:53:6:R_align	2
-../Core/Src/motorposition.c:63:6:moveProbe_test	1
-../Core/Src/motorposition.c:85:6:init_home	1
+../Core/Src/motorposition.c:63:6:moveProbe_test	3
+../Core/Src/motorposition.c:87:6:init_home	1
