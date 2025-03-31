@@ -5838,25 +5838,26 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x080019a4       0x40 ./Core/Src/fsm.o
                 0x080019a4                State_Coord_RX
  .text.State_Motors
-                0x080019e4       0x6c ./Core/Src/fsm.o
+                0x080019e4       0x78 ./Core/Src/fsm.o
                 0x080019e4                State_Motors
  .text.State_ADC_FFT
-                0x08001a50        0xe ./Core/Src/fsm.o
-                0x08001a50                State_ADC_FFT
+                0x08001a5c        0xe ./Core/Src/fsm.o
+                0x08001a5c                State_ADC_FFT
  .text.match_command
-                0x08001a5e       0x28 ./Core/Src/fsm.o
-                0x08001a5e                match_command
- *fill*         0x08001a86        0x2 
- .text.main     0x08001a88      0x114 ./Core/Src/main.o
-                0x08001a88                main
+                0x08001a6a       0x28 ./Core/Src/fsm.o
+                0x08001a6a                match_command
+ *fill*         0x08001a92        0x2 
+ .text.main     0x08001a94      0x114 ./Core/Src/main.o
+                0x08001a94                main
  .text.home_Align
-                0x08001b9c       0xa4 ./Core/Src/motorposition.o
-                0x08001b9c                home_Align
+                0x08001ba8       0xa4 ./Core/Src/motorposition.o
+                0x08001ba8                home_Align
+ *fill*         0x08001c4c        0x4 
  .text.theta_align
-                0x08001c40       0xe0 ./Core/Src/motorposition.o
-                0x08001c40                theta_align
- .text.R_align  0x08001d20       0xd8 ./Core/Src/motorposition.o
-                0x08001d20                R_align
+                0x08001c50       0xd8 ./Core/Src/motorposition.o
+                0x08001c50                theta_align
+ .text.R_align  0x08001d28       0xd0 ./Core/Src/motorposition.o
+                0x08001d28                R_align
  .text.moveProbe_test
                 0x08001df8       0x8a ./Core/Src/motorposition.o
                 0x08001df8                moveProbe_test
@@ -6627,197 +6628,197 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 .iplt           0x0800d630        0x0
  .iplt          0x0800d630        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x0800d630    0x13ad0
+.rodata         0x0800d630    0x13ac8
                 0x0800d630                        . = ALIGN (0x4)
  *(.rodata)
  .rodata        0x0800d630       0xc5 ./Core/Src/camera_code.o
  *fill*         0x0800d6f5        0x3 
- .rodata        0x0800d6f8        0xc ./Core/Src/fsm.o
- .rodata        0x0800d704       0xae ./Core/Src/ov7670.o
+ .rodata        0x0800d6f8       0xae ./Core/Src/ov7670.o
  *(.rodata*)
- *fill*         0x0800d7b2        0x2 
+ *fill*         0x0800d7a6        0x2 
  .rodata.CMD_TAKEPIC
+                0x0800d7a8        0x9 ./Core/Src/fsm.o
+ *fill*         0x0800d7b1        0x3 
+ .rodata.CMD_ADCFFT
                 0x0800d7b4        0x9 ./Core/Src/fsm.o
  *fill*         0x0800d7bd        0x3 
- .rodata.CMD_ADCFFT
+ .rodata.CMD_COORDS
                 0x0800d7c0        0x9 ./Core/Src/fsm.o
  *fill*         0x0800d7c9        0x3 
- .rodata.CMD_COORDS
-                0x0800d7cc        0x9 ./Core/Src/fsm.o
- *fill*         0x0800d7d5        0x3 
- .rodata.HOME   0x0800d7d8        0xc ./Core/Src/main.o
-                0x0800d7d8                HOME
+ .rodata.HOME   0x0800d7cc        0xc ./Core/Src/main.o
+                0x0800d7cc                HOME
  .rodata.OV7670_reg
-                0x0800d7e4       0xf4 ./Core/Src/ov7670.o
-                0x0800d7e4                OV7670_reg
+                0x0800d7d8       0xf4 ./Core/Src/ov7670.o
+                0x0800d7d8                OV7670_reg
  .rodata.AHBPrescTable
-                0x0800d8d8       0x10 ./Core/Src/system_stm32f4xx.o
-                0x0800d8d8                AHBPrescTable
+                0x0800d8cc       0x10 ./Core/Src/system_stm32f4xx.o
+                0x0800d8cc                AHBPrescTable
  .rodata.APBPrescTable
-                0x0800d8e8        0x8 ./Core/Src/system_stm32f4xx.o
-                0x0800d8e8                APBPrescTable
+                0x0800d8dc        0x8 ./Core/Src/system_stm32f4xx.o
+                0x0800d8dc                APBPrescTable
  .rodata.flagBitshiftOffset.0
-                0x0800d8f0        0x8 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
+                0x0800d8e4        0x8 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
  .rodata.twiddleCoef_2048
-                0x0800d8f8     0x4000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0800d8f8                twiddleCoef_2048
+                0x0800d8ec     0x4000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0800d8ec                twiddleCoef_2048
  .rodata.twiddleCoef_rfft_64
-                0x080118f8      0x100 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x080118f8                twiddleCoef_rfft_64
+                0x080118ec      0x100 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x080118ec                twiddleCoef_rfft_64
  .rodata.armBitRevIndexTable64
-                0x080119f8       0x70 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x080119f8                armBitRevIndexTable64
+                0x080119ec       0x70 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x080119ec                armBitRevIndexTable64
  .rodata.twiddleCoef_rfft_2048
-                0x08011a68     0x2000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x08011a68                twiddleCoef_rfft_2048
+                0x08011a5c     0x2000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x08011a5c                twiddleCoef_rfft_2048
  .rodata.twiddleCoef_rfft_4096
-                0x08013a68     0x4000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x08013a68                twiddleCoef_rfft_4096
+                0x08013a5c     0x4000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x08013a5c                twiddleCoef_rfft_4096
  .rodata.twiddleCoef_256
-                0x08017a68      0x800 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x08017a68                twiddleCoef_256
+                0x08017a5c      0x800 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x08017a5c                twiddleCoef_256
  .rodata.twiddleCoef_16
-                0x08018268       0x80 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x08018268                twiddleCoef_16
+                0x0801825c       0x80 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801825c                twiddleCoef_16
  .rodata.twiddleCoef_1024
-                0x080182e8     0x2000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x080182e8                twiddleCoef_1024
+                0x080182dc     0x2000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x080182dc                twiddleCoef_1024
  .rodata.twiddleCoef_32
-                0x0801a2e8      0x100 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801a2e8                twiddleCoef_32
+                0x0801a2dc      0x100 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801a2dc                twiddleCoef_32
  .rodata.armBitRevIndexTable1024
-                0x0801a3e8      0xe10 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801a3e8                armBitRevIndexTable1024
+                0x0801a3dc      0xe10 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801a3dc                armBitRevIndexTable1024
  .rodata.armBitRevIndexTable16
-                0x0801b1f8       0x28 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801b1f8                armBitRevIndexTable16
+                0x0801b1ec       0x28 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801b1ec                armBitRevIndexTable16
  .rodata.twiddleCoef_rfft_32
-                0x0801b220       0x80 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801b220                twiddleCoef_rfft_32
+                0x0801b214       0x80 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801b214                twiddleCoef_rfft_32
  .rodata.armBitRevIndexTable32
-                0x0801b2a0       0x60 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801b2a0                armBitRevIndexTable32
+                0x0801b294       0x60 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801b294                armBitRevIndexTable32
  .rodata.twiddleCoef_128
-                0x0801b300      0x400 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801b300                twiddleCoef_128
+                0x0801b2f4      0x400 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801b2f4                twiddleCoef_128
  .rodata.twiddleCoef_512
-                0x0801b700     0x1000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801b700                twiddleCoef_512
+                0x0801b6f4     0x1000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801b6f4                twiddleCoef_512
  .rodata.armBitRevIndexTable2048
-                0x0801c700     0x1dc0 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801c700                armBitRevIndexTable2048
+                0x0801c6f4     0x1dc0 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801c6f4                armBitRevIndexTable2048
  .rodata.twiddleCoef_64
-                0x0801e4c0      0x200 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801e4c0                twiddleCoef_64
+                0x0801e4b4      0x200 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801e4b4                twiddleCoef_64
  .rodata.twiddleCoef_rfft_512
-                0x0801e6c0      0x800 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801e6c0                twiddleCoef_rfft_512
+                0x0801e6b4      0x800 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801e6b4                twiddleCoef_rfft_512
  .rodata.armBitRevIndexTable512
-                0x0801eec0      0x380 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801eec0                armBitRevIndexTable512
+                0x0801eeb4      0x380 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801eeb4                armBitRevIndexTable512
  .rodata.twiddleCoef_rfft_1024
-                0x0801f240     0x1000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x0801f240                twiddleCoef_rfft_1024
+                0x0801f234     0x1000 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x0801f234                twiddleCoef_rfft_1024
  .rodata.twiddleCoef_rfft_256
-                0x08020240      0x400 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x08020240                twiddleCoef_rfft_256
+                0x08020234      0x400 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x08020234                twiddleCoef_rfft_256
  .rodata.armBitRevIndexTable256
-                0x08020640      0x370 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x08020640                armBitRevIndexTable256
+                0x08020634      0x370 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x08020634                armBitRevIndexTable256
  .rodata.twiddleCoef_rfft_128
-                0x080209b0      0x200 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x080209b0                twiddleCoef_rfft_128
+                0x080209a4      0x200 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x080209a4                twiddleCoef_rfft_128
  .rodata.armBitRevIndexTable128
-                0x08020bb0      0x1a0 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
-                0x08020bb0                armBitRevIndexTable128
+                0x08020ba4      0x1a0 C:\Users\ryan2\Documents\Y3_S2\EMBEDDED\flying_probe_tester\Automated_Circuit_Tester_Final\Lib\libarm_cortexM4lf_math.a(arm_common_tables.o)
+                0x08020ba4                armBitRevIndexTable128
  .rodata._printf_float.str1.1
-                0x08020d50       0x12 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_float.o)
+                0x08020d44       0x12 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_float.o)
  .rodata._printf_i.str1.1
-                0x08020d62       0x22 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08020d56       0x22 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
  .rodata._dtoa_r.str1.1
-                0x08020d84       0x8d C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-dtoa.o)
+                0x08020d78       0x8d C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-dtoa.o)
                                  0x8f (size before relaxing)
  .rodata._Balloc.str1.1
-                0x08020e11       0x59 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
+                0x08020e05       0x59 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
                                  0x70 (size before relaxing)
  .rodata.__multadd.str1.1
-                0x08020e6a       0x11 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
- *fill*         0x08020e6a        0x2 
- .rodata.p05.0  0x08020e6c        0xc C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
+                0x08020e5e       0x11 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
+ *fill*         0x08020e5e        0x2 
+ .rodata.p05.0  0x08020e60        0xc C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
+ *fill*         0x08020e6c        0x4 
  .rodata.__mprec_bigtens
-                0x08020e78       0x28 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
-                0x08020e78                __mprec_bigtens
+                0x08020e70       0x28 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
+                0x08020e70                __mprec_bigtens
  .rodata.__mprec_tens
-                0x08020ea0       0xc8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
-                0x08020ea0                __mprec_tens
+                0x08020e98       0xc8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mprec.o)
+                0x08020e98                __mprec_tens
  .rodata._svfprintf_r.str1.1
-                0x08020f68       0x11 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
+                0x08020f60       0x11 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
  .rodata._setlocale_r.str1.1
-                0x08020f79        0x8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-locale.o)
+                0x08020f71        0x8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-locale.o)
                                   0x9 (size before relaxing)
  .rodata.str1.1
-                0x08020f81        0x2 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-locale.o)
+                0x08020f79        0x2 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-locale.o)
  .rodata.__assert_func.str1.1
-                0x08020f83       0x3c C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-assert.o)
+                0x08020f7b       0x3c C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-assert.o)
                                  0x3d (size before relaxing)
  .rodata._ctype_
-                0x08020fbf      0x101 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-ctype_.o)
-                0x08020fbf                _ctype_
+                0x08020fb7      0x101 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-ctype_.o)
+                0x08020fb7                _ctype_
  .rodata._vfprintf_r.str1.1
-                0x080210c0       0x11 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf.o)
+                0x080210b8       0x11 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf.o)
  .rodata.atanlo
-                0x080210c0       0x20 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a(libm_a-s_atan.o)
+                0x080210b8       0x20 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a(libm_a-s_atan.o)
  .rodata.atanhi
-                0x080210e0       0x20 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a(libm_a-s_atan.o)
-                0x08021100                        . = ALIGN (0x4)
+                0x080210d8       0x20 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a(libm_a-s_atan.o)
+                0x080210f8                        . = ALIGN (0x4)
 
-.ARM.extab      0x08021100        0x0
-                0x08021100                        . = ALIGN (0x4)
+.ARM.extab      0x080210f8        0x0
+                0x080210f8                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08021100                        . = ALIGN (0x4)
+                0x080210f8                        . = ALIGN (0x4)
 
-.ARM            0x08021100        0x8
-                0x08021100                        . = ALIGN (0x4)
-                0x08021100                        __exidx_start = .
+.ARM            0x080210f8        0x8
+                0x080210f8                        . = ALIGN (0x4)
+                0x080210f8                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x08021100        0x8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
- .ARM.exidx     0x08021108        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-strlen.o)
+ .ARM.exidx     0x080210f8        0x8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
+ .ARM.exidx     0x08021100        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-strlen.o)
                                   0x8 (size before relaxing)
- .ARM.exidx     0x08021108        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x08021100        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
                                   0x8 (size before relaxing)
-                0x08021108                        __exidx_end = .
-                0x08021108                        . = ALIGN (0x4)
+                0x08021100                        __exidx_end = .
+                0x08021100                        . = ALIGN (0x4)
 
-.preinit_array  0x08021108        0x0
-                0x08021108                        . = ALIGN (0x4)
-                0x08021108                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08021100        0x0
+                0x08021100                        . = ALIGN (0x4)
+                0x08021100                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08021108                        PROVIDE (__preinit_array_end = .)
-                0x08021108                        . = ALIGN (0x4)
+                0x08021100                        PROVIDE (__preinit_array_end = .)
+                0x08021100                        . = ALIGN (0x4)
 
-.init_array     0x08021108        0x4
-                0x08021108                        . = ALIGN (0x4)
-                0x08021108                        PROVIDE (__init_array_start = .)
+.init_array     0x08021100        0x4
+                0x08021100                        . = ALIGN (0x4)
+                0x08021100                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08021108        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x0802110c                        PROVIDE (__init_array_end = .)
-                0x0802110c                        . = ALIGN (0x4)
+ .init_array    0x08021100        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08021104                        PROVIDE (__init_array_end = .)
+                0x08021104                        . = ALIGN (0x4)
 
-.fini_array     0x0802110c        0x4
-                0x0802110c                        . = ALIGN (0x4)
+.fini_array     0x08021104        0x4
+                0x08021104                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x0802110c        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x08021104        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x08021110                        . = ALIGN (0x4)
-                0x08021110                        _sidata = LOADADDR (.data)
+                0x08021108                        . = ALIGN (0x4)
+                0x08021108                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x08021110        0x0
- .rel.iplt      0x08021110        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x08021108        0x0
+ .rel.iplt      0x08021108        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.data           0x20000000      0x1e8 load address 0x08021110
+.data           0x20000000      0x1e8 load address 0x08021108
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -6851,11 +6852,11 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x200001e8                        . = ALIGN (0x4)
                 0x200001e8                        _edata = .
 
-.igot.plt       0x200001e8        0x0 load address 0x080212f8
+.igot.plt       0x200001e8        0x0 load address 0x080212f0
  .igot.plt      0x200001e8        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 0x200001e8                        . = ALIGN (0x4)
 
-.bss            0x200001e8    0x18c90 load address 0x080212f8
+.bss            0x200001e8    0x18c90 load address 0x080212f0
                 0x200001e8                        _sbss = .
                 0x200001e8                        __bss_start__ = _sbss
  *(.bss)
@@ -6945,7 +6946,7 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x20018e78                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20018e78      0x600 load address 0x080212f8
+                0x20018e78      0x600 load address 0x080212f0
                 0x20018e78                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 0x20018e78                        PROVIDE (_end = .)

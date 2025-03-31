@@ -7,23 +7,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         0000d460  080001d0  080001d0  000011d0  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00013ad0  0800d630  0800d630  0000e630  2**3
+  2 .rodata       00013ac8  0800d630  0800d630  0000e630  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08021100  08021100  000231e8  2**0
+  3 .ARM.extab    00000000  080210f8  080210f8  000231e8  2**0
                   CONTENTS
-  4 .ARM          00000008  08021100  08021100  00022100  2**2
+  4 .ARM          00000008  080210f8  080210f8  000220f8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08021108  08021108  000231e8  2**0
+  5 .preinit_array 00000000  08021100  08021100  000231e8  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08021108  08021108  00022108  2**2
+  6 .init_array   00000004  08021100  08021100  00022100  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  0802110c  0802110c  0002210c  2**2
+  7 .fini_array   00000004  08021104  08021104  00022104  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         000001e8  20000000  08021110  00023000  2**3
+  8 .data         000001e8  20000000  08021108  00023000  2**3
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00018c90  200001e8  080212f8  000231e8  2**2
+  9 .bss          00018c90  200001e8  080212f0  000231e8  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20018e78  080212f8  00023e78  2**0
+ 10 ._user_heap_stack 00000600  20018e78  080212f0  00023e78  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000231e8  2**0
                   CONTENTS, READONLY
@@ -2821,7 +2821,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             if (match_command(rx_data_arr, CMD_TAKEPIC)) {
  8001860:	4928      	ldr	r1, [pc, #160]	@ (8001904 <HAL_UART_RxCpltCallback+0xc4>)
  8001862:	4829      	ldr	r0, [pc, #164]	@ (8001908 <HAL_UART_RxCpltCallback+0xc8>)
- 8001864:	f000 f8fb 	bl	8001a5e <match_command>
+ 8001864:	f000 f901 	bl	8001a6a <match_command>
  8001868:	4603      	mov	r3, r0
  800186a:	2b00      	cmp	r3, #0
  800186c:	d003      	beq.n	8001876 <HAL_UART_RxCpltCallback+0x36>
@@ -2839,7 +2839,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             } else if (match_command(rx_data_arr, CMD_COORDS)) {
  8001876:	4927      	ldr	r1, [pc, #156]	@ (8001914 <HAL_UART_RxCpltCallback+0xd4>)
  8001878:	4823      	ldr	r0, [pc, #140]	@ (8001908 <HAL_UART_RxCpltCallback+0xc8>)
- 800187a:	f000 f8f0 	bl	8001a5e <match_command>
+ 800187a:	f000 f8f6 	bl	8001a6a <match_command>
  800187e:	4603      	mov	r3, r0
  8001880:	2b00      	cmp	r3, #0
  8001882:	d003      	beq.n	800188c <HAL_UART_RxCpltCallback+0x4c>
@@ -2852,7 +2852,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
             } else if (match_command(rx_data_arr, CMD_ADCFFT)) {
  800188c:	4923      	ldr	r1, [pc, #140]	@ (800191c <HAL_UART_RxCpltCallback+0xdc>)
  800188e:	481e      	ldr	r0, [pc, #120]	@ (8001908 <HAL_UART_RxCpltCallback+0xc8>)
- 8001890:	f000 f8e5 	bl	8001a5e <match_command>
+ 8001890:	f000 f8eb 	bl	8001a6a <match_command>
  8001894:	4603      	mov	r3, r0
  8001896:	2b00      	cmp	r3, #0
  8001898:	d009      	beq.n	80018ae <HAL_UART_RxCpltCallback+0x6e>
@@ -2931,14 +2931,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
  80018fa:	bf00      	nop
  80018fc:	40004800 	.word	0x40004800
  8001900:	20018ce8 	.word	0x20018ce8
- 8001904:	0800d7b4 	.word	0x0800d7b4
+ 8001904:	0800d7a8 	.word	0x0800d7a8
  8001908:	20000204 	.word	0x20000204
  800190c:	20018ce4 	.word	0x20018ce4
  8001910:	0800196d 	.word	0x0800196d
- 8001914:	0800d7cc 	.word	0x0800d7cc
+ 8001914:	0800d7c0 	.word	0x0800d7c0
  8001918:	080019a5 	.word	0x080019a5
- 800191c:	0800d7c0 	.word	0x0800d7c0
- 8001920:	08001a51 	.word	0x08001a51
+ 800191c:	0800d7b4 	.word	0x0800d7b4
+ 8001920:	08001a5d 	.word	0x08001a5d
  8001924:	20000500 	.word	0x20000500
  8001928:	0800193d 	.word	0x0800193d
  800192c:	20000220 	.word	0x20000220
@@ -3000,7 +3000,7 @@ void State_Picture(void){
 }
  800198c:	bf00      	nop
  800198e:	bd80      	pop	{r7, pc}
- 8001990:	0800d7b4 	.word	0x0800d7b4
+ 8001990:	0800d7a8 	.word	0x0800d7a8
  8001994:	20000500 	.word	0x20000500
  8001998:	20018ce8 	.word	0x20018ce8
  800199c:	20018ce4 	.word	0x20018ce4
@@ -3038,7 +3038,7 @@ void State_Coord_RX(void){
  80019d4:	20018ce4 	.word	0x20018ce4
  80019d8:	20000204 	.word	0x20000204
  80019dc:	20000500 	.word	0x20000500
- 80019e0:	0800d7cc 	.word	0x0800d7cc
+ 80019e0:	0800d7c0 	.word	0x0800d7c0
 
 080019e4 <State_Motors>:
 
@@ -3050,461 +3050,459 @@ void State_Motors(void){
  80019ea:	230a      	movs	r3, #10
  80019ec:	22c8      	movs	r2, #200	@ 0xc8
  80019ee:	2180      	movs	r1, #128	@ 0x80
- 80019f0:	4811      	ldr	r0, [pc, #68]	@ (8001a38 <State_Motors+0x54>)
+ 80019f0:	4813      	ldr	r0, [pc, #76]	@ (8001a40 <State_Motors+0x5c>)
  80019f2:	f7ff fb41 	bl	8001078 <flashLED>
     state = STATE_MOTORS;
- 80019f6:	4b11      	ldr	r3, [pc, #68]	@ (8001a3c <State_Motors+0x58>)
+ 80019f6:	4b13      	ldr	r3, [pc, #76]	@ (8001a44 <State_Motors+0x60>)
  80019f8:	2204      	movs	r2, #4
  80019fa:	701a      	strb	r2, [r3, #0]
     init_home(&myProbe);
- 80019fc:	4810      	ldr	r0, [pc, #64]	@ (8001a40 <State_Motors+0x5c>)
+ 80019fc:	4812      	ldr	r0, [pc, #72]	@ (8001a48 <State_Motors+0x64>)
  80019fe:	f000 fa41 	bl	8001e84 <init_home>
-    Position test = {3.0, 3.0, 0.0};
- 8001a02:	4a10      	ldr	r2, [pc, #64]	@ (8001a44 <State_Motors+0x60>)
- 8001a04:	1d3b      	adds	r3, r7, #4
- 8001a06:	ca07      	ldmia	r2, {r0, r1, r2}
- 8001a08:	e883 0007 	stmia.w	r3, {r0, r1, r2}
+    Position test = {posX, posY, 0.0};
+ 8001a02:	4b12      	ldr	r3, [pc, #72]	@ (8001a4c <State_Motors+0x68>)
+ 8001a04:	681b      	ldr	r3, [r3, #0]
+ 8001a06:	607b      	str	r3, [r7, #4]
+ 8001a08:	4b11      	ldr	r3, [pc, #68]	@ (8001a50 <State_Motors+0x6c>)
+ 8001a0a:	681b      	ldr	r3, [r3, #0]
+ 8001a0c:	60bb      	str	r3, [r7, #8]
+ 8001a0e:	f04f 0300 	mov.w	r3, #0
+ 8001a12:	60fb      	str	r3, [r7, #12]
     moveProbe_test(&myProbe, test);
- 8001a0c:	edd7 6a01 	vldr	s13, [r7, #4]
- 8001a10:	ed97 7a02 	vldr	s14, [r7, #8]
- 8001a14:	edd7 7a03 	vldr	s15, [r7, #12]
- 8001a18:	eeb0 0a66 	vmov.f32	s0, s13
- 8001a1c:	eef0 0a47 	vmov.f32	s1, s14
- 8001a20:	eeb0 1a67 	vmov.f32	s2, s15
- 8001a24:	4806      	ldr	r0, [pc, #24]	@ (8001a40 <State_Motors+0x5c>)
- 8001a26:	f000 f9e7 	bl	8001df8 <moveProbe_test>
+ 8001a14:	edd7 6a01 	vldr	s13, [r7, #4]
+ 8001a18:	ed97 7a02 	vldr	s14, [r7, #8]
+ 8001a1c:	edd7 7a03 	vldr	s15, [r7, #12]
+ 8001a20:	eeb0 0a66 	vmov.f32	s0, s13
+ 8001a24:	eef0 0a47 	vmov.f32	s1, s14
+ 8001a28:	eeb0 1a67 	vmov.f32	s2, s15
+ 8001a2c:	4806      	ldr	r0, [pc, #24]	@ (8001a48 <State_Motors+0x64>)
+ 8001a2e:	f000 f9e3 	bl	8001df8 <moveProbe_test>
     ptr_state = State_Listen;
- 8001a2a:	4b07      	ldr	r3, [pc, #28]	@ (8001a48 <State_Motors+0x64>)
- 8001a2c:	4a07      	ldr	r2, [pc, #28]	@ (8001a4c <State_Motors+0x68>)
- 8001a2e:	601a      	str	r2, [r3, #0]
+ 8001a32:	4b08      	ldr	r3, [pc, #32]	@ (8001a54 <State_Motors+0x70>)
+ 8001a34:	4a08      	ldr	r2, [pc, #32]	@ (8001a58 <State_Motors+0x74>)
+ 8001a36:	601a      	str	r2, [r3, #0]
 }
- 8001a30:	bf00      	nop
- 8001a32:	3710      	adds	r7, #16
- 8001a34:	46bd      	mov	sp, r7
- 8001a36:	bd80      	pop	{r7, pc}
- 8001a38:	40020400 	.word	0x40020400
- 8001a3c:	20018ce8 	.word	0x20018ce8
- 8001a40:	20018cec 	.word	0x20018cec
- 8001a44:	0800d6f8 	.word	0x0800d6f8
- 8001a48:	20018ce4 	.word	0x20018ce4
- 8001a4c:	0800193d 	.word	0x0800193d
+ 8001a38:	bf00      	nop
+ 8001a3a:	3710      	adds	r7, #16
+ 8001a3c:	46bd      	mov	sp, r7
+ 8001a3e:	bd80      	pop	{r7, pc}
+ 8001a40:	40020400 	.word	0x40020400
+ 8001a44:	20018ce8 	.word	0x20018ce8
+ 8001a48:	20018cec 	.word	0x20018cec
+ 8001a4c:	20000220 	.word	0x20000220
+ 8001a50:	20000224 	.word	0x20000224
+ 8001a54:	20018ce4 	.word	0x20018ce4
+ 8001a58:	0800193d 	.word	0x0800193d
 
-08001a50 <State_ADC_FFT>:
+08001a5c <State_ADC_FFT>:
     //basically a blocker to motor actuate until it receives a go. If receives anything other than go it indicates a problem and should force you to reset.
     ptr_state = NULL;
 }
 
 
 void State_ADC_FFT(void){
- 8001a50:	b480      	push	{r7}
- 8001a52:	af00      	add	r7, sp, #0
+ 8001a5c:	b480      	push	{r7}
+ 8001a5e:	af00      	add	r7, sp, #0
     //         sendADC_UART();
     //         sendFFT_UART();
     //     }
     // }
     // ptr_state = State_Listen;
 }
- 8001a54:	bf00      	nop
- 8001a56:	46bd      	mov	sp, r7
- 8001a58:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8001a5c:	4770      	bx	lr
+ 8001a60:	bf00      	nop
+ 8001a62:	46bd      	mov	sp, r7
+ 8001a64:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8001a68:	4770      	bx	lr
 
-08001a5e <match_command>:
+08001a6a <match_command>:
  * @brief Compare fixed-length 8-byte command strings.
  * @param input     Pointer to received buffer (must be at least 8 bytes)
  * @param command   Pointer to expected command (8-byte string)
  * @return 1 if match, 0 if not
  */
 uint8_t match_command(const uint8_t* input, const uint8_t* command) {
- 8001a5e:	b580      	push	{r7, lr}
- 8001a60:	b082      	sub	sp, #8
- 8001a62:	af00      	add	r7, sp, #0
- 8001a64:	6078      	str	r0, [r7, #4]
- 8001a66:	6039      	str	r1, [r7, #0]
+ 8001a6a:	b580      	push	{r7, lr}
+ 8001a6c:	b082      	sub	sp, #8
+ 8001a6e:	af00      	add	r7, sp, #0
+ 8001a70:	6078      	str	r0, [r7, #4]
+ 8001a72:	6039      	str	r1, [r7, #0]
     return (memcmp(input, command, 8) == 0);
- 8001a68:	2208      	movs	r2, #8
- 8001a6a:	6839      	ldr	r1, [r7, #0]
- 8001a6c:	6878      	ldr	r0, [r7, #4]
- 8001a6e:	f009 f928 	bl	800acc2 <memcmp>
- 8001a72:	4603      	mov	r3, r0
- 8001a74:	2b00      	cmp	r3, #0
- 8001a76:	bf0c      	ite	eq
- 8001a78:	2301      	moveq	r3, #1
- 8001a7a:	2300      	movne	r3, #0
- 8001a7c:	b2db      	uxtb	r3, r3
+ 8001a74:	2208      	movs	r2, #8
+ 8001a76:	6839      	ldr	r1, [r7, #0]
+ 8001a78:	6878      	ldr	r0, [r7, #4]
+ 8001a7a:	f009 f922 	bl	800acc2 <memcmp>
+ 8001a7e:	4603      	mov	r3, r0
+ 8001a80:	2b00      	cmp	r3, #0
+ 8001a82:	bf0c      	ite	eq
+ 8001a84:	2301      	moveq	r3, #1
+ 8001a86:	2300      	movne	r3, #0
+ 8001a88:	b2db      	uxtb	r3, r3
 }
- 8001a7e:	4618      	mov	r0, r3
- 8001a80:	3708      	adds	r7, #8
- 8001a82:	46bd      	mov	sp, r7
- 8001a84:	bd80      	pop	{r7, pc}
+ 8001a8a:	4618      	mov	r0, r3
+ 8001a8c:	3708      	adds	r7, #8
+ 8001a8e:	46bd      	mov	sp, r7
+ 8001a90:	bd80      	pop	{r7, pc}
 	...
 
-08001a88 <main>:
+08001a94 <main>:
 
 const Position HOME = {6.0, 6.0, 12.2};
 	
 
 int main(void)
 {
- 8001a88:	b580      	push	{r7, lr}
- 8001a8a:	af00      	add	r7, sp, #0
+ 8001a94:	b580      	push	{r7, lr}
+ 8001a96:	af00      	add	r7, sp, #0
 	HAL_Init();
- 8001a8c:	f001 fa2a 	bl	8002ee4 <HAL_Init>
+ 8001a98:	f001 fa24 	bl	8002ee4 <HAL_Init>
   	SystemClock_Config();
- 8001a90:	f7ff fb14 	bl	80010bc <SystemClock_Config>
+ 8001a9c:	f7ff fb0e 	bl	80010bc <SystemClock_Config>
 	MX_GPIO_Init();
- 8001a94:	f7ff fdc6 	bl	8001624 <MX_GPIO_Init>
+ 8001aa0:	f7ff fdc0 	bl	8001624 <MX_GPIO_Init>
 	MX_DMA_Init();
- 8001a98:	f7ff fd9c 	bl	80015d4 <MX_DMA_Init>
+ 8001aa4:	f7ff fd96 	bl	80015d4 <MX_DMA_Init>
 	MX_DCMI_Init();
- 8001a9c:	f7ff fbcc 	bl	8001238 <MX_DCMI_Init>
+ 8001aa8:	f7ff fbc6 	bl	8001238 <MX_DCMI_Init>
 	MX_USART3_UART_Init();
- 8001aa0:	f7ff fd5e 	bl	8001560 <MX_USART3_UART_Init>
+ 8001aac:	f7ff fd58 	bl	8001560 <MX_USART3_UART_Init>
 	MX_I2C2_Init();
- 8001aa4:	f7ff fc2a 	bl	80012fc <MX_I2C2_Init>
+ 8001ab0:	f7ff fc24 	bl	80012fc <MX_I2C2_Init>
 	MX_TIM1_Init();
- 8001aa8:	f7ff fc56 	bl	8001358 <MX_TIM1_Init>
+ 8001ab4:	f7ff fc50 	bl	8001358 <MX_TIM1_Init>
 	MX_TIM6_Init();
- 8001aac:	f7ff fd22 	bl	80014f4 <MX_TIM6_Init>
+ 8001ab8:	f7ff fd1c 	bl	80014f4 <MX_TIM6_Init>
 	MX_ADC1_Init();
- 8001ab0:	f7ff fb70 	bl	8001194 <MX_ADC1_Init>
+ 8001abc:	f7ff fb6a 	bl	8001194 <MX_ADC1_Init>
 	MX_I2C1_Init();
- 8001ab4:	f7ff fbf4 	bl	80012a0 <MX_I2C1_Init>
+ 8001ac0:	f7ff fbee 	bl	80012a0 <MX_I2C1_Init>
 	MX_TIM2_Init();
- 8001ab8:	f7ff fcd0 	bl	800145c <MX_TIM2_Init>
+ 8001ac4:	f7ff fcca 	bl	800145c <MX_TIM2_Init>
 	MX_USB_OTG_FS_USB_Init();
- 8001abc:	f7ff fd82 	bl	80015c4 <MX_USB_OTG_FS_USB_Init>
+ 8001ac8:	f7ff fd7c 	bl	80015c4 <MX_USB_OTG_FS_USB_Init>
 	
 	//init FFT
 	arm_rfft_fast_init_f32(&fftHandler, FFT_BUFFER_SIZE);
- 8001ac0:	f44f 6100 	mov.w	r1, #2048	@ 0x800
- 8001ac4:	482a      	ldr	r0, [pc, #168]	@ (8001b70 <main+0xe8>)
- 8001ac6:	f008 fafb 	bl	800a0c0 <arm_rfft_fast_init_f32>
+ 8001acc:	f44f 6100 	mov.w	r1, #2048	@ 0x800
+ 8001ad0:	482a      	ldr	r0, [pc, #168]	@ (8001b7c <main+0xe8>)
+ 8001ad2:	f008 faf5 	bl	800a0c0 <arm_rfft_fast_init_f32>
 
 
 	//init PCA
 	PCA9685_Init(50); // 50Hz for servo
- 8001aca:	2032      	movs	r0, #50	@ 0x32
- 8001acc:	f000 fb7a 	bl	80021c4 <PCA9685_Init>
+ 8001ad6:	2032      	movs	r0, #50	@ 0x32
+ 8001ad8:	f000 fb74 	bl	80021c4 <PCA9685_Init>
 	//init probe
 	myProbe.lin = &lin;
- 8001ad0:	4b28      	ldr	r3, [pc, #160]	@ (8001b74 <main+0xec>)
- 8001ad2:	4a29      	ldr	r2, [pc, #164]	@ (8001b78 <main+0xf0>)
- 8001ad4:	60da      	str	r2, [r3, #12]
+ 8001adc:	4b28      	ldr	r3, [pc, #160]	@ (8001b80 <main+0xec>)
+ 8001ade:	4a29      	ldr	r2, [pc, #164]	@ (8001b84 <main+0xf0>)
+ 8001ae0:	60da      	str	r2, [r3, #12]
 	myProbe.rot = &rot;
- 8001ad6:	4b27      	ldr	r3, [pc, #156]	@ (8001b74 <main+0xec>)
- 8001ad8:	4a28      	ldr	r2, [pc, #160]	@ (8001b7c <main+0xf4>)
- 8001ada:	611a      	str	r2, [r3, #16]
+ 8001ae2:	4b27      	ldr	r3, [pc, #156]	@ (8001b80 <main+0xec>)
+ 8001ae4:	4a28      	ldr	r2, [pc, #160]	@ (8001b88 <main+0xf4>)
+ 8001ae6:	611a      	str	r2, [r3, #16]
 	myProbe.nema = &nema;
- 8001adc:	4b25      	ldr	r3, [pc, #148]	@ (8001b74 <main+0xec>)
- 8001ade:	4a28      	ldr	r2, [pc, #160]	@ (8001b80 <main+0xf8>)
- 8001ae0:	615a      	str	r2, [r3, #20]
+ 8001ae8:	4b25      	ldr	r3, [pc, #148]	@ (8001b80 <main+0xec>)
+ 8001aea:	4a28      	ldr	r2, [pc, #160]	@ (8001b8c <main+0xf8>)
+ 8001aec:	615a      	str	r2, [r3, #20]
 	
     myProbe.probePos = HOME; 
- 8001ae2:	4b24      	ldr	r3, [pc, #144]	@ (8001b74 <main+0xec>)
- 8001ae4:	4a27      	ldr	r2, [pc, #156]	@ (8001b84 <main+0xfc>)
- 8001ae6:	ca07      	ldmia	r2, {r0, r1, r2}
- 8001ae8:	e883 0007 	stmia.w	r3, {r0, r1, r2}
+ 8001aee:	4b24      	ldr	r3, [pc, #144]	@ (8001b80 <main+0xec>)
+ 8001af0:	4a27      	ldr	r2, [pc, #156]	@ (8001b90 <main+0xfc>)
+ 8001af2:	ca07      	ldmia	r2, {r0, r1, r2}
+ 8001af4:	e883 0007 	stmia.w	r3, {r0, r1, r2}
     myProbe.lin->Channel = 0;
- 8001aec:	4b21      	ldr	r3, [pc, #132]	@ (8001b74 <main+0xec>)
- 8001aee:	68db      	ldr	r3, [r3, #12]
- 8001af0:	2200      	movs	r2, #0
- 8001af2:	721a      	strb	r2, [r3, #8]
+ 8001af8:	4b21      	ldr	r3, [pc, #132]	@ (8001b80 <main+0xec>)
+ 8001afa:	68db      	ldr	r3, [r3, #12]
+ 8001afc:	2200      	movs	r2, #0
+ 8001afe:	721a      	strb	r2, [r3, #8]
     myProbe.lin->currAngle = 0;
- 8001af4:	4b1f      	ldr	r3, [pc, #124]	@ (8001b74 <main+0xec>)
- 8001af6:	68db      	ldr	r3, [r3, #12]
- 8001af8:	f04f 0200 	mov.w	r2, #0
- 8001afc:	601a      	str	r2, [r3, #0]
+ 8001b00:	4b1f      	ldr	r3, [pc, #124]	@ (8001b80 <main+0xec>)
+ 8001b02:	68db      	ldr	r3, [r3, #12]
+ 8001b04:	f04f 0200 	mov.w	r2, #0
+ 8001b08:	601a      	str	r2, [r3, #0]
     myProbe.lin->homeAngle = 0;
- 8001afe:	4b1d      	ldr	r3, [pc, #116]	@ (8001b74 <main+0xec>)
- 8001b00:	68db      	ldr	r3, [r3, #12]
- 8001b02:	f04f 0200 	mov.w	r2, #0
- 8001b06:	605a      	str	r2, [r3, #4]
+ 8001b0a:	4b1d      	ldr	r3, [pc, #116]	@ (8001b80 <main+0xec>)
+ 8001b0c:	68db      	ldr	r3, [r3, #12]
+ 8001b0e:	f04f 0200 	mov.w	r2, #0
+ 8001b12:	605a      	str	r2, [r3, #4]
 
     myProbe.rot->Channel = 15;
- 8001b08:	4b1a      	ldr	r3, [pc, #104]	@ (8001b74 <main+0xec>)
- 8001b0a:	691b      	ldr	r3, [r3, #16]
- 8001b0c:	220f      	movs	r2, #15
- 8001b0e:	721a      	strb	r2, [r3, #8]
+ 8001b14:	4b1a      	ldr	r3, [pc, #104]	@ (8001b80 <main+0xec>)
+ 8001b16:	691b      	ldr	r3, [r3, #16]
+ 8001b18:	220f      	movs	r2, #15
+ 8001b1a:	721a      	strb	r2, [r3, #8]
     myProbe.rot->currAngle = 0;
- 8001b10:	4b18      	ldr	r3, [pc, #96]	@ (8001b74 <main+0xec>)
- 8001b12:	691b      	ldr	r3, [r3, #16]
- 8001b14:	f04f 0200 	mov.w	r2, #0
- 8001b18:	601a      	str	r2, [r3, #0]
+ 8001b1c:	4b18      	ldr	r3, [pc, #96]	@ (8001b80 <main+0xec>)
+ 8001b1e:	691b      	ldr	r3, [r3, #16]
+ 8001b20:	f04f 0200 	mov.w	r2, #0
+ 8001b24:	601a      	str	r2, [r3, #0]
     myProbe.rot->homeAngle = 0;
- 8001b1a:	4b16      	ldr	r3, [pc, #88]	@ (8001b74 <main+0xec>)
- 8001b1c:	691b      	ldr	r3, [r3, #16]
- 8001b1e:	f04f 0200 	mov.w	r2, #0
- 8001b22:	605a      	str	r2, [r3, #4]
+ 8001b26:	4b16      	ldr	r3, [pc, #88]	@ (8001b80 <main+0xec>)
+ 8001b28:	691b      	ldr	r3, [r3, #16]
+ 8001b2a:	f04f 0200 	mov.w	r2, #0
+ 8001b2e:	605a      	str	r2, [r3, #4]
 
     myProbe.nema->currAngle = HOME.x;
- 8001b24:	4b13      	ldr	r3, [pc, #76]	@ (8001b74 <main+0xec>)
- 8001b26:	695b      	ldr	r3, [r3, #20]
- 8001b28:	4a17      	ldr	r2, [pc, #92]	@ (8001b88 <main+0x100>)
- 8001b2a:	605a      	str	r2, [r3, #4]
+ 8001b30:	4b13      	ldr	r3, [pc, #76]	@ (8001b80 <main+0xec>)
+ 8001b32:	695b      	ldr	r3, [r3, #20]
+ 8001b34:	4a17      	ldr	r2, [pc, #92]	@ (8001b94 <main+0x100>)
+ 8001b36:	605a      	str	r2, [r3, #4]
     myProbe.nema->homeAngle = HOME.x;
- 8001b2c:	4b11      	ldr	r3, [pc, #68]	@ (8001b74 <main+0xec>)
- 8001b2e:	695b      	ldr	r3, [r3, #20]
- 8001b30:	4a15      	ldr	r2, [pc, #84]	@ (8001b88 <main+0x100>)
- 8001b32:	601a      	str	r2, [r3, #0]
+ 8001b38:	4b11      	ldr	r3, [pc, #68]	@ (8001b80 <main+0xec>)
+ 8001b3a:	695b      	ldr	r3, [r3, #20]
+ 8001b3c:	4a15      	ldr	r2, [pc, #84]	@ (8001b94 <main+0x100>)
+ 8001b3e:	601a      	str	r2, [r3, #0]
 	
 	ptr_state = State_Listen;
- 8001b34:	4b15      	ldr	r3, [pc, #84]	@ (8001b8c <main+0x104>)
- 8001b36:	4a16      	ldr	r2, [pc, #88]	@ (8001b90 <main+0x108>)
- 8001b38:	601a      	str	r2, [r3, #0]
+ 8001b40:	4b15      	ldr	r3, [pc, #84]	@ (8001b98 <main+0x104>)
+ 8001b42:	4a16      	ldr	r2, [pc, #88]	@ (8001b9c <main+0x108>)
+ 8001b44:	601a      	str	r2, [r3, #0]
 
 	__HAL_DMA_ENABLE_IT(&hdma_dcmi, DMA_IT_TC);
- 8001b3a:	4b16      	ldr	r3, [pc, #88]	@ (8001b94 <main+0x10c>)
- 8001b3c:	681b      	ldr	r3, [r3, #0]
- 8001b3e:	681a      	ldr	r2, [r3, #0]
- 8001b40:	4b14      	ldr	r3, [pc, #80]	@ (8001b94 <main+0x10c>)
- 8001b42:	681b      	ldr	r3, [r3, #0]
- 8001b44:	f042 0210 	orr.w	r2, r2, #16
- 8001b48:	601a      	str	r2, [r3, #0]
+ 8001b46:	4b16      	ldr	r3, [pc, #88]	@ (8001ba0 <main+0x10c>)
+ 8001b48:	681b      	ldr	r3, [r3, #0]
+ 8001b4a:	681a      	ldr	r2, [r3, #0]
+ 8001b4c:	4b14      	ldr	r3, [pc, #80]	@ (8001ba0 <main+0x10c>)
+ 8001b4e:	681b      	ldr	r3, [r3, #0]
+ 8001b50:	f042 0210 	orr.w	r2, r2, #16
+ 8001b54:	601a      	str	r2, [r3, #0]
 	HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
- 8001b4a:	2039      	movs	r0, #57	@ 0x39
- 8001b4c:	f001 fdc9 	bl	80036e2 <HAL_NVIC_EnableIRQ>
+ 8001b56:	2039      	movs	r0, #57	@ 0x39
+ 8001b58:	f001 fdc3 	bl	80036e2 <HAL_NVIC_EnableIRQ>
 
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
- 8001b50:	2100      	movs	r1, #0
- 8001b52:	4811      	ldr	r0, [pc, #68]	@ (8001b98 <main+0x110>)
- 8001b54:	f006 faec 	bl	8008130 <HAL_TIM_PWM_Start>
+ 8001b5c:	2100      	movs	r1, #0
+ 8001b5e:	4811      	ldr	r0, [pc, #68]	@ (8001ba4 <main+0x110>)
+ 8001b60:	f006 fae6 	bl	8008130 <HAL_TIM_PWM_Start>
 	ov7670_init();
- 8001b58:	f000 f9c0 	bl	8001edc <ov7670_init>
+ 8001b64:	f000 f9ba 	bl	8001edc <ov7670_init>
 	ov7_config();
- 8001b5c:	f000 f9f0 	bl	8001f40 <ov7_config>
+ 8001b68:	f000 f9ea 	bl	8001f40 <ov7_config>
 
 	while(1){
 
 		if (ptr_state != NULL) {
- 8001b60:	4b0a      	ldr	r3, [pc, #40]	@ (8001b8c <main+0x104>)
- 8001b62:	681b      	ldr	r3, [r3, #0]
- 8001b64:	2b00      	cmp	r3, #0
- 8001b66:	d0fb      	beq.n	8001b60 <main+0xd8>
+ 8001b6c:	4b0a      	ldr	r3, [pc, #40]	@ (8001b98 <main+0x104>)
+ 8001b6e:	681b      	ldr	r3, [r3, #0]
+ 8001b70:	2b00      	cmp	r3, #0
+ 8001b72:	d0fb      	beq.n	8001b6c <main+0xd8>
             ptr_state();       // Run the state logic
- 8001b68:	4b08      	ldr	r3, [pc, #32]	@ (8001b8c <main+0x104>)
- 8001b6a:	681b      	ldr	r3, [r3, #0]
- 8001b6c:	4798      	blx	r3
+ 8001b74:	4b08      	ldr	r3, [pc, #32]	@ (8001b98 <main+0x104>)
+ 8001b76:	681b      	ldr	r3, [r3, #0]
+ 8001b78:	4798      	blx	r3
 		if (ptr_state != NULL) {
- 8001b6e:	e7f7      	b.n	8001b60 <main+0xd8>
- 8001b70:	20000548 	.word	0x20000548
- 8001b74:	20018cec 	.word	0x20018cec
- 8001b78:	20018d04 	.word	0x20018d04
- 8001b7c:	20018d10 	.word	0x20018d10
- 8001b80:	20018d1c 	.word	0x20018d1c
- 8001b84:	0800d7d8 	.word	0x0800d7d8
- 8001b88:	40c00000 	.word	0x40c00000
- 8001b8c:	20018ce4 	.word	0x20018ce4
- 8001b90:	0800193d 	.word	0x0800193d
- 8001b94:	20000320 	.word	0x20000320
- 8001b98:	20000428 	.word	0x20000428
+ 8001b7a:	e7f7      	b.n	8001b6c <main+0xd8>
+ 8001b7c:	20000548 	.word	0x20000548
+ 8001b80:	20018cec 	.word	0x20018cec
+ 8001b84:	20018d04 	.word	0x20018d04
+ 8001b88:	20018d10 	.word	0x20018d10
+ 8001b8c:	20018d1c 	.word	0x20018d1c
+ 8001b90:	0800d7cc 	.word	0x0800d7cc
+ 8001b94:	40c00000 	.word	0x40c00000
+ 8001b98:	20018ce4 	.word	0x20018ce4
+ 8001b9c:	0800193d 	.word	0x0800193d
+ 8001ba0:	20000320 	.word	0x20000320
+ 8001ba4:	20000428 	.word	0x20000428
 
-08001b9c <home_Align>:
+08001ba8 <home_Align>:
 #include <math.h>
 
 extern const Position HOME;
 
 // Calculates the motor position based on given (x, y) coords
 void home_Align(Probe* myProbe){
- 8001b9c:	b580      	push	{r7, lr}
- 8001b9e:	b084      	sub	sp, #16
- 8001ba0:	af00      	add	r7, sp, #0
- 8001ba2:	6078      	str	r0, [r7, #4]
+ 8001ba8:	b580      	push	{r7, lr}
+ 8001baa:	b084      	sub	sp, #16
+ 8001bac:	af00      	add	r7, sp, #0
+ 8001bae:	6078      	str	r0, [r7, #4]
     // 1. retract the motor
     setServoAngle(myProbe->lin, myProbe->lin->homeAngle);
- 8001ba4:	687b      	ldr	r3, [r7, #4]
- 8001ba6:	68da      	ldr	r2, [r3, #12]
- 8001ba8:	687b      	ldr	r3, [r7, #4]
- 8001baa:	68db      	ldr	r3, [r3, #12]
- 8001bac:	edd3 7a01 	vldr	s15, [r3, #4]
- 8001bb0:	eeb0 0a67 	vmov.f32	s0, s15
- 8001bb4:	4610      	mov	r0, r2
- 8001bb6:	f000 fb4b 	bl	8002250 <setServoAngle>
+ 8001bb0:	687b      	ldr	r3, [r7, #4]
+ 8001bb2:	68da      	ldr	r2, [r3, #12]
+ 8001bb4:	687b      	ldr	r3, [r7, #4]
+ 8001bb6:	68db      	ldr	r3, [r3, #12]
+ 8001bb8:	edd3 7a01 	vldr	s15, [r3, #4]
+ 8001bbc:	eeb0 0a67 	vmov.f32	s0, s15
+ 8001bc0:	4610      	mov	r0, r2
+ 8001bc2:	f000 fb45 	bl	8002250 <setServoAngle>
     myProbe->lin->currAngle = myProbe->rot->homeAngle; 
- 8001bba:	687b      	ldr	r3, [r7, #4]
- 8001bbc:	691a      	ldr	r2, [r3, #16]
- 8001bbe:	687b      	ldr	r3, [r7, #4]
- 8001bc0:	68db      	ldr	r3, [r3, #12]
- 8001bc2:	6852      	ldr	r2, [r2, #4]
- 8001bc4:	601a      	str	r2, [r3, #0]
+ 8001bc6:	687b      	ldr	r3, [r7, #4]
+ 8001bc8:	691a      	ldr	r2, [r3, #16]
+ 8001bca:	687b      	ldr	r3, [r7, #4]
+ 8001bcc:	68db      	ldr	r3, [r3, #12]
+ 8001bce:	6852      	ldr	r2, [r2, #4]
+ 8001bd0:	601a      	str	r2, [r3, #0]
     HAL_Delay(500); 
- 8001bc6:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
- 8001bca:	f001 f9fd 	bl	8002fc8 <HAL_Delay>
+ 8001bd2:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
+ 8001bd6:	f001 f9f7 	bl	8002fc8 <HAL_Delay>
 
     // 2. rotate to home angle
     setServoAngle(myProbe->rot, myProbe->rot->homeAngle);
- 8001bce:	687b      	ldr	r3, [r7, #4]
- 8001bd0:	691a      	ldr	r2, [r3, #16]
- 8001bd2:	687b      	ldr	r3, [r7, #4]
- 8001bd4:	691b      	ldr	r3, [r3, #16]
- 8001bd6:	edd3 7a01 	vldr	s15, [r3, #4]
- 8001bda:	eeb0 0a67 	vmov.f32	s0, s15
- 8001bde:	4610      	mov	r0, r2
- 8001be0:	f000 fb36 	bl	8002250 <setServoAngle>
+ 8001bda:	687b      	ldr	r3, [r7, #4]
+ 8001bdc:	691a      	ldr	r2, [r3, #16]
+ 8001bde:	687b      	ldr	r3, [r7, #4]
+ 8001be0:	691b      	ldr	r3, [r3, #16]
+ 8001be2:	edd3 7a01 	vldr	s15, [r3, #4]
+ 8001be6:	eeb0 0a67 	vmov.f32	s0, s15
+ 8001bea:	4610      	mov	r0, r2
+ 8001bec:	f000 fb30 	bl	8002250 <setServoAngle>
     myProbe->rot->currAngle = myProbe->rot->homeAngle; 
- 8001be4:	687b      	ldr	r3, [r7, #4]
- 8001be6:	691a      	ldr	r2, [r3, #16]
- 8001be8:	687b      	ldr	r3, [r7, #4]
- 8001bea:	691b      	ldr	r3, [r3, #16]
- 8001bec:	6852      	ldr	r2, [r2, #4]
- 8001bee:	601a      	str	r2, [r3, #0]
+ 8001bf0:	687b      	ldr	r3, [r7, #4]
+ 8001bf2:	691a      	ldr	r2, [r3, #16]
+ 8001bf4:	687b      	ldr	r3, [r7, #4]
+ 8001bf6:	691b      	ldr	r3, [r3, #16]
+ 8001bf8:	6852      	ldr	r2, [r2, #4]
+ 8001bfa:	601a      	str	r2, [r3, #0]
     HAL_Delay(500); 
- 8001bf0:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
- 8001bf4:	f001 f9e8 	bl	8002fc8 <HAL_Delay>
+ 8001bfc:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
+ 8001c00:	f001 f9e2 	bl	8002fc8 <HAL_Delay>
 
     // 3. retract to home direction in stepper
     float move_cm = -(myProbe->nema->currAngle - HOME.x); // move right
- 8001bf8:	687b      	ldr	r3, [r7, #4]
- 8001bfa:	695b      	ldr	r3, [r3, #20]
- 8001bfc:	ed93 7a01 	vldr	s14, [r3, #4]
- 8001c00:	4b0e      	ldr	r3, [pc, #56]	@ (8001c3c <home_Align+0xa0>)
- 8001c02:	edd3 7a00 	vldr	s15, [r3]
- 8001c06:	ee77 7a67 	vsub.f32	s15, s14, s15
- 8001c0a:	eef1 7a67 	vneg.f32	s15, s15
- 8001c0e:	edc7 7a03 	vstr	s15, [r7, #12]
+ 8001c04:	687b      	ldr	r3, [r7, #4]
+ 8001c06:	695b      	ldr	r3, [r3, #20]
+ 8001c08:	ed93 7a01 	vldr	s14, [r3, #4]
+ 8001c0c:	4b0e      	ldr	r3, [pc, #56]	@ (8001c48 <home_Align+0xa0>)
+ 8001c0e:	edd3 7a00 	vldr	s15, [r3]
+ 8001c12:	ee77 7a67 	vsub.f32	s15, s14, s15
+ 8001c16:	eef1 7a67 	vneg.f32	s15, s15
+ 8001c1a:	edc7 7a03 	vstr	s15, [r7, #12]
     stp_moveDistance((myProbe->nema), move_cm);
- 8001c12:	687b      	ldr	r3, [r7, #4]
- 8001c14:	695b      	ldr	r3, [r3, #20]
- 8001c16:	ed97 0a03 	vldr	s0, [r7, #12]
- 8001c1a:	4618      	mov	r0, r3
- 8001c1c:	f000 fcbe 	bl	800259c <stp_moveDistance>
+ 8001c1e:	687b      	ldr	r3, [r7, #4]
+ 8001c20:	695b      	ldr	r3, [r3, #20]
+ 8001c22:	ed97 0a03 	vldr	s0, [r7, #12]
+ 8001c26:	4618      	mov	r0, r3
+ 8001c28:	f000 fcb8 	bl	800259c <stp_moveDistance>
     myProbe->nema->currAngle = myProbe->nema->homeAngle;
- 8001c20:	687b      	ldr	r3, [r7, #4]
- 8001c22:	695a      	ldr	r2, [r3, #20]
- 8001c24:	687b      	ldr	r3, [r7, #4]
- 8001c26:	695b      	ldr	r3, [r3, #20]
- 8001c28:	6812      	ldr	r2, [r2, #0]
- 8001c2a:	605a      	str	r2, [r3, #4]
+ 8001c2c:	687b      	ldr	r3, [r7, #4]
+ 8001c2e:	695a      	ldr	r2, [r3, #20]
+ 8001c30:	687b      	ldr	r3, [r7, #4]
+ 8001c32:	695b      	ldr	r3, [r3, #20]
+ 8001c34:	6812      	ldr	r2, [r2, #0]
+ 8001c36:	605a      	str	r2, [r3, #4]
     HAL_Delay(500); 
- 8001c2c:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
- 8001c30:	f001 f9ca 	bl	8002fc8 <HAL_Delay>
+ 8001c38:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
+ 8001c3c:	f001 f9c4 	bl	8002fc8 <HAL_Delay>
 }
- 8001c34:	bf00      	nop
- 8001c36:	3710      	adds	r7, #16
- 8001c38:	46bd      	mov	sp, r7
- 8001c3a:	bd80      	pop	{r7, pc}
- 8001c3c:	0800d7d8 	.word	0x0800d7d8
+ 8001c40:	bf00      	nop
+ 8001c42:	3710      	adds	r7, #16
+ 8001c44:	46bd      	mov	sp, r7
+ 8001c46:	bd80      	pop	{r7, pc}
+ 8001c48:	0800d7cc 	.word	0x0800d7cc
+ 8001c4c:	00000000 	.word	0x00000000
 
-08001c40 <theta_align>:
+08001c50 <theta_align>:
     }
     stp_moveDistance(((myProbe->nema)), move_cm);
     myProbe->nema->currAngle = move_cm; 
 }
 
 void theta_align(Probe* myProbe, Position desiredLoc){
- 8001c40:	b580      	push	{r7, lr}
- 8001c42:	b086      	sub	sp, #24
- 8001c44:	af00      	add	r7, sp, #0
- 8001c46:	60f8      	str	r0, [r7, #12]
- 8001c48:	eef0 6a40 	vmov.f32	s13, s0
- 8001c4c:	eeb0 7a60 	vmov.f32	s14, s1
- 8001c50:	eef0 7a41 	vmov.f32	s15, s2
- 8001c54:	edc7 6a00 	vstr	s13, [r7]
- 8001c58:	ed87 7a01 	vstr	s14, [r7, #4]
- 8001c5c:	edc7 7a02 	vstr	s15, [r7, #8]
-    float theta_rad = atan(abs(HOME.y -desiredLoc.y) / H);
- 8001c60:	4b2b      	ldr	r3, [pc, #172]	@ (8001d10 <theta_align+0xd0>)
- 8001c62:	ed93 7a01 	vldr	s14, [r3, #4]
- 8001c66:	edd7 7a01 	vldr	s15, [r7, #4]
- 8001c6a:	ee77 7a67 	vsub.f32	s15, s14, s15
- 8001c6e:	eefd 7ae7 	vcvt.s32.f32	s15, s15
- 8001c72:	ee17 3a90 	vmov	r3, s15
- 8001c76:	2b00      	cmp	r3, #0
- 8001c78:	bfb8      	it	lt
- 8001c7a:	425b      	neglt	r3, r3
- 8001c7c:	4618      	mov	r0, r3
- 8001c7e:	f7fe fc71 	bl	8000564 <__aeabi_i2d>
- 8001c82:	f04f 0200 	mov.w	r2, #0
- 8001c86:	4b23      	ldr	r3, [pc, #140]	@ (8001d14 <theta_align+0xd4>)
- 8001c88:	f7fe fe00 	bl	800088c <__aeabi_ddiv>
- 8001c8c:	4602      	mov	r2, r0
- 8001c8e:	460b      	mov	r3, r1
- 8001c90:	ec43 2b17 	vmov	d7, r2, r3
- 8001c94:	eeb0 0a47 	vmov.f32	s0, s14
- 8001c98:	eef0 0a67 	vmov.f32	s1, s15
- 8001c9c:	f00b f920 	bl	800cee0 <atan>
- 8001ca0:	ec53 2b10 	vmov	r2, r3, d0
- 8001ca4:	4610      	mov	r0, r2
- 8001ca6:	4619      	mov	r1, r3
- 8001ca8:	f7fe ff9e 	bl	8000be8 <__aeabi_d2f>
- 8001cac:	4603      	mov	r3, r0
- 8001cae:	613b      	str	r3, [r7, #16]
+ 8001c50:	b580      	push	{r7, lr}
+ 8001c52:	b086      	sub	sp, #24
+ 8001c54:	af00      	add	r7, sp, #0
+ 8001c56:	60f8      	str	r0, [r7, #12]
+ 8001c58:	eef0 6a40 	vmov.f32	s13, s0
+ 8001c5c:	eeb0 7a60 	vmov.f32	s14, s1
+ 8001c60:	eef0 7a41 	vmov.f32	s15, s2
+ 8001c64:	edc7 6a00 	vstr	s13, [r7]
+ 8001c68:	ed87 7a01 	vstr	s14, [r7, #4]
+ 8001c6c:	edc7 7a02 	vstr	s15, [r7, #8]
+    float theta_rad = atan(fabsf(HOME.y -desiredLoc.y) / H);
+ 8001c70:	4b29      	ldr	r3, [pc, #164]	@ (8001d18 <theta_align+0xc8>)
+ 8001c72:	ed93 7a01 	vldr	s14, [r3, #4]
+ 8001c76:	edd7 7a01 	vldr	s15, [r7, #4]
+ 8001c7a:	ee77 7a67 	vsub.f32	s15, s14, s15
+ 8001c7e:	eef0 7ae7 	vabs.f32	s15, s15
+ 8001c82:	ee17 0a90 	vmov	r0, s15
+ 8001c86:	f7fe fc7f 	bl	8000588 <__aeabi_f2d>
+ 8001c8a:	f04f 0200 	mov.w	r2, #0
+ 8001c8e:	4b23      	ldr	r3, [pc, #140]	@ (8001d1c <theta_align+0xcc>)
+ 8001c90:	f7fe fdfc 	bl	800088c <__aeabi_ddiv>
+ 8001c94:	4602      	mov	r2, r0
+ 8001c96:	460b      	mov	r3, r1
+ 8001c98:	ec43 2b17 	vmov	d7, r2, r3
+ 8001c9c:	eeb0 0a47 	vmov.f32	s0, s14
+ 8001ca0:	eef0 0a67 	vmov.f32	s1, s15
+ 8001ca4:	f00b f91c 	bl	800cee0 <atan>
+ 8001ca8:	ec53 2b10 	vmov	r2, r3, d0
+ 8001cac:	4610      	mov	r0, r2
+ 8001cae:	4619      	mov	r1, r3
+ 8001cb0:	f7fe ff9a 	bl	8000be8 <__aeabi_d2f>
+ 8001cb4:	4603      	mov	r3, r0
+ 8001cb6:	613b      	str	r3, [r7, #16]
     float theta_deg = theta_rad * DEGREE_CONVERSION;
- 8001cb0:	6938      	ldr	r0, [r7, #16]
- 8001cb2:	f7fe fc69 	bl	8000588 <__aeabi_f2d>
- 8001cb6:	a314      	add	r3, pc, #80	@ (adr r3, 8001d08 <theta_align+0xc8>)
- 8001cb8:	e9d3 2300 	ldrd	r2, r3, [r3]
- 8001cbc:	f7fe fcbc 	bl	8000638 <__aeabi_dmul>
- 8001cc0:	4602      	mov	r2, r0
- 8001cc2:	460b      	mov	r3, r1
- 8001cc4:	4610      	mov	r0, r2
- 8001cc6:	4619      	mov	r1, r3
- 8001cc8:	f7fe ff8e 	bl	8000be8 <__aeabi_d2f>
- 8001ccc:	4603      	mov	r3, r0
- 8001cce:	617b      	str	r3, [r7, #20]
+ 8001cb8:	6938      	ldr	r0, [r7, #16]
+ 8001cba:	f7fe fc65 	bl	8000588 <__aeabi_f2d>
+ 8001cbe:	a314      	add	r3, pc, #80	@ (adr r3, 8001d10 <theta_align+0xc0>)
+ 8001cc0:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 8001cc4:	f7fe fcb8 	bl	8000638 <__aeabi_dmul>
+ 8001cc8:	4602      	mov	r2, r0
+ 8001cca:	460b      	mov	r3, r1
+ 8001ccc:	4610      	mov	r0, r2
+ 8001cce:	4619      	mov	r1, r3
+ 8001cd0:	f7fe ff8a 	bl	8000be8 <__aeabi_d2f>
+ 8001cd4:	4603      	mov	r3, r0
+ 8001cd6:	617b      	str	r3, [r7, #20]
     if(theta_deg > THETA_MAX){
- 8001cd0:	edd7 7a05 	vldr	s15, [r7, #20]
- 8001cd4:	ed9f 7a10 	vldr	s14, [pc, #64]	@ 8001d18 <theta_align+0xd8>
- 8001cd8:	eef4 7ac7 	vcmpe.f32	s15, s14
- 8001cdc:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 8001ce0:	dd01      	ble.n	8001ce6 <theta_align+0xa6>
+ 8001cd8:	edd7 7a05 	vldr	s15, [r7, #20]
+ 8001cdc:	ed9f 7a10 	vldr	s14, [pc, #64]	@ 8001d20 <theta_align+0xd0>
+ 8001ce0:	eef4 7ac7 	vcmpe.f32	s15, s14
+ 8001ce4:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 8001ce8:	dd01      	ble.n	8001cee <theta_align+0x9e>
         theta_deg = THETA_MAX;
- 8001ce2:	4b0e      	ldr	r3, [pc, #56]	@ (8001d1c <theta_align+0xdc>)
- 8001ce4:	617b      	str	r3, [r7, #20]
+ 8001cea:	4b0e      	ldr	r3, [pc, #56]	@ (8001d24 <theta_align+0xd4>)
+ 8001cec:	617b      	str	r3, [r7, #20]
     }
     setServoAngle(myProbe->rot, theta_deg);
- 8001ce6:	68fb      	ldr	r3, [r7, #12]
- 8001ce8:	691b      	ldr	r3, [r3, #16]
- 8001cea:	ed97 0a05 	vldr	s0, [r7, #20]
- 8001cee:	4618      	mov	r0, r3
- 8001cf0:	f000 faae 	bl	8002250 <setServoAngle>
+ 8001cee:	68fb      	ldr	r3, [r7, #12]
+ 8001cf0:	691b      	ldr	r3, [r3, #16]
+ 8001cf2:	ed97 0a05 	vldr	s0, [r7, #20]
+ 8001cf6:	4618      	mov	r0, r3
+ 8001cf8:	f000 faaa 	bl	8002250 <setServoAngle>
     myProbe->rot->currAngle = theta_deg;
- 8001cf4:	68fb      	ldr	r3, [r7, #12]
- 8001cf6:	691b      	ldr	r3, [r3, #16]
- 8001cf8:	697a      	ldr	r2, [r7, #20]
- 8001cfa:	601a      	str	r2, [r3, #0]
+ 8001cfc:	68fb      	ldr	r3, [r7, #12]
+ 8001cfe:	691b      	ldr	r3, [r3, #16]
+ 8001d00:	697a      	ldr	r2, [r7, #20]
+ 8001d02:	601a      	str	r2, [r3, #0]
 }
- 8001cfc:	bf00      	nop
- 8001cfe:	3718      	adds	r7, #24
- 8001d00:	46bd      	mov	sp, r7
- 8001d02:	bd80      	pop	{r7, pc}
- 8001d04:	f3af 8000 	nop.w
- 8001d08:	1a63c1f8 	.word	0x1a63c1f8
- 8001d0c:	404ca5dc 	.word	0x404ca5dc
- 8001d10:	0800d7d8 	.word	0x0800d7d8
- 8001d14:	40290000 	.word	0x40290000
- 8001d18:	42080000 	.word	0x42080000
- 8001d1c:	42080000 	.word	0x42080000
+ 8001d04:	bf00      	nop
+ 8001d06:	3718      	adds	r7, #24
+ 8001d08:	46bd      	mov	sp, r7
+ 8001d0a:	bd80      	pop	{r7, pc}
+ 8001d0c:	f3af 8000 	nop.w
+ 8001d10:	1a63c1f8 	.word	0x1a63c1f8
+ 8001d14:	404ca5dc 	.word	0x404ca5dc
+ 8001d18:	0800d7cc 	.word	0x0800d7cc
+ 8001d1c:	40290000 	.word	0x40290000
+ 8001d20:	42080000 	.word	0x42080000
+ 8001d24:	42080000 	.word	0x42080000
 
-08001d20 <R_align>:
+08001d28 <R_align>:
 
 void R_align(Probe* myProbe, Position desiredLoc){
- 8001d20:	b580      	push	{r7, lr}
- 8001d22:	b086      	sub	sp, #24
- 8001d24:	af00      	add	r7, sp, #0
- 8001d26:	60f8      	str	r0, [r7, #12]
- 8001d28:	eef0 6a40 	vmov.f32	s13, s0
- 8001d2c:	eeb0 7a60 	vmov.f32	s14, s1
- 8001d30:	eef0 7a41 	vmov.f32	s15, s2
- 8001d34:	edc7 6a00 	vstr	s13, [r7]
- 8001d38:	ed87 7a01 	vstr	s14, [r7, #4]
- 8001d3c:	edc7 7a02 	vstr	s15, [r7, #8]
-    float hypotenuse = hypot(H, abs(HOME.y - desiredLoc.y));
- 8001d40:	4b2b      	ldr	r3, [pc, #172]	@ (8001df0 <R_align+0xd0>)
- 8001d42:	ed93 7a01 	vldr	s14, [r3, #4]
- 8001d46:	edd7 7a01 	vldr	s15, [r7, #4]
- 8001d4a:	ee77 7a67 	vsub.f32	s15, s14, s15
- 8001d4e:	eefd 7ae7 	vcvt.s32.f32	s15, s15
- 8001d52:	ee17 3a90 	vmov	r3, s15
- 8001d56:	2b00      	cmp	r3, #0
- 8001d58:	bfb8      	it	lt
- 8001d5a:	425b      	neglt	r3, r3
- 8001d5c:	4618      	mov	r0, r3
- 8001d5e:	f7fe fc01 	bl	8000564 <__aeabi_i2d>
+ 8001d28:	b580      	push	{r7, lr}
+ 8001d2a:	b086      	sub	sp, #24
+ 8001d2c:	af00      	add	r7, sp, #0
+ 8001d2e:	60f8      	str	r0, [r7, #12]
+ 8001d30:	eef0 6a40 	vmov.f32	s13, s0
+ 8001d34:	eeb0 7a60 	vmov.f32	s14, s1
+ 8001d38:	eef0 7a41 	vmov.f32	s15, s2
+ 8001d3c:	edc7 6a00 	vstr	s13, [r7]
+ 8001d40:	ed87 7a01 	vstr	s14, [r7, #4]
+ 8001d44:	edc7 7a02 	vstr	s15, [r7, #8]
+    float hypotenuse = hypot(H, fabsf(HOME.y - desiredLoc.y));
+ 8001d48:	4b29      	ldr	r3, [pc, #164]	@ (8001df0 <R_align+0xc8>)
+ 8001d4a:	ed93 7a01 	vldr	s14, [r3, #4]
+ 8001d4e:	edd7 7a01 	vldr	s15, [r7, #4]
+ 8001d52:	ee77 7a67 	vsub.f32	s15, s14, s15
+ 8001d56:	eef0 7ae7 	vabs.f32	s15, s15
+ 8001d5a:	ee17 0a90 	vmov	r0, s15
+ 8001d5e:	f7fe fc13 	bl	8000588 <__aeabi_f2d>
  8001d62:	4602      	mov	r2, r0
  8001d64:	460b      	mov	r3, r1
  8001d66:	ec43 2b11 	vmov	d1, r2, r3
- 8001d6a:	ed9f 0b1b 	vldr	d0, [pc, #108]	@ 8001dd8 <R_align+0xb8>
+ 8001d6a:	ed9f 0b1b 	vldr	d0, [pc, #108]	@ 8001dd8 <R_align+0xb0>
  8001d6e:	f00b f883 	bl	800ce78 <hypot>
  8001d72:	ec53 2b10 	vmov	r2, r3, d0
  8001d76:	4610      	mov	r0, r2
@@ -3515,7 +3513,7 @@ void R_align(Probe* myProbe, Position desiredLoc){
     float move_cm = hypotenuse - PROBE_LEN;
  8001d82:	6938      	ldr	r0, [r7, #16]
  8001d84:	f7fe fc00 	bl	8000588 <__aeabi_f2d>
- 8001d88:	a315      	add	r3, pc, #84	@ (adr r3, 8001de0 <R_align+0xc0>)
+ 8001d88:	a315      	add	r3, pc, #84	@ (adr r3, 8001de0 <R_align+0xb8>)
  8001d8a:	e9d3 2300 	ldrd	r2, r3, [r3]
  8001d8e:	f7fe fa9b 	bl	80002c8 <__aeabi_dsub>
  8001d92:	4602      	mov	r2, r0
@@ -3528,14 +3526,14 @@ void R_align(Probe* myProbe, Position desiredLoc){
     if(move_cm > DR_MAX){
  8001da2:	6978      	ldr	r0, [r7, #20]
  8001da4:	f7fe fbf0 	bl	8000588 <__aeabi_f2d>
- 8001da8:	a30f      	add	r3, pc, #60	@ (adr r3, 8001de8 <R_align+0xc8>)
+ 8001da8:	a30f      	add	r3, pc, #60	@ (adr r3, 8001de8 <R_align+0xc0>)
  8001daa:	e9d3 2300 	ldrd	r2, r3, [r3]
  8001dae:	f7fe fed3 	bl	8000b58 <__aeabi_dcmpgt>
  8001db2:	4603      	mov	r3, r0
  8001db4:	2b00      	cmp	r3, #0
- 8001db6:	d001      	beq.n	8001dbc <R_align+0x9c>
+ 8001db6:	d001      	beq.n	8001dbc <R_align+0x94>
         move_cm = DR_MAX; 
- 8001db8:	4b0e      	ldr	r3, [pc, #56]	@ (8001df4 <R_align+0xd4>)
+ 8001db8:	4b0e      	ldr	r3, [pc, #56]	@ (8001df4 <R_align+0xcc>)
  8001dba:	617b      	str	r3, [r7, #20]
     }
     sv_moveDistance(myProbe->lin, move_cm); // automatically updates cur_angle
@@ -3557,7 +3555,7 @@ void R_align(Probe* myProbe, Position desiredLoc){
  8001de4:	40289999 	.word	0x40289999
  8001de8:	9999999a 	.word	0x9999999a
  8001dec:	40059999 	.word	0x40059999
- 8001df0:	0800d7d8 	.word	0x0800d7d8
+ 8001df0:	0800d7cc 	.word	0x0800d7cc
  8001df4:	402ccccd 	.word	0x402ccccd
 
 08001df8 <moveProbe_test>:
@@ -3578,7 +3576,7 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
     // 1. send home
     home_Align(myProbe);
  8001e18:	68f8      	ldr	r0, [r7, #12]
- 8001e1a:	f7ff febf 	bl	8001b9c <home_Align>
+ 8001e1a:	f7ff fec5 	bl	8001ba8 <home_Align>
 
     // 2. align stepper, theta, R in order
     //x_align(myProbe, desiredLoc);
@@ -3593,7 +3591,7 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
  8001e36:	eef0 0a47 	vmov.f32	s1, s14
  8001e3a:	eeb0 1a67 	vmov.f32	s2, s15
  8001e3e:	68f8      	ldr	r0, [r7, #12]
- 8001e40:	f7ff fefe 	bl	8001c40 <theta_align>
+ 8001e40:	f7ff ff06 	bl	8001c50 <theta_align>
     HAL_Delay(500); 
  8001e44:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
  8001e48:	f001 f8be 	bl	8002fc8 <HAL_Delay>
@@ -3605,7 +3603,7 @@ void moveProbe_test(Probe* myProbe, Position desiredLoc){
  8001e5c:	eef0 0a47 	vmov.f32	s1, s14
  8001e60:	eeb0 1a67 	vmov.f32	s2, s15
  8001e64:	68f8      	ldr	r0, [r7, #12]
- 8001e66:	f7ff ff5b 	bl	8001d20 <R_align>
+ 8001e66:	f7ff ff5f 	bl	8001d28 <R_align>
     HAL_Delay(500); 
  8001e6a:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
  8001e6e:	f001 f8ab 	bl	8002fc8 <HAL_Delay>
@@ -3674,7 +3672,7 @@ void init_home(Probe* myProbe){
  8001ed0:	f85d 7b04 	ldr.w	r7, [sp], #4
  8001ed4:	4770      	bx	lr
  8001ed6:	bf00      	nop
- 8001ed8:	0800d7d8 	.word	0x0800d7d8
+ 8001ed8:	0800d7cc 	.word	0x0800d7cc
 
 08001edc <ov7670_init>:
   { 0xb3, 0x82 }, //
@@ -3738,9 +3736,9 @@ uint8_t ov7670_init(void){
  8001f2e:	46bd      	mov	sp, r7
  8001f30:	bd80      	pop	{r7, pc}
  8001f32:	bf00      	nop
- 8001f34:	0800d704 	.word	0x0800d704
- 8001f38:	0800d710 	.word	0x0800d710
- 8001f3c:	0800d72c 	.word	0x0800d72c
+ 8001f34:	0800d6f8 	.word	0x0800d6f8
+ 8001f38:	0800d704 	.word	0x0800d704
+ 8001f3c:	0800d720 	.word	0x0800d720
 
 08001f40 <ov7_config>:
     }
@@ -3826,9 +3824,9 @@ void ov7_config(){
  8001fc6:	3720      	adds	r7, #32
  8001fc8:	46bd      	mov	sp, r7
  8001fca:	bd80      	pop	{r7, pc}
- 8001fcc:	0800d7e4 	.word	0x0800d7e4
+ 8001fcc:	0800d7d8 	.word	0x0800d7d8
  8001fd0:	200003d4 	.word	0x200003d4
- 8001fd4:	0800d78c 	.word	0x0800d78c
+ 8001fd4:	0800d780 	.word	0x0800d780
 
 08001fd8 <ov7670_read>:
 
@@ -3898,7 +3896,7 @@ uint8_t ov7670_read(uint8_t reg){
  8002058:	bd80      	pop	{r7, pc}
  800205a:	bf00      	nop
  800205c:	200003d4 	.word	0x200003d4
- 8002060:	0800d798 	.word	0x0800d798
+ 8002060:	0800d78c 	.word	0x0800d78c
 
 08002064 <ov7670_snapshot>:
 
@@ -3942,7 +3940,7 @@ void ov7670_snapshot(uint16_t *buff){
  80020a6:	bf00      	nop
  80020a8:	20000560 	.word	0x20000560
  80020ac:	200002d0 	.word	0x200002d0
- 80020b0:	0800d7a0 	.word	0x0800d7a0
+ 80020b0:	0800d794 	.word	0x0800d794
 
 080020b4 <PCA9685_SetBit>:
 
@@ -6331,7 +6329,7 @@ LoopFillZerobss:
  8002ebe:	f007 ff69 	bl	800ad94 <__libc_init_array>
 /* Call the application's entry point.*/
   bl  main
- 8002ec2:	f7fe fde1 	bl	8001a88 <main>
+ 8002ec2:	f7fe fde7 	bl	8001a94 <main>
   bx  lr    
  8002ec6:	4770      	bx	lr
   ldr   sp, =_estack      /* set stack pointer */
@@ -6341,7 +6339,7 @@ LoopFillZerobss:
   ldr r1, =_edata
  8002ed0:	200001e8 	.word	0x200001e8
   ldr r2, =_sidata
- 8002ed4:	08021110 	.word	0x08021110
+ 8002ed4:	08021108 	.word	0x08021108
   ldr r2, =_sbss
  8002ed8:	200001e8 	.word	0x200001e8
   ldr r4, =_ebss
@@ -10133,7 +10131,7 @@ static uint32_t DMA_CalcBaseAndBitshift(DMA_HandleTypeDef *hdma)
  80042f0:	4770      	bx	lr
  80042f2:	bf00      	nop
  80042f4:	aaaaaaab 	.word	0xaaaaaaab
- 80042f8:	0800d8f0 	.word	0x0800d8f0
+ 80042f8:	0800d8e4 	.word	0x0800d8e4
 
 080042fc <DMA_CheckFifoParam>:
   * @param  hdma       pointer to a DMA_HandleTypeDef structure that contains
@@ -17883,7 +17881,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  80075da:	bf00      	nop
  80075dc:	40023c00 	.word	0x40023c00
  80075e0:	40023800 	.word	0x40023800
- 80075e4:	0800d8d8 	.word	0x0800d8d8
+ 80075e4:	0800d8cc 	.word	0x0800d8cc
  80075e8:	20000000 	.word	0x20000000
  80075ec:	20000004 	.word	0x20000004
 
@@ -17931,7 +17929,7 @@ uint32_t HAL_RCC_GetPCLK1Freq(void)
  8007624:	4618      	mov	r0, r3
  8007626:	bd80      	pop	{r7, pc}
  8007628:	40023800 	.word	0x40023800
- 800762c:	0800d8e8 	.word	0x0800d8e8
+ 800762c:	0800d8dc 	.word	0x0800d8dc
 
 08007630 <HAL_RCC_GetPCLK2Freq>:
   * @note   Each time PCLK2 changes, this function must be called to update the
@@ -17957,7 +17955,7 @@ uint32_t HAL_RCC_GetPCLK2Freq(void)
  800764c:	4618      	mov	r0, r3
  800764e:	bd80      	pop	{r7, pc}
  8007650:	40023800 	.word	0x40023800
- 8007654:	0800d8e8 	.word	0x0800d8e8
+ 8007654:	0800d8dc 	.word	0x0800d8dc
 
 08007658 <HAL_RCC_GetSysClockFreq>:
   *
@@ -24931,30 +24929,30 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800a162:	4b18      	ldr	r3, [pc, #96]	@ (800a1c4 <arm_rfft_fast_init_f32+0x104>)
  800a164:	e7c2      	b.n	800a0ec <arm_rfft_fast_init_f32+0x2c>
  800a166:	bf00      	nop
- 800a168:	0801c700 	.word	0x0801c700
- 800a16c:	0800d8f8 	.word	0x0800d8f8
- 800a170:	08013a68 	.word	0x08013a68
- 800a174:	080119f8 	.word	0x080119f8
- 800a178:	0801e4c0 	.word	0x0801e4c0
- 800a17c:	080209b0 	.word	0x080209b0
- 800a180:	0801a3e8 	.word	0x0801a3e8
- 800a184:	080182e8 	.word	0x080182e8
- 800a188:	08011a68 	.word	0x08011a68
- 800a18c:	08020640 	.word	0x08020640
- 800a190:	08017a68 	.word	0x08017a68
- 800a194:	0801e6c0 	.word	0x0801e6c0
- 800a198:	0801b2a0 	.word	0x0801b2a0
- 800a19c:	0801a2e8 	.word	0x0801a2e8
- 800a1a0:	080118f8 	.word	0x080118f8
- 800a1a4:	0801b1f8 	.word	0x0801b1f8
- 800a1a8:	08018268 	.word	0x08018268
- 800a1ac:	0801b220 	.word	0x0801b220
- 800a1b0:	0801eec0 	.word	0x0801eec0
- 800a1b4:	0801b700 	.word	0x0801b700
- 800a1b8:	0801f240 	.word	0x0801f240
- 800a1bc:	08020bb0 	.word	0x08020bb0
- 800a1c0:	0801b300 	.word	0x0801b300
- 800a1c4:	08020240 	.word	0x08020240
+ 800a168:	0801c6f4 	.word	0x0801c6f4
+ 800a16c:	0800d8ec 	.word	0x0800d8ec
+ 800a170:	08013a5c 	.word	0x08013a5c
+ 800a174:	080119ec 	.word	0x080119ec
+ 800a178:	0801e4b4 	.word	0x0801e4b4
+ 800a17c:	080209a4 	.word	0x080209a4
+ 800a180:	0801a3dc 	.word	0x0801a3dc
+ 800a184:	080182dc 	.word	0x080182dc
+ 800a188:	08011a5c 	.word	0x08011a5c
+ 800a18c:	08020634 	.word	0x08020634
+ 800a190:	08017a5c 	.word	0x08017a5c
+ 800a194:	0801e6b4 	.word	0x0801e6b4
+ 800a198:	0801b294 	.word	0x0801b294
+ 800a19c:	0801a2dc 	.word	0x0801a2dc
+ 800a1a0:	080118ec 	.word	0x080118ec
+ 800a1a4:	0801b1ec 	.word	0x0801b1ec
+ 800a1a8:	0801825c 	.word	0x0801825c
+ 800a1ac:	0801b214 	.word	0x0801b214
+ 800a1b0:	0801eeb4 	.word	0x0801eeb4
+ 800a1b4:	0801b6f4 	.word	0x0801b6f4
+ 800a1b8:	0801f234 	.word	0x0801f234
+ 800a1bc:	08020ba4 	.word	0x08020ba4
+ 800a1c0:	0801b2f4 	.word	0x0801b2f4
+ 800a1c4:	08020234 	.word	0x08020234
 
 0800a1c8 <__cvt>:
  800a1c8:	e92d 47ff 	stmdb	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
@@ -25377,11 +25375,11 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800a5cc:	e7ee      	b.n	800a5ac <_printf_float+0x2a4>
  800a5ce:	bf00      	nop
  800a5d0:	7fefffff 	.word	0x7fefffff
- 800a5d4:	08020d50 	.word	0x08020d50
- 800a5d8:	08020d54 	.word	0x08020d54
- 800a5dc:	08020d58 	.word	0x08020d58
- 800a5e0:	08020d5c 	.word	0x08020d5c
- 800a5e4:	08020d60 	.word	0x08020d60
+ 800a5d4:	08020d44 	.word	0x08020d44
+ 800a5d8:	08020d48 	.word	0x08020d48
+ 800a5dc:	08020d4c 	.word	0x08020d4c
+ 800a5e0:	08020d50 	.word	0x08020d50
+ 800a5e4:	08020d54 	.word	0x08020d54
  800a5e8:	6da3      	ldr	r3, [r4, #88]	@ 0x58
  800a5ea:	f8dd a028 	ldr.w	sl, [sp, #40]	@ 0x28
  800a5ee:	4553      	cmp	r3, sl
@@ -25861,8 +25859,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800aa68:	f104 0619 	add.w	r6, r4, #25
  800aa6c:	e7f5      	b.n	800aa5a <_printf_i+0x222>
  800aa6e:	bf00      	nop
- 800aa70:	08020d62 	.word	0x08020d62
- 800aa74:	08020d73 	.word	0x08020d73
+ 800aa70:	08020d56 	.word	0x08020d56
+ 800aa74:	08020d67 	.word	0x08020d67
 
 0800aa78 <std>:
  800aa78:	2300      	movs	r3, #0
@@ -26249,10 +26247,10 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800adc6:	4798      	blx	r3
  800adc8:	3601      	adds	r6, #1
  800adca:	e7f2      	b.n	800adb2 <__libc_init_array+0x1e>
- 800adcc:	08021108 	.word	0x08021108
- 800add0:	08021108 	.word	0x08021108
- 800add4:	08021108 	.word	0x08021108
- 800add8:	0802110c 	.word	0x0802110c
+ 800adcc:	08021100 	.word	0x08021100
+ 800add0:	08021100 	.word	0x08021100
+ 800add4:	08021100 	.word	0x08021100
+ 800add8:	08021104 	.word	0x08021104
 
 0800addc <__retarget_lock_init_recursive>:
  800addc:	4770      	bx	lr
@@ -26650,15 +26648,15 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800b1b4:	3fc68a28 	.word	0x3fc68a28
  800b1b8:	509f79fb 	.word	0x509f79fb
  800b1bc:	3fd34413 	.word	0x3fd34413
- 800b1c0:	08020d91 	.word	0x08020d91
- 800b1c4:	08020da8 	.word	0x08020da8
+ 800b1c0:	08020d85 	.word	0x08020d85
+ 800b1c4:	08020d9c 	.word	0x08020d9c
  800b1c8:	7ff00000 	.word	0x7ff00000
- 800b1cc:	08020d61 	.word	0x08020d61
+ 800b1cc:	08020d55 	.word	0x08020d55
  800b1d0:	3ff80000 	.word	0x3ff80000
- 800b1d4:	08020ea0 	.word	0x08020ea0
- 800b1d8:	08020e00 	.word	0x08020e00
- 800b1dc:	08020d8d 	.word	0x08020d8d
- 800b1e0:	08020d60 	.word	0x08020d60
+ 800b1d4:	08020e98 	.word	0x08020e98
+ 800b1d8:	08020df4 	.word	0x08020df4
+ 800b1dc:	08020d81 	.word	0x08020d81
+ 800b1e0:	08020d54 	.word	0x08020d54
  800b1e4:	f8db 301c 	ldr.w	r3, [fp, #28]
  800b1e8:	6018      	str	r0, [r3, #0]
  800b1ea:	9b07      	ldr	r3, [sp, #28]
@@ -26910,8 +26908,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800b4aa:	f7f5 f8c5 	bl	8000638 <__aeabi_dmul>
  800b4ae:	e9cd 0102 	strd	r0, r1, [sp, #8]
  800b4b2:	e7c4      	b.n	800b43e <_dtoa_r+0x546>
- 800b4b4:	08020ea0 	.word	0x08020ea0
- 800b4b8:	08020e78 	.word	0x08020e78
+ 800b4b4:	08020e98 	.word	0x08020e98
+ 800b4b8:	08020e70 	.word	0x08020e70
  800b4bc:	3ff00000 	.word	0x3ff00000
  800b4c0:	40240000 	.word	0x40240000
  800b4c4:	401c0000 	.word	0x401c0000
@@ -27513,8 +27511,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800ba70:	f000 f968 	bl	800bd44 <__multadd>
  800ba74:	4681      	mov	r9, r0
  800ba76:	e7ea      	b.n	800ba4e <_dtoa_r+0xb56>
- 800ba78:	08020e00 	.word	0x08020e00
- 800ba7c:	08020d84 	.word	0x08020d84
+ 800ba78:	08020df4 	.word	0x08020df4
+ 800ba7c:	08020d78 	.word	0x08020d78
 
 0800ba80 <_free_r>:
  800ba80:	b538      	push	{r3, r4, r5, lr}
@@ -27798,8 +27796,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800bcf0:	e9c0 3303 	strd	r3, r3, [r0, #12]
  800bcf4:	e7f7      	b.n	800bce6 <_Balloc+0x66>
  800bcf6:	bf00      	nop
- 800bcf8:	08020d91 	.word	0x08020d91
- 800bcfc:	08020e11 	.word	0x08020e11
+ 800bcf8:	08020d85 	.word	0x08020d85
+ 800bcfc:	08020e05 	.word	0x08020e05
 
 0800bd00 <_Bfree>:
  800bd00:	b570      	push	{r4, r5, r6, lr}
@@ -27827,8 +27825,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800bd34:	6021      	str	r1, [r4, #0]
  800bd36:	f843 4022 	str.w	r4, [r3, r2, lsl #2]
  800bd3a:	bd70      	pop	{r4, r5, r6, pc}
- 800bd3c:	08020d91 	.word	0x08020d91
- 800bd40:	08020e11 	.word	0x08020e11
+ 800bd3c:	08020d85 	.word	0x08020d85
+ 800bd40:	08020e05 	.word	0x08020e05
 
 0800bd44 <__multadd>:
  800bd44:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
@@ -27882,8 +27880,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800bdc0:	6125      	str	r5, [r4, #16]
  800bdc2:	4620      	mov	r0, r4
  800bdc4:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
- 800bdc8:	08020e00 	.word	0x08020e00
- 800bdcc:	08020e11 	.word	0x08020e11
+ 800bdc8:	08020df4 	.word	0x08020df4
+ 800bdcc:	08020e05 	.word	0x08020e05
 
 0800bdd0 <__hi0bits>:
  800bdd0:	f5b0 3f80 	cmp.w	r0, #65536	@ 0x10000
@@ -27973,8 +27971,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800be86:	6103      	str	r3, [r0, #16]
  800be88:	bd10      	pop	{r4, pc}
  800be8a:	bf00      	nop
- 800be8c:	08020e00 	.word	0x08020e00
- 800be90:	08020e11 	.word	0x08020e11
+ 800be8c:	08020df4 	.word	0x08020df4
+ 800be90:	08020e05 	.word	0x08020e05
 
 0800be94 <__multiply>:
  800be94:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
@@ -28093,8 +28091,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800bfda:	e799      	b.n	800bf10 <__multiply+0x7c>
  800bfdc:	3e01      	subs	r6, #1
  800bfde:	e79b      	b.n	800bf18 <__multiply+0x84>
- 800bfe0:	08020e00 	.word	0x08020e00
- 800bfe4:	08020e11 	.word	0x08020e11
+ 800bfe0:	08020df4 	.word	0x08020df4
+ 800bfe4:	08020e05 	.word	0x08020e05
 
 0800bfe8 <__pow5mult>:
  800bfe8:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -28162,9 +28160,9 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800c088:	4630      	mov	r0, r6
  800c08a:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
  800c08e:	bf00      	nop
- 800c090:	08020e6c 	.word	0x08020e6c
- 800c094:	08020d91 	.word	0x08020d91
- 800c098:	08020e11 	.word	0x08020e11
+ 800c090:	08020e60 	.word	0x08020e60
+ 800c094:	08020d85 	.word	0x08020d85
+ 800c098:	08020e05 	.word	0x08020e05
 
 0800c09c <__lshift>:
  800c09c:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
@@ -28243,8 +28241,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800c166:	d8f9      	bhi.n	800c15c <__lshift+0xc0>
  800c168:	e7ea      	b.n	800c140 <__lshift+0xa4>
  800c16a:	bf00      	nop
- 800c16c:	08020e00 	.word	0x08020e00
- 800c170:	08020e11 	.word	0x08020e11
+ 800c16c:	08020df4 	.word	0x08020df4
+ 800c170:	08020e05 	.word	0x08020e05
 
 0800c174 <__mcmp>:
  800c174:	690a      	ldr	r2, [r1, #16]
@@ -28380,8 +28378,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800c2c6:	3f01      	subs	r7, #1
  800c2c8:	e7e7      	b.n	800c29a <__mdiff+0xee>
  800c2ca:	bf00      	nop
- 800c2cc:	08020e00 	.word	0x08020e00
- 800c2d0:	08020e11 	.word	0x08020e11
+ 800c2cc:	08020df4 	.word	0x08020df4
+ 800c2d0:	08020e05 	.word	0x08020e05
 
 0800c2d4 <__d2b>:
  800c2d4:	e92d 43f7 	stmdb	sp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
@@ -28447,8 +28445,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800c372:	f7ff fd2d 	bl	800bdd0 <__hi0bits>
  800c376:	ebc0 1042 	rsb	r0, r0, r2, lsl #5
  800c37a:	e7e5      	b.n	800c348 <__d2b+0x74>
- 800c37c:	08020e00 	.word	0x08020e00
- 800c380:	08020e11 	.word	0x08020e11
+ 800c37c:	08020df4 	.word	0x08020df4
+ 800c380:	08020e05 	.word	0x08020e05
 
 0800c384 <__ssputs_r>:
  800c384:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
@@ -28725,11 +28723,11 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800c618:	4638      	mov	r0, r7
  800c61a:	f7fe f90d 	bl	800a838 <_printf_i>
  800c61e:	e7ed      	b.n	800c5fc <_svfiprintf_r+0x1c0>
- 800c620:	08020f68 	.word	0x08020f68
- 800c624:	08020f72 	.word	0x08020f72
+ 800c620:	08020f60 	.word	0x08020f60
+ 800c624:	08020f6a 	.word	0x08020f6a
  800c628:	0800a309 	.word	0x0800a309
  800c62c:	0800c385 	.word	0x0800c385
- 800c630:	08020f6e 	.word	0x08020f6e
+ 800c630:	08020f66 	.word	0x08020f66
 
 0800c634 <__sflush_r>:
  800c634:	f9b1 200c 	ldrsh.w	r2, [r1, #12]
@@ -28961,9 +28959,9 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800c824:	e7f4      	b.n	800c810 <__assert_func+0x14>
  800c826:	bf00      	nop
  800c828:	20000018 	.word	0x20000018
- 800c82c:	08020fbe 	.word	0x08020fbe
- 800c830:	08020f90 	.word	0x08020f90
- 800c834:	08020f83 	.word	0x08020f83
+ 800c82c:	08020fb6 	.word	0x08020fb6
+ 800c830:	08020f88 	.word	0x08020f88
+ 800c834:	08020f7b 	.word	0x08020f7b
 
 0800c838 <_calloc_r>:
  800c838:	b570      	push	{r4, r5, r6, lr}
@@ -29351,11 +29349,11 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800cba4:	4630      	mov	r0, r6
  800cba6:	f7fd fe47 	bl	800a838 <_printf_i>
  800cbaa:	e7e4      	b.n	800cb76 <_vfiprintf_r+0x1e6>
- 800cbac:	08020f68 	.word	0x08020f68
- 800cbb0:	08020f72 	.word	0x08020f72
+ 800cbac:	08020f60 	.word	0x08020f60
+ 800cbb0:	08020f6a 	.word	0x08020f6a
  800cbb4:	0800a309 	.word	0x0800a309
  800cbb8:	0800c96d 	.word	0x0800c96d
- 800cbbc:	08020f6e 	.word	0x08020f6e
+ 800cbbc:	08020f66 	.word	0x08020f66
 
 0800cbc0 <__swbuf_r>:
  800cbc0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
@@ -29987,8 +29985,8 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  800d1fc:	40038000 	.word	0x40038000
  800d200:	3ff80000 	.word	0x3ff80000
  800d204:	bff00000 	.word	0xbff00000
- 800d208:	080210c0 	.word	0x080210c0
- 800d20c:	080210e0 	.word	0x080210e0
+ 800d208:	080210b8 	.word	0x080210b8
+ 800d20c:	080210d8 	.word	0x080210d8
 
 0800d210 <fabs>:
  800d210:	ec51 0b10 	vmov	r0, r1, d0
