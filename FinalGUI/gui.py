@@ -110,6 +110,7 @@ class SignalViewer(QMainWindow):
                 return
 
             ser.write(b"TAKEPC\r\n")
+            ser.flush()
             if not wait_for_response(ser, "TAKEPC"): return
             if not wait_for_response(ser, "PREAMBLE!", timeout=10): return
 
@@ -175,11 +176,13 @@ class SignalViewer(QMainWindow):
                     ser = self.serial
                     if not ser: return
                     ser.write(b"COORDS\r\n")
+                    ser.flush()
                     if not wait_for_response(ser, "COORDS"): return
                     ser.reset_input_buffer()
 
                     packed = struct.pack('<ff', *img_arr3D)
                     ser.write(packed)
+                    ser.flush()
 
                     if wait_for_float_echo(ser, img_arr3D[0], img_arr3D[1]):
                         print("Float echo verified successfully.")
@@ -221,6 +224,7 @@ class SignalViewer(QMainWindow):
 
             print("Sending COORDS for home position...")
             ser.write(b"COORDS\r\n")
+            ser.flush()
             if not wait_for_response(ser, "COORDS"):
                 print("No echo back for COORDS.")
                 return
@@ -228,6 +232,7 @@ class SignalViewer(QMainWindow):
 
             packed = struct.pack('<ff', *home_coords)
             ser.write(packed)
+            ser.flush()
             print(f"Sent home coordinates: {home_coords}")
 
             if wait_for_float_echo(ser, *home_coords):
