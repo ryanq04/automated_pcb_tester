@@ -18,3 +18,8 @@ Communication is over UART, program is written in C for the STM32, and Python fo
     <img src="ece342_probe.jpg" alt="Watch the video" />
   </a>
 </p>
+
+
+Resources Used:
+
+https://www.youtube.com/watch?v=2vAoOYF3m8U
