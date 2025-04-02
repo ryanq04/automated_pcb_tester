@@ -9,12 +9,12 @@ Communication is over UART, program is written in C for the STM32, and Python fo
 
 <p align="center">
   <a href="https://www.youtube.com/shorts/35WJPPRGhOk">
-    <img src="adc_fft.jpg" alt="Watch the video" />
+    <img src="automated_pcb_tester/adc_fft.jpg" alt="Watch the video" />
   </a>
 </p>
 
 <p align="center">
   <a href="https://www.youtube.com/shorts/IuJ4Q_L5Wx0">
-    <img src="ece342_probe.jpg" alt="Watch the video" />
+    <img src="automated_pcb_tester/ece342_probe.jpg" alt="Watch the video" />
   </a>
 </p>
