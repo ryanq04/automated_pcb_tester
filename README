@@ -9,7 +9,7 @@ Communication is over UART, program is written in C for the STM32, and Python fo
 
 <p align="center">
   <a href="https://www.youtube.com/shorts/35WJPPRGhOk">
-    <img src="automated_pcb_tester/adc_fft.jpg" alt="Watch the video" />
+    <img src="https://github.com/ryanq04/automated_pcb_tester/blob/main/adc_fft.jpg" alt="Watch the video" />
   </a>
 </p>
 
