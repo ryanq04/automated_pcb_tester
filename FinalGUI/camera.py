@@ -20,22 +20,28 @@ def decode_ycbcr422(raw_data, rows=144, cols=174):
 
     return np.rot90(np.stack((G, R, B), axis=-1), 1)
 
+
 def project_2D_to_3D(pt_2D):
-    image_pts = np.array([
-        [138.1, 144.2], [120.4, 97.4], [100.4, 78.8], [80.85, 59.8],
-        [61.3, 42.1], [40.88, 25.37], [20.9, 10.87],
-        [24.08, 115.55], [133.1, 9.51], [82.67, 114.64],
-        [137.2, 59.8], [21.35, 62.5], [77.68, 9.51]
-    ], dtype=np.float32)
 
-    world_pts = np.array([
-        [0, 0, 0], [1, 1, 0], [2, 2, 0], [3, 3, 0],
-        [4, 4, 0], [5, 5, 0], [6, 6, 0],
-        [6, 0, 0], [0, 6, 0], [3, 0, 0],
-        [0, 3, 0], [6, 3, 0], [3, 6, 0]
-    ], dtype=np.float32)
 
+    image_pts = np.array([[130.37, 131.4], [111.75, 114.64], [92.21, 95.61], [74.04, 76.13], 
+                          [54.51, 57.55], [34.52, 39.42], [14.54, 24.47], 
+                          [15.44, 130.05], [128.10, 24.92], [74.04, 130.95], [137.2, 59.8], [14.54, 75.67], [72.23, 23.56]], dtype=np.float32)
+    world_pts = np.array([[0, 0, 0], [1, 1, 0], [2, 2, 0], [3, 3, 0], 
+                          [4, 4, 0], [5, 5, 0], [6, 6, 0], 
+                          [6, 0, 0], [0, 6, 0], [3, 0, 0], [0, 3, 0], [6, 3, 0], [3, 6, 0]], dtype=np.float32)
+
+
+    #image_pts = np.array([[124.9, 125.06], [69.5, 68.4], [14.1, 14.95], [9.99, 120.1], 
+    #                      [127.2, 19.0]], dtype=np.float32)
+    #worldpts = np.array([[0, 0, 0], [3, 3, 0], [6, 6, 0], [6, 0, 0], 
+    #                      [0, 6, 0]], dtype=np.float32)
+
+    # Compute homography
     H, _ = cv2.findHomography(image_pts, world_pts[:, :2])
+
     pt_3D = np.dot(H, np.array([pt_2D[0], pt_2D[1], 1]))
     pt_3D_normalized = pt_3D / pt_3D[2]
-    return [round(pt_3D_normalized[0], 2), round(pt_3D_normalized[1], 2)]
+    pt_3D_rounded = np.round(pt_3D_normalized, 2)
+
+    return ([pt_3D_rounded[0], pt_3D_rounded[1]])
