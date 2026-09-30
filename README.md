@@ -7,6 +7,8 @@ This project was created in roughly 80 hours for the final project of ECE342 and
 
 Communication is over UART, program is written in C for the STM32, and Python for the user interface on the PC.
 
+!! Press the images below to view a quick demo !!  
+
 <p align="center">
   <a href="https://www.youtube.com/shorts/35WJPPRGhOk">
     <img src="adc_fft.jpg" alt="Watch the video" />
