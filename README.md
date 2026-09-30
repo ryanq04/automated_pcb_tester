@@ -9,7 +9,7 @@ Completed in approximately **80 hours** for the ECE342 final project.
 
 ## Hardware
 
-- **STM32F446ZE**
+- **STM32F446ZE** [Product Info](https://www.st.com/en/microcontrollers-microprocessors/stm32f446ze.html)
 - **OV7670 camera** [Camera Driver](./Automated_Circuit_Tester_Final/Core/Src/ov7670.c)
 - **NEMA 17 stepper motor** [Nema17 Datasheet](https://transmotec.com/Download/Datasheets/Transmotec-Datasheet-SHW42-18.pdf)
 - **SG90 servos** [SG90 Info](https://smarthon-docs-en.readthedocs.io/en/latest/Sensors_and_actuators/Servo.html)
@@ -19,6 +19,9 @@ Completed in approximately **80 hours** for the ECE342 final project.
 ## Software
 
 - **Embedded firmware:** C [Source Code](./Automated_Circuit_Tester_Final/Core/Src)
+    [Function Pointer FSM](./Automated_Circuit_Tester_Final/Core/Src/fsm.c)
+    [Analog to Digital Conversion and Fast Fourier Transform](./Automated_Circuit_Tester_Final/Core/Src/adc_fft.c)
+    [Motor Position Tracking](./Automated_Circuit_Tester_Final/Core/Src/motorposition.c)
 - **PC interface:** Python [Source Code](./FinalGUI)
 - **Communication:** UART, I2C
 
