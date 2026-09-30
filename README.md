@@ -3,7 +3,10 @@
 ### University of Toronto — ECE342 Embedded Systems
 **Ryan Qi & Avani Yadav**
 
+During my visit to a Shanghai Technology Fair in 2023, I was inspired by the incredible speed of the automated electronics testing machines.
+
 We built an **automated PCB tester prototype** inspired by production **ICT and flying probe systems**.
+[Example of a flying probe tester](https://www.youtube.com/watch?v=A3oJ12aXAco)
 
 Completed in approximately **80 hours** for the ECE342 final project.
 
