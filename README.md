@@ -5,9 +5,22 @@
 
 We built an **automated PCB tester prototype** inspired by production **ICT and flying probe systems**.
 
-Completed in approximately **80 hours** for the ECE342 final project, the system uses an **STM32F446ZE**, **OV7670 camera**, **NEMA 17 stepper**, **SG90 servos**, **PCA9685 servo driver**, and **L298N stepper driver**.
+Completed in approximately **80 hours** for the ECE342 final project.
 
-The embedded firmware is written in **C**, with a **Python** PC interface communicating over **UART**.
+## Hardware
+
+- **STM32F446ZE**
+- **OV7670 camera** [Camera Driver](./Automated_Circuit_Tester_Final/Core/Src/ov7670.c)
+- **NEMA 17 stepper motor** [Nema17 Datasheet](https://transmotec.com/Download/Datasheets/Transmotec-Datasheet-SHW42-18.pdf)
+- **SG90 servos** [SG90 Info](https://smarthon-docs-en.readthedocs.io/en/latest/Sensors_and_actuators/Servo.html)
+- **PCA9685 servo driver** [View Servo Driver](./Automated_Circuit_Tester_Final/Core/Src/servomotors.c)
+- **L298N stepper driver** [View Nema17 Driver](./Automated_Circuit_Tester_Final/Core/Src/steppermotors.c)
+
+## Software
+
+- **Embedded firmware:** C [Source Code](./Automated_Circuit_Tester_Final/Core/Src)
+- **PC interface:** Python [Source Code](./FinalGUI)
+- **Communication:** UART, I2C
 
 ## Demo
 
@@ -15,13 +28,13 @@ The embedded firmware is written in **C**, with a **Python** PC interface commun
 
 <p align="center">
   <a href="https://www.youtube.com/shorts/35WJPPRGhOk">
-    <img src="adc_fft.jpg" alt="PCB Tester Demo" width="700"/>
+    <img src="adc_fft.jpg" alt="PCB Tester Demo" width="350"/>
   </a>
 </p>
 
 <p align="center">
   <a href="https://www.youtube.com/shorts/IuJ4Q_L5Wx0">
-    <img src="ece342_probe.jpg" alt="Probe Movement Demo" width="700"/>
+    <img src="ece342_probe.jpg" alt="Probe Movement Demo" width="350"/>
   </a>
 </p>
 
@@ -29,4 +42,4 @@ The embedded firmware is written in **C**, with a **Python** PC interface commun
 
 | Probe Holder | System Display | Flying Probe |
 |:---:|:---:|:---:|
-| <img src="embedded%20probe%20holder.png" width="280"/> | <img src="embedded%20proj%20display.png" width="280"/> | <img src="embedded_flying_probe1.png" width="280"/> |
+| <img src="embedded%20probe%20holder.png" width="250"/> | <img src="embedded%20proj%20display.png" width="250"/> | <img src="embedded_flying_probe1.png" width="250"/> |
