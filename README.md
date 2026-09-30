@@ -18,10 +18,10 @@ Completed in approximately **80 hours** for the ECE342 final project.
 
 ## Software
 
-- **Embedded firmware:** C [Source Code](./Automated_Circuit_Tester_Final/Core/Src)
-    [Function Pointer FSM](./Automated_Circuit_Tester_Final/Core/Src/fsm.c)
-    [Analog to Digital Conversion and Fast Fourier Transform](./Automated_Circuit_Tester_Final/Core/Src/adc_fft.c)
-    [Motor Position Tracking](./Automated_Circuit_Tester_Final/Core/Src/motorposition.c)
+- **Embedded firmware:** C
+- [Function Pointer FSM](./Automated_Circuit_Tester_Final/Core/Src/fsm.c)
+- [Analog to Digital Conversion and Fast Fourier Transform](./Automated_Circuit_Tester_Final/Core/Src/adc_fft.c)
+- [Motor Position Tracking](./Automated_Circuit_Tester_Final/Core/Src/motorposition.c)
 - **PC interface:** Python [Source Code](./FinalGUI)
 - **Communication:** UART, I2C
 
